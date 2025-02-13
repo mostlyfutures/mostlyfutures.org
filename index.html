@@ -15,20 +15,26 @@
             height: 100vh;
             background: linear-gradient(135deg, #4a90e2, #50e3c2);
             color: #fff;
+            text-align: center;
+            padding: 0 20px;
+            box-sizing: border-box;
         }
         h1 {
             font-size: 4em;
             margin-bottom: 20px;
+            word-wrap: break-word;
         }
         .links {
             display: flex;
+            flex-direction: column;
             gap: 20px;
+            width: 100%;
+            max-width: 600px;
         }
         .link-card {
             background: rgba(255, 255, 255, 0.1);
             padding: 20px;
             border-radius: 10px;
-            text-align: center;
             transition: background 0.3s;
         }
         .link-card a {
@@ -38,6 +44,24 @@
         }
         .link-card:hover {
             background: rgba(255, 255, 255, 0.2);
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+                margin-bottom: 15px;
+            }
+            .link-card {
+                padding: 15px;
+            }
+            .link-card a {
+                font-size: 1em;
+            }
+        }
+        @media (min-width: 768px) {
+            .links {
+                flex-direction: row;
+                justify-content: center;
+            }
         }
     </style>
 </head>
