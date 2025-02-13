@@ -15,6 +15,7 @@
             height: 100vh;
             background: linear-gradient(135deg, #4a90e2, #50e3c2);
             color: #fff;
+            text-align: center;
         }
         h1 {
             font-size: 4em;
@@ -22,13 +23,15 @@
         }
         .links {
             display: flex;
+            flex-direction: column;
             gap: 20px;
+            width: 100%;
+            max-width: 600px;
         }
         .link-card {
             background: rgba(255, 255, 255, 0.1);
             padding: 20px;
             border-radius: 10px;
-            text-align: center;
             transition: background 0.3s;
         }
         .link-card a {
@@ -39,19 +42,25 @@
         .link-card:hover {
             background: rgba(255, 255, 255, 0.2);
         }
+        @media (min-width: 600px) {
+            .links {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
     <h1>MostlyFutures</h1>
     <div class="links">
         <div class="link-card">
-            <a href="https://opensea.io/mostlyfutures" target="_blank">Gallery</a>
+            <a href="https://opensea.io/mostlyfutures" target="_blank">OpenSea</a>
         </div>
         <div class="link-card">
-            <a href="https://coinbase.com/join/C7JGVF4" target="_blank">Get Started with Crypto</a>
+            <a href="https://coinbase.com/join/C7JGVF4" target="_blank">Coinbase</a>
         </div>
         <div class="link-card">
-            <a href="https://join.robinhood.com/grantc-6ef531b" target="_blank">Start trading Stocks</a>
+            <a href="https://join.robinhood.com/grantc-6ef531b" target="_blank">Robinhood</a>
         </div>
     </div>
 </body>
