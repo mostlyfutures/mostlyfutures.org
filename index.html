@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MostlyFutures</title>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FK2QXK688"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -49,9 +50,24 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            position: relative;
         }
         .link-card:hover {
             background: rgba(255, 255, 255, 0.2);
+        }
+        .link-card a {
+            color: inherit; /* Inherit color from parent */
+            text-decoration: none; /* Remove underline from text */
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+        .link-card div {
+            position: relative;
+            z-index: 2;
         }
         @media (max-width: 768px) {
             h1 {
@@ -60,6 +76,9 @@
             }
             .link-card {
                 padding: 15px;
+            }
+            .link-card div {
+                font-size: 1em;
             }
         }
         @media (min-width: 768px) {
@@ -73,15 +92,19 @@
 <body>
     <h1>MostlyFutures</h1>
     <div class="links">
-        <a href="https://opensea.io/mostlyfutures" target="_blank" class="link-card">
-            Gallery
-        </a>
-        <a href="https://coinbase.com/join/C7JGVF4" target="_blank" class="link-card">
-            Get Started with Crypto
-        </a>
-        <a href="https://join.robinhood.com/grantc-6ef531b" target="_blank" class="link-card">
-            Start trading Stocks
-        </a>
+        <div class="link-card">
+            <a href="https://opensea.io/mostlyfutures" target="_blank"></a>
+            <div>Gallery</div>
+        </div>
+        <div class="link-card">
+            <a href="https://coinbase.com/join/C7JGVF4" target="_blank"></a>
+            <div>Get Started with Crypto</div>
+        </div>
+        <div class="link-card">
+            <a href="https://join.robinhood.com/grantc-6ef531b" target="_blank"></a>
+            <div>Start trading Stocks</div>
+        </div>
     </div>
 </body>
 </html>
+``` ▋
