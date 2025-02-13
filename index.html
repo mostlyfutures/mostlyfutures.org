@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MostlyFutures</title>
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FK2QXK688"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -45,17 +44,35 @@
             padding: 20px;
             border-radius: 10px;
             transition: background 0.3s;
-        }
-        .link-card a {
             color: #fff;
             text-decoration: none;
-            font-size: 1.2em;
-            display: block;
-            width: 100%;
-            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            cursor: pointer; /* Ensure cursor changes to pointer */
         }
         .link-card:hover {
             background: rgba(255, 255, 255, 0.2);
+        }
+        .link-card a {
+            color: inherit; /* Inherit color from parent */
+            text-decoration: none; /* Remove underline from text */
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+        .link-card div {
+            position: relative;
+            z-index: 2;
+        }
+        .link-card div a {
+            color: inherit;
+            text-decoration: none;
+            z-index: 2;
         }
         @media (max-width: 768px) {
             h1 {
@@ -65,7 +82,7 @@
             .link-card {
                 padding: 15px;
             }
-            .link-card a {
+            .link-card div {
                 font-size: 1em;
             }
         }
@@ -80,14 +97,17 @@
 <body>
     <h1>MostlyFutures</h1>
     <div class="links">
-        <div class="link-card">
-            <a href="https://opensea.io/mostlyfutures" target="_blank">Gallery</a>
+        <div class="link-card" onclick="window.location.href='https://opensea.io/mostlyfutures'">
+            <a href="https://opensea.io/mostlyfutures" target="_blank"></a>
+            <div><a href="https://opensea.io/mostlyfutures" target="_blank">Gallery</a></div>
         </div>
-        <div class="link-card">
-            <a href="https://coinbase.com/join/C7JGVF4" target="_blank">Get Started with Crypto</a>
+        <div class="link-card" onclick="window.location.href='https://coinbase.com/join/C7JGVF4'">
+            <a href="https://coinbase.com/join/C7JGVF4" target="_blank"></a>
+            <div><a href="https://coinbase.com/join/C7JGVF4" target="_blank">Get Started with Crypto</a></div>
         </div>
-        <div class="link-card">
-            <a href="https://join.robinhood.com/grantc-6ef531b" target="_blank">Start trading Stocks</a>
+        <div class="link-card" onclick="window.location.href='https://join.robinhood.com/grantc-6ef531b'">
+            <a href="https://join.robinhood.com/grantc-6ef531b" target="_blank"></a>
+            <div><a href="https://join.robinhood.com/grantc-6ef531b" target="_blank">Start trading Stocks</a></div>
         </div>
     </div>
 </body>
