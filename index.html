@@ -6,21 +6,53 @@
     <title>MostlyFutures</title>
     <style>
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #4a90e2, #50e3c2);
+            color: #fff;
         }
         h1 {
-            font-size: 3em;
-            color: #333;
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+        .links {
+            display: flex;
+            gap: 20px;
+        }
+        .link-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: background 0.3s;
+        }
+        .link-card a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+        .link-card:hover {
+            background: rgba(255, 255, 255, 0.2);
         }
     </style>
 </head>
 <body>
     <h1>MostlyFutures</h1>
+    <div class="links">
+        <div class="link-card">
+            <a href="https://opensea.io/mostlyfutures" target="_blank">OpenSea</a>
+        </div>
+        <div class="link-card">
+            <a href="https://coinbase.com/join/C7JGVF4" target="_blank">Coinbase</a>
+        </div>
+        <div class="link-card">
+            <a href="https://join.robinhood.com/grantc-6ef531b" target="_blank">Robinhood</a>
+        </div>
+    </div>
 </body>
 </html>
