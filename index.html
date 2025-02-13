@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MostlyFutures</title>
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FK2QXK688"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -48,7 +47,6 @@
             white-space: nowrap;
             border-right: 3px solid rgba(255, 255, 255, 0.75);
             animation: typing 3.5s steps(30, end), blink-caret 0.75s step-end infinite;
-            animation-fill-mode: forwards;
         }
 
         .links {
@@ -115,11 +113,14 @@
             <a href="https://join.robinhood.com/grantc-6ef531b" target="_blank">Start trading Stocks</a>
         </div>
     </div>
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const title = document.querySelector(".typing-animation");
+
             title.addEventListener("animationend", function() {
-                title.style.borderRight = "none";
+                title.style.animation = "typing 3.5s steps(30, end)";
+                title.style.borderRight = "none";  
             });
         });
     </script>
