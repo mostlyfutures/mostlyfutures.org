@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MostlyFutures</title>
-    <meta name="description" content="MostlyFutures - Explore our gallery, get started with crypto, and start trading stocks.">
-    <meta name="keywords" content="MostlyFutures, gallery, crypto, stocks, trading">
-    <meta name="author" content="MostlyFutures">
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FK2QXK688"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -15,22 +13,82 @@
 
       gtag('config', 'G-4FK2QXK688');
     </script>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #4a90e2, #50e3c2);
+            color: #fff;
+            text-align: center;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+        h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            word-wrap: break-word;
+        }
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            max-width: 600px;
+        }
+        .link-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+        .link-card a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2em;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        .link-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+                margin-bottom: 15px;
+            }
+            .link-card {
+                padding: 15px;
+            }
+            .link-card a {
+                font-size: 1em;
+            }
+        }
+        @media (min-width: 768px) {
+            .links {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
     <h1>MostlyFutures</h1>
     <div class="links">
         <div class="link-card">
-            <a href="https://opensea.io/mostlyfutures" target="_blank" aria-label="Gallery">Gallery</a>
+            <a href="https://opensea.io/mostlyfutures" target="_blank">Gallery</a>
         </div>
         <div class="link-card">
-            <a href="https://coinbase.com/join/C7JGVF4" target="_blank" aria-label="Get Started with Crypto">Get Started with Crypto</a>
+            <a href="https://coinbase.com/join/C7JGVF4" target="_blank">Get Started with Crypto</a>
         </div>
         <div class="link-card">
-            <a href="https://join.robinhood.com/grantc-6ef531b" target="_blank" aria-label="Start trading Stocks">Start trading Stocks</a>
+            <a href="https://join.robinhood.com/grantc-6ef531b" target="_blank">Start trading Stocks</a>
         </div>
     </div>
-    <script src="scripts.js"></script>
 </body>
 </html>
-
