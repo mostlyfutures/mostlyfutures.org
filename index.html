@@ -9,6 +9,7 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
+
       gtag('config', 'G-4FK2QXK688');
     </script>
     <style>
@@ -48,13 +49,20 @@
             text-decoration: none;
         }
         .link-card a {
+            color: inherit; /* Keep text color same as parent */
+            text-decoration: none; /* Remove underline from text */
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        .link-card a::before {
+            content: "";
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
             z-index: 1;
-            opacity: 0;
         }
         .link-card div {
             position: relative;
@@ -87,16 +95,19 @@
     <h1>MostlyFutures</h1>
     <div class="links">
         <div class="link-card">
-            <a href="https://opensea.io/mostlyfutures" target="_blank"></a>
-            <div>Gallery</div>
+            <a href="https://opensea.io/mostlyfutures" target="_blank">
+                <div>Gallery</div>
+            </a>
         </div>
         <div class="link-card">
-            <a href="https://coinbase.com/join/C7JGVF4" target="_blank"></a>
-            <div>Get Started with Crypto</div>
+            <a href="https://coinbase.com/join/C7JGVF4" target="_blank">
+                <div>Get Started with Crypto</div>
+            </a>
         </div>
         <div class="link-card">
-            <a href="https://join.robinhood.com/grantc-6ef531b" target="_blank"></a>
-            <div>Start trading Stocks</div>
+            <a href="https://join.robinhood.com/grantc-6ef531b" target="_blank">
+                <div>Start trading Stocks</div>
+            </a>
         </div>
     </div>
 </body>
