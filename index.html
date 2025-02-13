@@ -47,6 +47,11 @@
             white-space: nowrap;
             border-right: 3px solid rgba(255, 255, 255, 0.75);
             animation: typing 3.5s steps(30, end), blink-caret 0.75s step-end infinite;
+            animation-fill-mode: forwards; 
+        }
+
+        h1.finished {
+            animation: typing 3.5s steps(30, end), blink-caret 0s step-end forwards; 
         }
 
         .links {
@@ -77,52 +82,4 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5em;
-                margin-bottom: 15px;
-            }
-
-            .link-card {
-                padding: 15px;
-            }
-
-            .link-card a {
-                font-size: 1em;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .links {
-                flex-direction: row;
-                justify-content: center;
-            }
-        }
-    </style>
-</head>
-<body>
-    <h1 class="typing-animation">MostlyFutures</h1>
-    <div class="links">
-        <div class="link-card">
-            <a href="https://opensea.io/mostlyfutures" target="_blank">Gallery</a>
-        </div>
-        <div class="link-card">
-            <a href="https://coinbase.com/join/C7JGVF4" target="_blank">Get Started with Crypto</a>
-        </div>
-        <div class="link-card">
-            <a href="https://join.robinhood.com/grantc-6ef531b" target="_blank">Start trading Stocks</a>
-        </div>
-    </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const title = document.querySelector(".typing-animation");
-
-            title.addEventListener("animationend", function() {
-                title.style.animation = "typing 3.5s steps(30, end)";
-                title.style.borderRight = "none";  
-            });
-        });
-    </script>
-</body>
-</html>
+        @media (max-width: 768
