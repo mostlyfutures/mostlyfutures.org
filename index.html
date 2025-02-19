@@ -1,111 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MostlyFutures</title>
-    <meta name="description" content="Explore the world of stocks, crypto, futures, and NFTs with MostlyFutures. Start your trading journey today and learn how to trade for beginners">
-    <meta name="keywords" content="stocks, crypto, futures, NFTs, trading, invest, beginners, start trading, gallery, start trading, start stocks, start investing, where to start investing, robinhood">
-    <meta name="author" content="MostlyFutures">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FK2QXK688"></script>
+    <meta
+      name="description"
+      content="Explore the world of stocks, crypto, futures, and NFTs with MostlyFutures. Start your trading journey today and learn how to trade for beginners"
+    />
+    <meta
+      name="keywords"
+      content="stocks, crypto, futures, NFTs, trading, invest, beginners, start trading, gallery, start trading, start stocks, start investing, where to start investing, robinhood"
+    />
+    <meta name="author" content="MostlyFutures" />
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-4FK2QXK688"
+    ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag() {
+        dataLayer.push(arguments);
+      }
       gtag('js', new Date());
       gtag('config', 'G-4FK2QXK688');
     </script>
     <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background: linear-gradient(135deg, #4a90e2, #50e3c2);
-            color: #fff;
-            text-align: center;
-            padding: 0 20px;
-            box-sizing: border-box;
-        }
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background: linear-gradient(135deg, #4a90e2, #50e3c2);
+        color: #fff;
+        text-align: center;
+        padding: 0 20px;
+        box-sizing: border-box;
+      }
+      h1 {
+        font-size: 4em;
+        margin-bottom: 20px;
+        word-wrap: break-word;
+      }
+      .links {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+        max-width: 600px;
+      }
+      .link-card {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 10px;
+        transition: background 0.3s;
+      }
+      .link-card a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 1.2em;
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      .link-card:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+      .info-circle {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 20px; /* 50% smaller */
+        height: 20px; /* 50% smaller */
+        background-color: grey;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1em; /* Adjusted font size */
+        text-decoration: none;
+      }
+      @media (max-width: 768px) {
         h1 {
-            font-size: 4em;
-            margin-bottom: 20px;
-            word-wrap: break-word;
-        }
-        .links {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            width: 100%;
-            max-width: 600px;
+          font-size: 2.5em;
+          margin-bottom: 15px;
         }
         .link-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            transition: background 0.3s;
+          padding: 15px;
         }
         .link-card a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 1.2em;
-            display: block;
-            width: 100%;
-            height: 100%;
+          font-size: 1em;
         }
-        .link-card:hover {
-            background: rgba(255, 255, 255, 0.2);
+      }
+      @media (min-width: 768px) {
+        .links {
+          flex-direction: row;
+          justify-content: center;
         }
-        .info-circle {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            width: 20px; /* 50% smaller */
-            height: 20px; /* 50% smaller */
-            background-color: grey;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1em; /* Adjusted font size */
-            text-decoration: none;
-        }
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5em;
-                margin-bottom: 15px;
-            }
-            .link-card {
-                padding: 15px;
-            }
-            .link-card a {
-                font-size: 1em;
-            }
-        }
-        @media (min-width: 768px) {
-            .links {
-                flex-direction: row;
-                justify-content: center;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <a href="index2.html" class="info-circle">i</a>
     <h1>MostlyFutures</h1>
     <div class="links">
-        <div class="link-card">
-            <a href="https://coinbase.com/join/C7JGVF4" target="_blank">Get Started with Crypto</a>
-        </div>
-        <div class="link-card">
-            <a href="https://join.robinhood.com/grantc-6ef531b" target="_blank">Start trading Stocks</a>
-        </div>
-        <div class="link-card">
-            <a href="https://opensea.io/mostlyfutures" target="_blank">NFT Gallery</a>
-        </div>
+      <div class="link-card">
+        <a href="https://www.amazon.com/dp/B0DXN4P2P4" target="_blank"
+          >Introduction to Cryptocurrency Book</a
+        >
+      </div>
+      <div class="link-card">
+        <a href="https://coinbase.com/join/C7JGVF4" target="_blank"
+          >Get Started with Crypto</a
+        >
+      </div>
+      <div class="link-card">
+        <a href="https://join.robinhood.com/grantc-6ef531b" target="_blank"
+          >Start trading Stocks</a
+        >
+      </div>
+      <div class="link-card">
+        <a href="https://opensea.io/mostlyfutures" target="_blank"
+          >NFT Gallery</a
+        >
+      </div>
     </div>
-</body>
+  </body>
 </html>
