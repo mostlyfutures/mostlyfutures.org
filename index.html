@@ -42,11 +42,11 @@
         @keyframes spinFadeIn {
             0% {
                 opacity: 0;
-                transform: rotateY(360deg);
+                transform: translate3d(0, 0, 0) rotateY(360deg);
             }
             100% {
                 opacity: 1;
-                transform: rotateY(0deg);
+                transform: translate3d(0, 0, 0) rotateY(0deg);
             }
         }
 
@@ -101,8 +101,11 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            animation: spinFadeIn 1.5s ease-out;
+            animation: spinFadeIn 1.5s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: center;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            will-change: transform;
         }
 
         .links {
@@ -274,7 +277,7 @@
     </div>
 
     <script>
-        
+        // Smooth scroll on arrow click
         document
             .querySelector('.scroll-indicator')
             .addEventListener('click', () => {
@@ -283,7 +286,7 @@
                     .scrollIntoView({behavior: 'smooth'});
             });
 
-      
+        // Detect scroll and trigger animation
         window.addEventListener('scroll', () => {
             const content = document.getElementById('content');
             const contentPosition = content.getBoundingClientRect().top;
