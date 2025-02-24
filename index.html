@@ -337,23 +337,6 @@
     <div class="main-content">
       <h1>MostlyFutures</h1>
       <div class="subtitle-text">your local quant</div>
-      <div class="links">
-        <div class="link-card">
-          <a href="https://coinbase.com/join/C7JGVF4" target="_blank"
-            >The Top Crypto Exchange</a
-          >
-        </div>
-        <div class="link-card">
-          <a href="https://join.robinhood.com/grantc-6ef531b" target="_blank"
-            >Start trading Stocks</a
-          >
-        </div>
-        <div class="link-card">
-          <a href="https://opensea.io/mostlyfutures" target="_blank"
-            >NFT Gallery</a
-          >
-        </div>
-      </div>
     </div>
 
     <div class="scroll-indicator">↓</div>
@@ -407,7 +390,6 @@
         }
       });
 
-      // Smooth scroll on arrow click
       document
         .querySelector('.scroll-indicator')
         .addEventListener('click', () => {
@@ -416,7 +398,6 @@
             .scrollIntoView({ behavior: 'smooth' });
         });
 
-      // Detect scroll and trigger animation
       window.addEventListener('scroll', () => {
         const content = document.getElementById('content');
         const contentPosition = content.getBoundingClientRect().top;
