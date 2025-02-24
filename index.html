@@ -27,7 +27,7 @@
     </script>
     <style>
       .hamburger-menu {
-        display: none;
+        display: block;
         position: fixed;
         top: 20px;
         right: 20px;
@@ -82,6 +82,7 @@
         .hamburger-menu {
           display: block;
         }
+
         .links {
           display: none;
         }
@@ -375,7 +376,6 @@
     </div>
 
     <script>
-      // Hamburger menu toggle
       const hamburger = document.querySelector('.hamburger-menu');
       const navMenu = document.querySelector('.nav-menu');
 
@@ -383,7 +383,6 @@
         navMenu.classList.toggle('active');
       });
 
-      // Close menu when clicking outside
       document.addEventListener('click', (e) => {
         if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
           navMenu.classList.remove('active');
