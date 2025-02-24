@@ -26,6 +26,67 @@
       gtag('config', 'G-4FK2QXK688');
     </script>
     <style>
+      .hamburger-menu {
+        display: none;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        cursor: pointer;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 8px;
+      }
+
+      .hamburger-menu span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        margin: 5px;
+        background-color: white;
+        transition: 0.3s;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -300px;
+        width: 300px;
+        height: 100vh;
+        background: rgba(30, 64, 175, 0.95);
+        backdrop-filter: blur(10px);
+        padding-top: 60px;
+        transition: 0.3s;
+        z-index: 999;
+      }
+
+      .nav-menu.active {
+        right: 0;
+      }
+
+      .nav-menu a {
+        display: block;
+        padding: 15px 30px;
+        color: white;
+        text-decoration: none;
+        font-size: 1.1em;
+        transition: 0.3s;
+      }
+
+      .nav-menu a:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      @media (max-width: 768px) {
+        .hamburger-menu {
+          display: block;
+        }
+        .links {
+          display: none;
+        }
+      }
+
       @keyframes bounce {
         0%,
         20%,
@@ -112,8 +173,7 @@
         border-right: 3px solid #93c5fd;
         width: 0;
         animation: typing 2.5s steps(14, end) 1s forwards,
-          blink 0.75s step-end 3.5s forwards,
-          removeBorder 0.1s ease 3.5s forwards;
+          blink 0.75s step-end infinite;
       }
 
       @keyframes typing {
@@ -134,12 +194,6 @@
 
         50% {
           border-color: #93c5fd;
-        }
-      }
-
-      @keyframes removeBorder {
-        to {
-          border-right: none;
         }
       }
 
@@ -270,6 +324,16 @@
 
   <body>
     <a href="index2.html" class="info-circle">i</a>
+    <div class="hamburger-menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <nav class="nav-menu">
+      <a href="index3.html">Section 1</a>
+      <a href="index4.html">Section 2</a>
+      <a href="index5.html">Section 3</a>
+    </nav>
     <div class="main-content">
       <h1>MostlyFutures</h1>
       <div class="subtitle-text">your local quant</div>
@@ -328,6 +392,22 @@
     </div>
 
     <script>
+      // Hamburger menu toggle
+      const hamburger = document.querySelector('.hamburger-menu');
+      const navMenu = document.querySelector('.nav-menu');
+
+      hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+          navMenu.classList.remove('active');
+        }
+      });
+
+      // Smooth scroll on arrow click
       document
         .querySelector('.scroll-indicator')
         .addEventListener('click', () => {
@@ -336,6 +416,7 @@
             .scrollIntoView({ behavior: 'smooth' });
         });
 
+      // Detect scroll and trigger animation
       window.addEventListener('scroll', () => {
         const content = document.getElementById('content');
         const contentPosition = content.getBoundingClientRect().top;
