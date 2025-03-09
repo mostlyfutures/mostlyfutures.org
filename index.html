@@ -1,379 +1,361 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MostlyFutures</title>
-  <meta name="description"
-    content="Explore the world of stocks, crypto, futures, and NFTs with MostlyFutures. Start your trading journey today and learn how to trade for beginners" />
-  <meta name="keywords"
-    content="stocks, crypto, futures, NFTs, trading, invest, beginners, start trading, gallery, start trading, start stocks, start investing, where to start investing, robinhood" />
-  <meta name="author" content="MostlyFutures" />
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FK2QXK688"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'G-4FK2QXK688');
-  </script>
-  <style>
-    .hamburger-menu {
-      display: block;
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 1000;
-      cursor: pointer;
-      padding: 10px;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      border-radius: 8px;
-    }
-
-    .hamburger-menu span {
-      display: block;
-      width: 25px;
-      height: 3px;
-      margin: 5px;
-      background-color: white;
-      transition: 0.3s;
-    }
-
-    .nav-menu {
-      position: fixed;
-      top: 0;
-      right: -300px;
-      width: 300px;
-      height: 100vh;
-      background: rgba(30, 64, 175, 0.95);
-      backdrop-filter: blur(10px);
-      padding-top: 60px;
-      transition: 0.3s;
-      z-index: 999;
-    }
-
-    .nav-menu.active {
-      right: 0;
-    }
-
-    .nav-menu a {
-      display: block;
-      padding: 15px 30px;
-      color: white;
-      text-decoration: none;
-      font-size: 1.1em;
-      transition: 0.3s;
-    }
-
-    .nav-menu a:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    @media (max-width: 768px) {
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MostlyFutures</title>
+    <meta
+      name="description"
+      content="Explore the world of stocks, crypto, futures, and NFTs with MostlyFutures. Start your trading journey today and learn how to trade for beginners"
+    />
+    <meta
+      name="keywords"
+      content="stocks, crypto, futures, NFTs, trading, invest, beginners, start trading, gallery, start trading, start stocks, start investing, where to start investing, robinhood"
+    />
+    <meta name="author" content="MostlyFutures" />
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-4FK2QXK688"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-4FK2QXK688');
+    </script>
+    <style>
       .hamburger-menu {
         display: block;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        cursor: pointer;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 8px;
+      }
+
+      .hamburger-menu span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        margin: 5px;
+        background-color: white;
+        transition: 0.3s;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -300px;
+        width: 300px;
+        height: 100vh;
+        background: rgba(30, 64, 175, 0.95);
+        backdrop-filter: blur(10px);
+        padding-top: 60px;
+        transition: 0.3s;
+        z-index: 999;
+      }
+
+      .nav-menu.active {
+        right: 0;
+      }
+
+      .nav-menu a {
+        display: block;
+        padding: 15px 30px;
+        color: white;
+        text-decoration: none;
+        font-size: 1.1em;
+        transition: 0.3s;
+      }
+
+      .nav-menu a:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      @media (max-width: 768px) {
+        .hamburger-menu {
+          display: block;
+        }
+
+        .links {
+          display: none;
+        }
+      }
+
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0);
+        }
+
+        40% {
+          transform: translateY(-20px);
+        }
+
+        60% {
+          transform: translateY(-10px);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(-30px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      body {
+        margin: 0;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #1e40af, #3b82f6);
+        color: #fff;
+        padding: 2rem;
+        box-sizing: border-box;
+        overflow-x: hidden;
+      }
+
+      .main-content {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      h1 {
+        font-size: 5em;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+        background: linear-gradient(to right, #60a5fa, #93c5fd);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: fadeIn 1s ease-out;
+        text-align: center;
+      }
+
+      .subtitle-text {
+        font-size: 1.5em;
+        font-weight: 800;
+        margin-bottom: 2rem;
+        background: linear-gradient(to right, #60a5fa, #93c5fd);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        opacity: 0;
+        animation: fadeIn 1s ease-out 0.3s forwards;
       }
 
       .links {
-        display: none;
-      }
-    }
-
-    @keyframes bounce {
-
-      0%,
-      20%,
-      50%,
-      80%,
-      100% {
-        transform: translateY(0);
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        max-width: 500px;
+        animation: fadeIn 1s ease-out 0.3s backwards;
       }
 
-      40% {
-        transform: translateY(-20px);
+      .link-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        animation: slideIn 0.5s ease-out backwards;
       }
 
-      60% {
-        transform: translateY(-10px);
-      }
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
+      .link-card:nth-child(1) {
+        animation-delay: 0.4s;
       }
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateX(-30px);
+      .link-card:nth-child(2) {
+        animation-delay: 0.6s;
       }
 
-      to {
-        opacity: 1;
-        transform: translateX(0);
+      .link-card:nth-child(3) {
+        animation-delay: 0.8s;
       }
-    }
 
-    body {
-      margin: 0;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      min-height: 100vh;
-      background: linear-gradient(135deg, #1e40af, #3b82f6);
-      color: #fff;
-      padding: 2rem;
-      box-sizing: border-box;
-      overflow-x: hidden;
-    }
+      .link-card:nth-child(4) {
+        animation-delay: 1s;
+      }
 
-    .main-content {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
+      .link-card a {
+        color: #fff;
+        text-decoration: none;
+        padding: 1.2rem;
+        display: block;
+        font-size: 1.1em;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+      }
 
-    h1 {
-      font-size: 5em;
-      font-weight: 800;
-      margin-bottom: 0.5rem;
-      background: linear-gradient(to right, #60a5fa, #93c5fd);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      animation: fadeIn 1s ease-out;
-      text-align: center;
-    }
-
-    .subtitle-text {
-      font-size: 1.5em;
-      font-weight: 800;
-      margin-bottom: 2rem;
-      background: linear-gradient(to right, #60a5fa, #93c5fd);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      opacity: 0;
-      animation: fadeIn 1s ease-out 0.3s forwards;
-    }
-
-
-    .links {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      width: 100%;
-      max-width: 500px;
-      animation: fadeIn 1s ease-out 0.3s backwards;
-    }
-
-    .link-card {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      border-radius: 12px;
-      overflow: hidden;
-      transition: all 0.3s ease;
-      animation: slideIn 0.5s ease-out backwards;
-    }
-
-    .link-card:nth-child(1) {
-      animation-delay: 0.4s;
-    }
-
-    .link-card:nth-child(2) {
-      animation-delay: 0.6s;
-    }
-
-    .link-card:nth-child(3) {
-      animation-delay: 0.8s;
-    }
-
-    .link-card:nth-child(4) {
-      animation-delay: 1s;
-    }
-
-    .link-card a {
-      color: #fff;
-      text-decoration: none;
-      padding: 1.2rem;
-      display: block;
-      font-size: 1.1em;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-    }
-
-    .link-card:hover {
-      transform: translateY(-2px);
-      background: rgba(255, 255, 255, 0.1);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-    }
-
-    .info-circle {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      width: 40px;
-      height: 40px;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      text-decoration: none;
-      font-size: 1.2em;
-      transition: all 0.3s ease;
-      animation: fadeIn 1s ease-out 1.2s backwards;
-    }
-
-    .info-circle:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: scale(1.1);
-    }
-
-    .scroll-indicator {
-      position: absolute;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 2em;
-      animation: bounce 2s infinite;
-      cursor: pointer;
-      color: rgba(255, 255, 255, 0.8);
-    }
-
-    .content-section {
-      min-height: 100vh;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transform: translateY(50px);
-      transition: all 1s ease;
-    }
-
-    .content-section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .content-section h2 {
-      font-size: 3em;
-      margin-bottom: 1rem;
-      background: linear-gradient(to right, #60a5fa, #93c5fd);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 3em;
+      .link-card:hover {
+        transform: translateY(-2px);
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
       }
 
       .info-circle {
-        width: 35px;
-        height: 35px;
-        font-size: 1em;
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-decoration: none;
+        font-size: 1.2em;
+        transition: all 0.3s ease;
+        animation: fadeIn 1s ease-out 1.2s backwards;
       }
-    }
-  </style>
-</head>
 
-<body>
-  <a href="index2.html" class="info-circle">i</a>
-  <div class="hamburger-menu">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-  <nav class="nav-menu">
-    <a href="index3.html">Buying Crypto</a>
-    <a href="index4.html">Trading Stocks</a>
-    <a href="index5.html">NFTs</a>
-  </nav>
-  <div class="main-content">
-    <h1>MostlyFutures</h1>
-    <div class="subtitle-text">your local quant</div>
-  </div>
+      .info-circle:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.1);
+      }
 
-  <div class="scroll-indicator">↓</div>
+      .scroll-indicator {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 2em;
+        animation: bounce 2s infinite;
+        cursor: pointer;
+        color: rgba(255, 255, 255, 0.8);
+      }
 
-  <div id="content" class="content-section">
-    <h1>What is Crypto?</h1>
-    <p1 style="
-          text-align: center;
-          max-width: 800px;
-          margin: 0 auto;
-          line-height: 1.6;
-        ">
-      The word "Crypto" is essentially an umbrella term for a new technology
-      called Blockchain. Blockchain technology uses code to facilitate an
-      exchange of information instead of relying on humans which can be prone
-      to error, fraud, inefficiency problems, or just expensive in general.
-      For example, rather than one person trusting the other party not to scam
-      them the code in blockchain will ensure the transaction is "trust-less"
-      making the merchant relinquish the goods that money was sent for.
-      Blockchain can also use this "code" to automate human actions to
-      eliminate human error. Imagine a world where instead of relying on a
-      person to consistently give you the goods you paid for, or information,
-      a code makes sure you received what you paid for instead of relying on a
-      merchant. Blockchain technology can be used for data, voting systems, or
-      any exchange of information. The biggest names in finance are already
-      invested and actively using this technology. For example, Blackrock,
-      JPMorgan, USB, Donald Trump, and Elon Musk.
-    </p1>
-    <div class="link-card" style="margin-top: 2rem">
-      <a href="https://www.amazon.com/dp/B0DXN4P2P4" target="_blank">Learn More</a>
+      .content-section {
+        min-height: 100vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 1s ease;
+      }
+
+      .content-section.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .content-section h2 {
+        font-size: 3em;
+        margin-bottom: 1rem;
+        background: linear-gradient(to right, #60a5fa, #93c5fd);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 3em;
+        }
+
+        .info-circle {
+          width: 35px;
+          height: 35px;
+          font-size: 1em;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <a href="index2.html" class="info-circle">i</a>
+    <div class="hamburger-menu">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
-  </div>
+    <nav class="nav-menu">
+      <a href="index3.html">Buying Crypto</a>
+      <a href="index4.html">Trading Stocks</a>
+      <a href="index5.html">NFTs</a>
+    </nav>
+    <div class="main-content">
+      <h1>MostlyFutures</h1>
+      <div class="subtitle-text">your local quant</div>
+    </div>
 
-  <script>
-    const hamburger = document.querySelector('.hamburger-menu');
-    const navMenu = document.querySelector('.nav-menu');
+    <div class="scroll-indicator">↓</div>
 
-    hamburger.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
-    });
+    <div id="content" class="content-section">
+      <div class="link-card" style="margin-top: 2rem">
+        <a href="https://www.amazon.com/dp/B0DXN4P2P4" target="_blank"
+          >Learn More</a
+        >
+      </div>
+    </div>
 
-    document.addEventListener('click', (e) => {
-      if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-        navMenu.classList.remove('active');
-      }
-    });
+    <script>
+      const hamburger = document.querySelector('.hamburger-menu');
+      const navMenu = document.querySelector('.nav-menu');
 
-    document
-      .querySelector('.scroll-indicator')
-      .addEventListener('click', () => {
-        document
-          .getElementById('content')
-          .scrollIntoView({behavior: 'smooth'});
+      hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
       });
 
-    window.addEventListener('scroll', () => {
-      const content = document.getElementById('content');
-      const contentPosition = content.getBoundingClientRect().top;
-      const screenPosition = window.innerHeight / 1.3;
+      document.addEventListener('click', (e) => {
+        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+          navMenu.classList.remove('active');
+        }
+      });
 
-      if (contentPosition < screenPosition) {
-        content.classList.add('visible');
-      }
-    });
-  </script>
-</body>
+      document
+        .querySelector('.scroll-indicator')
+        .addEventListener('click', () => {
+          document
+            .getElementById('content')
+            .scrollIntoView({ behavior: 'smooth' });
+        });
 
+      window.addEventListener('scroll', () => {
+        const content = document.getElementById('content');
+        const contentPosition = content.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 1.3;
+
+        if (contentPosition < screenPosition) {
+          content.classList.add('visible');
+        }
+      });
+    </script>
+  </body>
 </html>
