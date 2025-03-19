@@ -51,13 +51,14 @@
       .compass-container {
         display: flex;
         justify-content: left;
-        margin-bottom: 20px; 
+        margin-bottom: 20px;
       }
 
-     
+      
       .compass {
         font-size: 20px; 
         animation: spin 1s infinite linear; 
+        align-items: center;
       }
 
       
@@ -212,14 +213,14 @@
         overflow: hidden;
         transition: all 0.3s ease;
         animation: slideIn 0.5s ease-out backwards;
-        margin-left: -2.17px; /* Default for desktop */
+        margin-left: -2.17px;
       }
 
       @media only screen and (max-width: 768px) {
-        /* Adjust the max-width as needed for your mobile breakpoint */
+        
         .link-card {
-          margin-left: 0; /* Reset margin-left */
-          margin-right: -7.5px; /* Mobile-specific style */
+          margin-left: 0; 
+          margin-right: -7.5px; 
         }
       }
       .link-card:nth-child(1) {
@@ -314,16 +315,32 @@
         max-width: 200px;
         box-sizing: border-box;
         text-align: center;
+        display: flex;
+        align-items: center; 
+        justify-content: space-between; 
+        overflow: hidden; 
       }
 
       .crypto-element .name {
         font-size: 1.2em;
         font-weight: 700;
+        text-align; center;
+        white-space: nowrap; 
+        overflow: hidden; 
+        text-overflow: ellipsis; 
       }
 
       .crypto-element .price {
         font-size: 1.1em;
         margin-top: 0.5rem;
+        text-align; center;
+        white-space: nowrap; 
+      }
+
+      .crypto-element img {
+        max-width: 15px; 
+        height: auto; 
+        align-items: center;
       }
 
       @media (max-width: 768px) {
@@ -467,7 +484,17 @@
             const cryptoElement = document.createElement('div');
             cryptoElement.className =
               'crypto-element' + (index === 0 ? ' active' : '');
-            cryptoElement.innerHTML = `<div class="name">${crypto.name}</div><div class="price">$${crypto.current_price}</div>`;
+
+            
+            const cryptoImage = `<img src="${crypto.image}" alt="${crypto.name} logo" />`;
+
+           
+            cryptoElement.innerHTML = `
+        ${cryptoImage}
+        <div class="name">${crypto.name}</div>
+        <div class="price">$${crypto.current_price}</div>
+      `;
+
             cryptoPricesContainer.appendChild(cryptoElement);
           });
 
@@ -487,11 +514,10 @@
           cryptoElements[currentIndex].classList.remove('active');
           currentIndex = (currentIndex + 1) % cryptoElements.length;
           cryptoElements[currentIndex].classList.add('active');
-        }, 3000); 
+        }, 3000);
       }
 
       fetchCryptoPrices();
       setInterval(fetchCryptoPrices, 60000); 
-    </script>
   </body>
 </html>
