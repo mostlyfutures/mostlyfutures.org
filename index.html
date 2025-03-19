@@ -47,6 +47,28 @@
         background-color: white;
         transition: 0.3s;
       }
+      
+      .compass-container {
+        display: flex;
+        justify-content: left;
+        margin-bottom: 20px; 
+      }
+
+     
+      .compass {
+        font-size: 20px; 
+        animation: spin 1s infinite linear; 
+      }
+
+      
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
 
       .nav-menu {
         position: fixed;
@@ -190,15 +212,16 @@
         overflow: hidden;
         transition: all 0.3s ease;
         animation: slideIn 0.5s ease-out backwards;
-        margin-left: -2.17px; 
-}
+        margin-left: -2.17px; /* Default for desktop */
+      }
 
-@media only screen and (max-width: 768px) { 
-  .link-card {
-    margin-left: 0; 
-    margin-right: -7.5px; 
-  }
-}
+      @media only screen and (max-width: 768px) {
+        /* Adjust the max-width as needed for your mobile breakpoint */
+        .link-card {
+          margin-left: 0; /* Reset margin-left */
+          margin-right: -7.5px; /* Mobile-specific style */
+        }
+      }
       .link-card:nth-child(1) {
         animation-delay: 0.4s;
       }
@@ -373,6 +396,10 @@
       <a href="index5.html">NFTs</a>
     </nav>
     <div class="main-content">
+      <div class="compass-container">
+        <div class="compass">X</div>
+        
+      </div>
       <h1>MostlyFutures</h1>
       <div class="subtitle-text">your local quant</div>
       <div class="link-card" style="margin-top: 32px">
@@ -385,7 +412,7 @@
     <div class="scroll-indicator">↓</div>
 
     <div id="crypto-prices" class="crypto-prices">
-      <!-- Crypto data will be inserted here -->
+      
     </div>
 
     <div id="content" class="content-section"></div>
