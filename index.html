@@ -258,7 +258,7 @@
               color: rgba(255, 255, 255, 0.8);
             }
             .crypto-prices {
-              margin-top: -17px;
+              margin-top: 1;
               padding: 1rem;
               background: rgba(255, 255, 255, 0.05);
               backdrop-filter: blur(10px);
@@ -360,6 +360,7 @@
               opacity: 0;
               transform: translateY(50px);
               transition: all 1s ease;
+              display: none;
             }
             .content-section.visible {
               opacity: 1;
@@ -410,8 +411,7 @@
       </div>
     </div>
     <div class="scroll-indicator">↓</div>
-    <div id="crypto-prices" class="crypto-prices">      
-    </div>
+    <div id="crypto-prices" class="crypto-prices"></div>
     <div id="content" class="content-section"></div>
     <script>
       const hamburger = document.querySelector('.hamburger-menu');
@@ -479,10 +479,134 @@
           cryptoElements[currentIndex].classList.remove('active');
           currentIndex = (currentIndex + 1) % cryptoElements.length;
           cryptoElements[currentIndex].classList.add('active');
-        }, 3000); 
+        }, 3000);
       }
       fetchCryptoPrices();
-      setInterval(fetchCryptoPrices, 60000); 
+      setInterval(fetchCryptoPrices, 60000);
     </script>
+    <div
+      class="disclaimer"
+      style="
+        margin-top: 1rem;
+        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 0.9em;
+        line-height: 1.6;
+      "
+    >
+      <h2 style="margin-top: 0">Disclaimer</h2>
+      <h3>What is Trading?</h3>
+      <p>
+        Trading is essentially, buying and selling financial assets such as
+        stocks, futures, forex, options with the goal of profiting from market
+        fluctuations to generate profit. Trading is not to be confused with
+        long-term investing.
+      </p>
+      <p>
+        At the end of the day, trading is all about understanding market
+        structure, probabilities and discipline within the markets. In order to
+        be a successful trader, you must detach yourself from the idea of
+        “money”. You must disconnect all your emotions to the markets, the
+        market does not care about your emotions or financial situation. Doesn’t
+        matter if you’re an intraday trader or a swing trader, trading involves
+        three main components: Strategy, Psychology and Consistency.
+      </p>
+      <h3>Asset Types</h3>
+      <p>
+        Stocks: Represent Ownership within a company. Whenever you go ahead and
+        purchase shares, you own a piece of that business which gives you
+        entitlement over capital appreciation and dividends. Usually traders who
+        trade look at price movements done by earnings reports, market sentiment
+        and other macroeconomic factors along with minor technical analysis.
+      </p>
+      <p>Pros: Works for both short-term and long-term strategies</p>
+      <p>Regulated and transparent, rarely any shady things</p>
+      <p>Cons: Pattern Day Trading Rule restricting intraday trading</p>
+      <p>Significant Capital needed for proper returns</p>
+      <p>
+        Futures: Leveraged contracts that allow traders to “bet” on the future
+        price of commodities, indices and bonds. Compared to stocks, you don’t
+        own the any asset, but are simply trading the contract
+      </p>
+      <p>Pros: High leverage allows for massive gains</p>
+      <p>Trade around the clock (24/5)</p>
+      <p>No Pattern Day Trading rule</p>
+      <p>Cons: High leverage also means more losses</p>
+      <p>Requires much better risk management and psychology</p>
+      <p>
+        Forex: The Foreign Exchange Market is the global exchange of currencies.
+        This is usually the most liquid market in the world also being open
+        24/5. It’s quite simple, you’re just trading currencies, that’s all.
+      </p>
+      <p>Pros: Low Barrier for entry, you can trade with literal 10 bucks</p>
+      <p>High Liquidity and tight spreads</p>
+      <p>Cons: Extreme leverage at disposal can liquidate your account fast</p>
+      <p>Stronger risk management and psychology</p>
+
+      <h3>What to trade?</h3>
+      <p>
+        In this document we’re going to be mainly focusing on Futures. NQ and
+        ES. why? and what are these? Nasdaq (NQ) and the S&P500 (ES) are indices
+        which are used to measure the movement of 100 (NQ) or 500 (ES) stocks.
+        These are available to trade 24/5 across NY, Asia and London session.
+      </p>
+
+      <h3>Where to trade?</h3>
+      <p>
+        Futures can be analyzed on tradingview.com (free) but you will need
+        market data or otherwise your data will be 10 minutes delayed. This
+        market data thankfully does come with prop firms. Talking about prop
+        firms, you can trade futures two ways, either on a live account with
+        your own money and own personal risk or on a demo account with a firm
+        that let’s you keep the profits in real time from the demo account.
+      </p>
+      <h3>Prop Firms</h3>
+      <p>
+        Essentially demo trading on an account and paying yourself out with the
+        profits you make. Sounds easy? If it was easy Prop Firms would be out of
+        business.
+      </p>
+      <p>Rules: Prop firms have rules and this is usually how it goes</p>
+      <p>
+        You will start off with an “evaluation” account. You will be given a
+        profit target to reach with a trailing drawdown. What’s a trailing
+        drawdown? Let’s say you’re on a 50k account with the profit target of 3k
+        and max drawdown (max loss) of 2k. If you make 1k (acc balance: 51k)
+        your max drawdown will now be at 49k. If your balance goes below that
+        your account will be liquidated and you will have to restart.
+      </p>
+      <p>
+        Once you pass this “evaluation” you’ll be moved on to a “funded/passed”
+        account. This account will start from 50k not from the 53k target profit
+        you hit on your evaluation account.
+      </p>
+      <p>
+        The drawdown rule still follows on this account, however it stops after
+        it reaches the account balance in this case 50k. Let’s say you make 52k,
+        the max drawdown is now at 50k. Now even if you’re at 58k, the drawdown
+        remains at 50k. This allows you to build a “buffer-zone” to risk more in
+        trades.
+      </p>
+      <p>
+        Once you have a fair amount of money in the account you can request a
+        payout from the account as long as you follow all the rules. Make sure
+        to read all the payout rules for the firm before trading on it since
+        each firm has their own rules.
+      </p>
+
+      <h3>How to Trade?</h3>
+      <p>
+        This is the most important part of trading, the how? As I said before
+        trading mainly consists of three things:<br />
+        Strategy<br />
+        Psychology<br />Consistency <br />
+      </p>
+      <p>For more information visit the trading tab in the top right.</p>
+      <p></p>
+    </div>
   </body>
 </html>
