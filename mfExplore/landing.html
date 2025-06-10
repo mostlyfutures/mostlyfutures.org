@@ -394,209 +394,29 @@
       <span></span>
     </div>
     <nav class="nav-menu">
-      <a href="index3.html">Buying Crypto</a>
-      <a href="index4.html">Trading</a>
-      <a href="index5.html">NFTs</a>
-      <a href="zchat.html">Chatbot</a>
+      <a href="crypto-intro.html">Crypto Introduction</a>
+      <a href="trading-intro.html">Trading</a>
+      <a href="/mfSart/landing.html">Sart</a>
+      <a href="ai-chatbot.html">AI Model</a>
     </nav>
     <div class="main-content">
       <div class="compass-container">
-        <div class="compass">X</div>
       </div>
       <h1>MostlyFutures</h1>
-      <div class="subtitle-text">your local quant</div>
       <div class="link-card" style="margin-top: 32px">
-        <a href="https://www.amazon.com/dp/B0DXN4P2P4" target="_blank"
-          >My Book</a
-        >
       </div>
     </div>
-    <div class="scroll-indicator">↓</div>
-    <div id="crypto-prices" class="crypto-prices"></div>
-    <div id="content" class="content-section"></div>
-    <script>
-      const hamburger = document.querySelector('.hamburger-menu');
-      const navMenu = document.querySelector('.nav-menu');
-      hamburger.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-      });
-      document.addEventListener('click', (e) => {
-        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-          navMenu.classList.remove('active');
-        }
-      });
-      document
-        .querySelector('.scroll-indicator')
-        .addEventListener('click', () => {
-          document
-            .getElementById('content')
-            .scrollIntoView({ behavior: 'smooth' });
-        });
-      window.addEventListener('scroll', () => {
-        const content = document.getElementById('content');
-        const contentPosition = content.getBoundingClientRect().top;
-        const screenPosition = window.innerHeight / 1.3;
-        if (contentPosition < screenPosition) {
-          content.classList.add('visible');
-        }
-      });
-      async function fetchCryptoPrices() {
-        try {
-          const response = await fetch(
-            'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=6&page=1&sparkline=false'
-          );
-          const data = await response.json();
-          const filteredData = data.filter(
-            (crypto) => crypto.symbol !== 'usdt'
-          );
-          const top5Cryptos = filteredData.slice(0, 5);
-          const cryptoPricesContainer =
-            document.getElementById('crypto-prices');
-          cryptoPricesContainer.innerHTML = '';
 
-          top5Cryptos.forEach((crypto, index) => {
-            const cryptoElement = document.createElement('div');
-            cryptoElement.className =
-              'crypto-element' + (index === 0 ? ' active' : '');
-            const cryptoImage = `<img src="${crypto.image}" alt="${crypto.name} logo" />`;
-            cryptoElement.innerHTML = `
-        ${cryptoImage}
-        <div class="name">${crypto.name}</div>
-        <div class="price">$${crypto.current_price}</div>
-      `;
-            cryptoPricesContainer.appendChild(cryptoElement);
-          });
-          if (window.innerWidth <= 768) {
-            rotateCryptos();
-          }
-        } catch (error) {
-          console.error('Error fetching crypto prices:', error);
-        }
-      }
-      function rotateCryptos() {
-        const cryptoElements = document.querySelectorAll('.crypto-element');
-        let currentIndex = 0;
-        setInterval(() => {
-          cryptoElements[currentIndex].classList.remove('active');
-          currentIndex = (currentIndex + 1) % cryptoElements.length;
-          cryptoElements[currentIndex].classList.add('active');
-        }, 3000);
-      }
-      fetchCryptoPrices();
-      setInterval(fetchCryptoPrices, 60000);
-    </script>
-    <div
-      class="disclaimer"
-      style="
-        margin-top: 1rem;
-        padding: 1.5rem;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 12px;
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-        font-size: 0.9em;
-        line-height: 1.6;
-      "
-    >
-      <h2 style="margin-top: 0">Disclaimer</h2>
-      <h3>What is Trading?</h3>
-      <p>
-        Trading is essentially, buying and selling financial assets such as
-        stocks, futures, forex, options with the goal of profiting from market
-        fluctuations to generate profit. Trading is not to be confused with
-        long-term investing.
-      </p>
-      <p>
-        At the end of the day, trading is all about understanding market
-        structure, probabilities and discipline within the markets. In order to
-        be a successful trader, you must detach yourself from the idea of
-        “money”. You must disconnect all your emotions to the markets, the
-        market does not care about your emotions or financial situation. Doesn’t
-        matter if you’re an intraday trader or a swing trader, trading involves
-        three main components: Strategy, Psychology and Consistency.
-      </p>
-      <h3>Asset Types</h3>
-      <p>
-        Stocks: Represent Ownership within a company. Whenever you go ahead and
-        purchase shares, you own a piece of that business which gives you
-        entitlement over capital appreciation and dividends. Usually traders who
-        trade look at price movements done by earnings reports, market sentiment
-        and other macroeconomic factors along with minor technical analysis.
-      </p>
-      <p>Pros: Works for both short-term and long-term strategies</p>
-      <p>Regulated and transparent, rarely any shady things</p>
-      <p>Cons: Pattern Day Trading Rule restricting intraday trading</p>
-      <p>Significant Capital needed for proper returns</p>
-      <p>
-        Futures: Leveraged contracts that allow traders to “bet” on the future
-        price of commodities, indices and bonds. Compared to stocks, you don’t
-        own the any asset, but are simply trading the contract
-      </p>
-      <p>Pros: High leverage allows for massive gains</p>
-      <p>Trade around the clock (24/5)</p>
-      <p>No Pattern Day Trading rule</p>
-      <p>Cons: High leverage also means more losses</p>
-      <p>Requires much better risk management and psychology</p>
-      <p>
-        Forex: The Foreign Exchange Market is the global exchange of currencies.
-        This is usually the most liquid market in the world also being open
-        24/5. It’s quite simple, you’re just trading currencies, that’s all.
-      </p>
-      <p>Pros: Low Barrier for entry, you can trade with literal 10 bucks</p>
-      <p>High Liquidity and tight spreads</p>
-      <p>Cons: Extreme leverage at disposal can liquidate your account fast</p>
-      <p>Stronger risk management and psychology</p>
-
-      <h3>Where to trade?</h3>
-      <p>
-        Futures can be analyzed on tradingview.com (free) but you will need
-        market data or otherwise your data will be 10 minutes delayed. This
-        market data thankfully does come with prop firms. Talking about prop
-        firms, you can trade futures two ways, either on a live account with
-        your own money and own personal risk or on a demo account with a firm
-        that let’s you keep the profits in real time from the demo account.
-      </p>
-      <h3>DEXs</h3>
-      <p>
-        A DEX (Decentralized Exchange) is a cryptocurrency trading platform that operates without a central authority or intermediary. 
-        Unlike traditional centralized exchanges like Coinbase or Binance, DEXs use smart contracts on blockchain networks to facilitate peer-to-peer 
-        trading directly between users.
-      </p>
-      <p>How DEXs Work</p>
-      <p>
-        DEXs typically use Automated Market Makers (AMMs) instead of traditional
-          order books. In an AMM system, trades happen against liquidity pools - 
-          collections of tokens locked in smart contracts. When you want to trade
-          Token A for Token B, the smart contract automatically calculates the exchange 
-          rate based on the relative amounts of each token in the pool, following mathematical
-          formulas like the constant product formula (x * y = k).
-          Users can also become liquidity providers by depositing pairs of tokens into these pools.
-          In return, they earn a portion of the trading fees generated by the pool, typically ranging
-          from 0.05% to 1% per trade.
-      </p>
-      <p>
-        Trading Tokenized Assets
-        DEXs excel at trading various tokenized assets including traditional cryptocurrencies, stablecoins,
-        governance tokens, NFTs (through specialized DEX platforms), and even tokenized real-world assets like 
-        stocks or commodities when available on-chain.
-        Popular DEX platforms include Dydx, Hyperliquid, and Ostium.app . 
-        Each offers slightly different features but follows the same core principle of decentralized, automated trading through smart contracts.
-        The main advantages are lower fees, no need for account creation or KYC, direct wallet-to-wallet trading, and 24/7 availability. 
-        However, users need to manage their own private keys and navigate the technical aspects of blockchain interactions.
-        This can be done using a web3 wallet like Metamask.
-      </p>
-
-      <h3>How to Trade?</h3>
-      <p>
-        This is the most important part of trading, the how? As I said before
-        trading mainly consists of three things:<br />
-        Strategy<br />
-        Psychology<br/>
-      & Consistency <br />
-      </p>
-      <p>For more information visit the trading tab in the top right.</p>
-      <p></p>
     </div>
+    <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const navMenu = document.querySelector('.nav-menu');
+
+    hamburgerMenu.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+  });
+</script>
   </body>
 </html>
