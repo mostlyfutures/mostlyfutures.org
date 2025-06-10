@@ -70,6 +70,21 @@
       </div>
       
       <div class="p-4 bg-blue-900/50">
+        <div class="flex items-center space-x-4 mb-2">
+          <!-- File Upload Input -->
+          <label for="file-upload" class="cursor-pointer py-2 px-4 bg-gray-700 text-white rounded-xl hover:bg-gray-600 transition">
+            Upload File
+            <input type="file" id="file-upload" accept="image/*" class="hidden" />
+          </label>
+          <!-- Display selected file info -->
+          <div id="file-display" class="flex-1 text-white/70 text-sm italic">
+            No file selected.
+          </div>
+          <button id="clear-file" class="hidden py-1 px-3 bg-red-600 text-white rounded-xl hover:bg-red-500 transition text-sm">
+            Clear
+          </button>
+        </div>
+
         <div class="flex items-center space-x-4">
           <input
             type="text"
@@ -89,21 +104,26 @@
         const chatMessages = document.getElementById('chat-messages');
         const userInput = document.getElementById('user-input');
         const sendButton = document.getElementById('send-button');
+        const fileUploadInput = document.getElementById('file-upload');
+        const fileDisplay = document.getElementById('file-display');
+        const clearFileButton = document.getElementById('clear-file');
 
         let chatHistory = [];
         const systemPrompt = 'You are a helpful trading assistant for MostlyFutures. Provide concise, accurate information about stocks, crypto, futures, and NFTs. Be professional but approachable.';
         chatHistory.push({ role: "user", parts: [{ text: systemPrompt }] });
         chatHistory.push({ role: "model", parts: [{ text: "I am ready to help. How can I assist you today?" }] });
 
-        const apiKey = "AIzaSyDZ5hEmR_dWrNBUYl2bS8Yz5NOlr-TBr8o"; // Canvas provides this
+        const apiKey = "AIzaSyDZ5hEmR_dWrNBUYl2bS8Yz5NOlr"; // Canvas provides this
+        let selectedFile = null; // To store the selected file object
 
         /**
          * Utility to create and add a message to the UI.
          * @param {string | HTMLElement} content - The text or HTML element to add.
          * @param {string} role - 'user', 'bot', or 'system'.
          * @param {string} [messageId] - An optional ID for the message element.
+         * @param {string} [imageUrl] - Optional URL for an image to display within the message.
          */
-        function addMessageToUI(content, role, messageId) {
+        function addMessageToUI(content, role, messageId, imageUrl = null) {
             const messageWrapper = document.createElement('div');
             messageWrapper.classList.add('message', 'mb-4', 'flex');
             if (messageId) {
@@ -117,6 +137,13 @@
                 messageDiv.innerHTML = content;
             } else {
                 messageDiv.appendChild(content);
+            }
+
+            if (imageUrl) {
+                const imgElement = document.createElement('img');
+                imgElement.src = imageUrl;
+                imgElement.classList.add('mt-2', 'rounded-lg', 'max-w-full', 'h-auto');
+                messageDiv.appendChild(imgElement);
             }
             
             if (role === 'user') {
@@ -148,32 +175,81 @@
         }
 
         /**
+         * Reads a File object as a Base64 encoded string.
+         * @param {File} file - The File object to read.
+         * @returns {Promise<string>} A promise that resolves with the Base64 string.
+         */
+        function readFileAsBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result.split(',')[1]); // Get only the base64 part
+                reader.onerror = error => reject(error);
+                reader.readAsDataURL(file);
+            });
+        }
+
+        /**
          * Main function to handle user input.
          */
         async function sendMessage() {
             const message = userInput.value.trim();
-            if (message === '') return;
+            if (message === '' && !selectedFile) return; // Don't send empty message with no file
 
-            addMessageToUI(message, 'user');
+            let userMessageParts = [];
+            let displayedImage = null; // To display the image sent by the user
+
+            // Add text part if available
+            if (message !== '') {
+                userMessageParts.push({ text: message });
+            }
+
+            // Add file part if available
+            if (selectedFile) {
+                try {
+                    const base64Data = await readFileAsBase64(selectedFile);
+                    userMessageParts.push({
+                        inlineData: {
+                            mimeType: selectedFile.type,
+                            data: base64Data
+                        }
+                    });
+                    displayedImage = URL.createObjectURL(selectedFile); // Create a temporary URL for display
+                } catch (error) {
+                    console.error("Error reading file:", error);
+                    addMessageToUI(`❌ Error reading file: ${error.message}`, 'bot');
+                    clearSelectedFile();
+                    return; // Stop processing if file reading fails
+                }
+            }
+
+            // Display user message with potential image
+            if (message !== '' || displayedImage) {
+                addMessageToUI(message, 'user', null, displayedImage);
+            }
+            
             userInput.value = '';
+            clearSelectedFile(); // Clear file input after sending
 
+            // Handle video command
             if (message.toLowerCase().startsWith('/video ')) {
                 const videoPrompt = message.substring(7);
                 await generateVideo(videoPrompt);
             } else {
-                await getChatResponse(message);
+                // For chat, pass the combined parts
+                await getChatResponse(userMessageParts);
             }
         }
 
         /**
          * Calls the Gemini API for a standard text chat response.
-         * @param {string} userMessage - The user's text message.
+         * @param {Array<Object>} contents - Array of parts (text, inlineData) to send.
          */
-        async function getChatResponse(userMessage) {
+        async function getChatResponse(contents) {
             const statusId = `status-${Date.now()}`;
             showStatusIndicator('Thinking...', statusId);
             
-            chatHistory.push({ role: "user", parts: [{ text: userMessage }] });
+            // Add user's new message parts to chat history
+            chatHistory.push({ role: "user", parts: contents });
 
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
             const payload = { contents: chatHistory };
@@ -280,6 +356,32 @@
                 addMessageToUI(`❌ Video creation failed: ${error.message}`, 'bot');
             }
         }
+
+        /**
+         * Handles file selection from the input.
+         */
+        fileUploadInput.addEventListener('change', (event) => {
+            if (event.target.files.length > 0) {
+                selectedFile = event.target.files[0];
+                fileDisplay.textContent = `File selected: ${selectedFile.name}`;
+                clearFileButton.classList.remove('hidden');
+            } else {
+                clearSelectedFile();
+            }
+        });
+
+        /**
+         * Clears the selected file and updates the UI.
+         */
+        function clearSelectedFile() {
+            selectedFile = null;
+            fileUploadInput.value = ''; // Clear the input field
+            fileDisplay.textContent = 'No file selected.';
+            clearFileButton.classList.add('hidden');
+        }
+
+        // Event listener for clearing the selected file
+        clearFileButton.addEventListener('click', clearSelectedFile);
 
         sendButton.addEventListener('click', sendMessage);
         userInput.addEventListener('keypress', (e) => {
