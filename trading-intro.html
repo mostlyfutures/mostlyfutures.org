@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MostlyFutures - Stocks</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #1e40af, #3b82f6);
+        color: #fff;
+        padding: 2rem;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .link-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        width: 100%;
+        max-width: 500px;
+        animation: fadeIn 0.5s ease-out;
+      }
+
+      .link-card a {
+        color: #fff;
+        text-decoration: none;
+        padding: 1.2rem;
+        display: block;
+        font-size: 1.1em;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        text-align: center;
+      }
+
+      .link-card:hover {
+        transform: translateY(-2px);
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 768px) {
+        img {
+          max-width: 80% !important; /* 50% + 30% increase = 80% */
+        }
+      }
+
+      .back-button {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 10px 20px;
+        border-radius: 8px;
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .back-button:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .trading-description {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 2rem auto;
+        line-height: 1.6;
+        animation: fadeIn 0.5s ease-out;
+      }
+    </style>
+  </head>
+
+  <body>
+    <a href="landing.html" class="back-button">Back</a>
+    <h1 style="animation: fadeIn 1s ease-out">What is Trading?</h1>
+    <div class="trading-description">
+      The word "Trading" is an umbrella term for the exchange of goods at point in time. Trading uses
+      These markets you will be capitalizing off of refer to the facilitatation an the exchange of goods.
+        The same way someone is willing to buy a fruit at a price is the same way a person is willing to buy a 
+        stock or commodoty like a car. Once you start to associate a demand with every particular thing in life
+        trading becomes easier. People change their mind about how much they are willing to pay for things all
+        the time, this is called demand. Every stock, car, piece of technology, or even a gold brick will always have demand
+        for it at any given time and trading is all about knowing when its likey for demand of a product to go up or go down
+        given the variety of factors related to the underlaying product at the time.
+
+        For example if a beyblade comerial starts to get kids interested in buying their toys, the demand
+        for beyblades will go up. Now image only 100 beyblades are released by the company who
+        makes them, if 100 people buy up all the beyblades priced at $10, the first person who doesnt want 
+        their beyblade anymore can sell it for $11. This facilitation of scare goods is what makes markets
+        like Bitcoin and the S&P500 "tradeable". The things we will be "trading" are scare, which allows us to 
+        capitilize on the fluctuations in demand, completly online at the comfort of a nice chair.
+    </div>
+    <div class="link-card" style="margin-bottom: 1rem">
+      <a href="/mfDex/dex.html" target="_blank"
+        >Start Trading</a
+      >
+    </div>
+    <div class="link-card">
+      <a target="_blank"
+        >New to Trading?</a
+      >
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gemini AI Chat & Video</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+      .chat-messages::-webkit-scrollbar {
+        width: 8px;
+      }
+      .chat-messages::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+      }
+      .chat-messages::-webkit-scrollbar-thumb {
+        background: rgba(59, 130, 246, 0.5);
+        border-radius: 10px;
+      }
+      .chat-messages::-webkit-scrollbar-thumb:hover {
+        background: #2563eb;
+      }
+      .typing-dots span {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #fff;
+        margin: 0 2px;
+        opacity: 0.4;
+        animation: bounce 1s infinite;
+      }
+      .typing-dots span:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .typing-dots span:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+      @keyframes bounce {
+        0%, 100% {
+          transform: translateY(0);
+          opacity: 0.4;
+        }
+        50% {
+          transform: translateY(-5px);
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gradient-to-br from-gray-900 to-blue-900 text-white p-4 sm:p-8 box-border min-h-screen">
+
+    <div class="max-w-3xl mx-auto h-[85vh] flex flex-col bg-white/5 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden border border-white/10">
+      <div class="p-4 bg-blue-800/80 text-center text-xl font-bold">
+        Grant AI
+      </div>
+      <div class="flex-1 p-4 sm:p-6 overflow-y-auto chat-messages" id="chat-messages">
+        <div class="message bot-message mb-4 flex">
+          <div class="p-3 px-4 bg-white/10 rounded-2xl rounded-bl-none max-w-[80%]">
+            I can chat or create videos. For video, start your prompt with <strong>/video</strong>. What would you like to do?
+          </div>
+        </div>
+      </div>
+      
+      <div class="p-4 bg-blue-900/50">
+        <div class="flex items-center space-x-4">
+          <input
+            type="text"
+            id="user-input"
+            placeholder="Ask for a chat or /video prompt..."
+            class="flex-1 py-3 px-4 border-none rounded-xl bg-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-blue-500 focus:outline-none transition"
+          />
+          <button id="send-button" class="py-3 px-6 bg-blue-600 text-white border-none rounded-xl cursor-pointer font-bold transition hover:bg-blue-500 active:scale-95">
+            Send
+          </button>
+        </div>
+        <p class="text-xs text-white/50 text-center mt-2">Example: /video a majestic eagle flying over mountains</p>
+      </div>
+    </div>
+
+    <script>
+        const chatMessages = document.getElementById('chat-messages');
+        const userInput = document.getElementById('user-input');
+        const sendButton = document.getElementById('send-button');
+
+        let chatHistory = [];
+        const systemPrompt = 'You are a helpful trading assistant for MostlyFutures. Provide concise, accurate information about stocks, crypto, futures, and NFTs. Be professional but approachable.';
+        chatHistory.push({ role: "user", parts: [{ text: systemPrompt }] });
+        chatHistory.push({ role: "model", parts: [{ text: "I am ready to help. How can I assist you today?" }] });
+
+        const apiKey = "AIzaSyDZ5hEmR_dWrNBUYl2bS8Yz5NOlr-TBr8o"; // Canvas provides this
+
+        /**
+         * Utility to create and add a message to the UI.
+         * @param {string | HTMLElement} content - The text or HTML element to add.
+         * @param {string} role - 'user', 'bot', or 'system'.
+         * @param {string} [messageId] - An optional ID for the message element.
+         */
+        function addMessageToUI(content, role, messageId) {
+            const messageWrapper = document.createElement('div');
+            messageWrapper.classList.add('message', 'mb-4', 'flex');
+            if (messageId) {
+              messageWrapper.id = messageId;
+            }
+
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('p-3', 'px-4', 'rounded-2xl', 'max-w-[80%]');
+
+            if (typeof content === 'string') {
+                messageDiv.innerHTML = content;
+            } else {
+                messageDiv.appendChild(content);
+            }
+            
+            if (role === 'user') {
+                messageWrapper.classList.add('justify-end');
+                messageDiv.classList.add('bg-blue-600', 'rounded-br-none');
+            } else {
+                messageWrapper.classList.add('justify-start');
+                messageDiv.classList.add('bg-white/10', 'rounded-bl-none');
+            }
+            
+            messageWrapper.appendChild(messageDiv);
+            chatMessages.appendChild(messageWrapper);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            return messageWrapper;
+        }
+
+        /**
+         * Adds a temporary loading/status indicator to the UI.
+         * @param {string} text - The text to display in the indicator.
+         * @param {string} messageId - The ID for the message element.
+         */
+        function showStatusIndicator(text, messageId) {
+             const indicatorContent = `
+                <div class="flex items-center space-x-2">
+                    <div class="typing-dots"><span></span><span></span><span></span></div>
+                    <span>${text}</span>
+                </div>`;
+            return addMessageToUI(indicatorContent, 'bot', messageId);
+        }
+
+        /**
+         * Main function to handle user input.
+         */
+        async function sendMessage() {
+            const message = userInput.value.trim();
+            if (message === '') return;
+
+            addMessageToUI(message, 'user');
+            userInput.value = '';
+
+            if (message.toLowerCase().startsWith('/video ')) {
+                const videoPrompt = message.substring(7);
+                await generateVideo(videoPrompt);
+            } else {
+                await getChatResponse(message);
+            }
+        }
+
+        /**
+         * Calls the Gemini API for a standard text chat response.
+         * @param {string} userMessage - The user's text message.
+         */
+        async function getChatResponse(userMessage) {
+            const statusId = `status-${Date.now()}`;
+            showStatusIndicator('Thinking...', statusId);
+            
+            chatHistory.push({ role: "user", parts: [{ text: userMessage }] });
+
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+            const payload = { contents: chatHistory };
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                });
+                
+                document.getElementById(statusId)?.remove();
+
+                if (!response.ok) throw new Error(`API Error: ${response.status}`);
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates[0].content.parts[0].text) {
+                    const botResponseText = result.candidates[0].content.parts[0].text;
+                    chatHistory.push({ role: "model", parts: [{ text: botResponseText }] });
+                    addMessageToUI(botResponseText, 'bot');
+                } else {
+                    addMessageToUI("I received an unusual response. Please try again.", 'bot');
+                }
+            } catch (error) {
+                console.error("Chat API Error:", error);
+                document.getElementById(statusId)?.remove();
+                addMessageToUI(`❌ Sorry, an error occurred: ${error.message}`, 'bot');
+            }
+        }
+        
+        /**
+         * A helper function to pause execution.
+         * @param {number} ms - Milliseconds to wait.
+         */
+        const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+        /**
+         * Handles the entire video generation flow.
+         * @param {string} prompt - The user's prompt for the video.
+         */
+        async function generateVideo(prompt) {
+            const statusId = `status-video-${Date.now()}`;
+            showStatusIndicator('Starting video creation...', statusId);
+
+            const GCS_API_URL = "https://generativelanguage.googleapis.com/v1beta";
+
+            try {
+                // 1. Initial request to start the video generation operation
+                const startResponse = await fetch(`${GCS_API_URL}/models/veo-2.0-generate-002:generateVideos`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+                    body: JSON.stringify({ prompt: prompt })
+                });
+
+                if (!startResponse.ok) throw new Error(`Video creation failed to start: ${startResponse.statusText}`);
+                const operation = await startResponse.json();
+                const operationName = operation.name;
+
+                document.getElementById(statusId).querySelector('span').textContent = 'Video is processing... (can take 2-3 mins)';
+
+                // 2. Poll the operation status until it's done
+                let isDone = false;
+                let finalResult;
+                while (!isDone) {
+                    await sleep(20000); // Poll every 20 seconds
+                    const statusResponse = await fetch(`${GCS_API_URL}/${operationName}`, {
+                        method: 'GET',
+                        headers: { 'Authorization': `Bearer ${apiKey}` }
+                    });
+                    
+                    if (!statusResponse.ok) throw new Error(`Failed to get operation status: ${statusResponse.statusText}`);
+                    
+                    const statusData = await statusResponse.json();
+                    isDone = statusData.done;
+
+                    if (isDone) {
+                        finalResult = statusData;
+                    }
+                }
+                
+                document.getElementById(statusId).remove();
+
+                // 3. Process and display the final video
+                if (finalResult && finalResult.response && finalResult.response.generatedVideos) {
+                    const videoData = finalResult.response.generatedVideos[0];
+                    // The API response contains the video as base64 encoded bytes.
+                    const videoBytes = videoData.video.data;
+                    const mimeType = videoData.video.mimeType;
+                    
+                    const videoElement = document.createElement('video');
+                    videoElement.src = `data:${mimeType};base64,${videoBytes}`;
+                    videoElement.controls = true;
+                    videoElement.classList.add('w-full', 'rounded-lg');
+                    
+                    addMessageToUI(videoElement, 'bot');
+                    
+                } else {
+                    throw new Error('Video generation finished, but no video data was found.');
+                }
+
+            } catch (error) {
+                console.error("Video Generation Error:", error);
+                document.getElementById(statusId)?.remove();
+                addMessageToUI(`❌ Video creation failed: ${error.message}`, 'bot');
+            }
+        }
+
+        sendButton.addEventListener('click', sendMessage);
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+    </script>
+  </body>
+</html>
