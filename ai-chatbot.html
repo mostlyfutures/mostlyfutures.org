@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gramt AI</title>
+    <title>Grant AI</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
@@ -109,10 +109,10 @@
         const clearFileButton = document.getElementById('clear-file');
 
         let chatHistory = [];
-        // The system prompt is implicitly handled by the model based on its design.
-        // For multimodal calls, the first turn must be from the user, so we manage chatHistory dynamically.
+        // No initial system prompt or model response in chatHistory for multimodal compatibility.
+        // The first user turn will initiate the conversation.
 
-        const apiKey = "AIzaSyDZ5hEmR_dWrNBUYl2bS8Yz5NOlr-TBr8o"; // Canvas provides this
+        const apiKey = ""; // Canvas provides this - DO NOT HARDCODE
         let selectedFile = null; // To store the selected file object
 
         /**
@@ -329,7 +329,7 @@
                             console.error("Detailed Video API Error:", errorData.error);
                         }
                     } catch (parseError) {
-                        console.error("Failed to parse video API error response:", parseError);
+                            console.error("Failed to parse video API error response:", parseError);
                     }
                     throw new Error(errorMessage);
                 }
