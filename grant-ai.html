@@ -10,9 +10,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+      /* Base font for the body */
       body {
         font-family: 'Inter', sans-serif;
       }
+      /* Custom scrollbar for chat messages */
       .chat-messages::-webkit-scrollbar {
         width: 8px;
       }
@@ -27,6 +29,7 @@
       .chat-messages::-webkit-scrollbar-thumb:hover {
         background: #2563eb;
       }
+      /* Typing indicator animation */
       .typing-dots span {
         display: inline-block;
         width: 8px;
@@ -62,29 +65,15 @@
         Grant AI
       </div>
       <div class="flex-1 p-4 sm:p-6 overflow-y-auto chat-messages" id="chat-messages">
+        <!-- Initial bot message -->
         <div class="message bot-message mb-4 flex">
           <div class="p-3 px-4 bg-white/10 rounded-2xl rounded-bl-none max-w-[80%]">
-            Hello I am Grant AI. What do you want?
+            Hello! I am Grant AI, your trading assistant. How can I help you today?
           </div>
         </div>
       </div>
       
       <div class="p-4 bg-blue-900/50">
-        <div class="flex items-center space-x-4 mb-2">
-          <!-- File Upload Input -->
-          <label for="file-upload" class="cursor-pointer py-2 px-4 bg-gray-700 text-white rounded-xl hover:bg-gray-600 transition">
-            Upload File
-            <input type="file" id="file-upload" accept="image/*" class="hidden" />
-          </label>
-          <!-- Display selected file info -->
-          <div id="file-display" class="flex-1 text-white/70 text-sm italic">
-            No file selected.
-          </div>
-          <button id="clear-file" class="hidden py-1 px-3 bg-red-600 text-white rounded-xl hover:bg-red-500 transition text-sm">
-            Clear
-          </button>
-        </div>
-
         <div class="flex items-center space-x-4">
           <input
             type="text"
@@ -92,11 +81,15 @@
             placeholder="Ask for a chat or /video prompt..."
             class="flex-1 py-3 px-4 border-none rounded-xl bg-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-blue-500 focus:outline-none transition"
           />
+          <button id="upload-button" class="py-3 px-4 bg-purple-600 text-white border-none rounded-xl cursor-pointer font-bold transition hover:bg-purple-500 active:scale-95 whitespace-nowrap">
+            Upload File
+          </button>
+          <input type="file" id="file-input" class="hidden" accept=".pdf,.docx,image/*">
           <button id="send-button" class="py-3 px-6 bg-blue-600 text-white border-none rounded-xl cursor-pointer font-bold transition hover:bg-blue-500 active:scale-95">
             Send
           </button>
         </div>
-        <p class="text-xs text-white/50 text-center mt-2">Video generation comming soon</p>
+        <p class="text-xs text-white/50 text-center mt-2">Example: /video a majestic eagle flying over mountains</p>
       </div>
     </div>
 
@@ -104,25 +97,27 @@
         const chatMessages = document.getElementById('chat-messages');
         const userInput = document.getElementById('user-input');
         const sendButton = document.getElementById('send-button');
-        const fileUploadInput = document.getElementById('file-upload');
-        const fileDisplay = document.getElementById('file-display');
-        const clearFileButton = document.getElementById('clear-file');
+        const uploadButton = document.getElementById('upload-button');
+        const fileInput = document.getElementById('file-input');
 
+        // Initialize chat history with a system prompt and the bot's initial greeting.
+        // The system prompt guides the AI's persona and purpose.
         let chatHistory = [];
-        // No initial system prompt or model response in chatHistory for multimodal compatibility.
-        // The first user turn will initiate the conversation.
+        const systemPrompt = 'You are a helpful trading assistant for MostlyFutures. Provide concise, accurate information about stocks, crypto, futures, and NFTs. Be professional but approachable. If a user uploads a file (document or image), acknowledge the upload, describe the content (or summarize it if a document), and ask how you can help analyze it.';
+        chatHistory.push({ role: "user", parts: [{ text: systemPrompt }] });
+        chatHistory.push({ role: "model", parts: [{ text: "Hello! I am Grant AI, your trading assistant. How can I help you today?" }] });
 
-        const apiKey = "AIzaSyDZ5hEmR_dWrNBUYl2bS8Yz5NOlr-TBr8o"; // Canvas provides this - DO NOT HARDCODE
-        let selectedFile = null; // To store the selected file object
+        // API Key is automatically provided by the Canvas environment.
+        // In a real application, for security, you would typically handle API keys on a backend server.
+        const apiKey = "AIzaSyDZ5hEmR_dWrNBUYl2bS8Yz5NOlr-TBr8o"; 
 
         /**
          * Utility to create and add a message to the UI.
          * @param {string | HTMLElement} content - The text or HTML element to add.
          * @param {string} role - 'user', 'bot', or 'system'.
          * @param {string} [messageId] - An optional ID for the message element.
-         * @param {string} [imageUrl] - Optional URL for an image to display within the message.
          */
-        function addMessageToUI(content, role, messageId, imageUrl = null) {
+        function addMessageToUI(content, role, messageId) {
             const messageWrapper = document.createElement('div');
             messageWrapper.classList.add('message', 'mb-4', 'flex');
             if (messageId) {
@@ -132,19 +127,14 @@
             const messageDiv = document.createElement('div');
             messageDiv.classList.add('p-3', 'px-4', 'rounded-2xl', 'max-w-[80%]');
 
+            // If content is an HTMLElement, append it directly; otherwise, set innerHTML.
             if (typeof content === 'string') {
                 messageDiv.innerHTML = content;
             } else {
                 messageDiv.appendChild(content);
             }
-
-            if (imageUrl) {
-                const imgElement = document.createElement('img');
-                imgElement.src = imageUrl;
-                imgElement.classList.add('mt-2', 'rounded-lg', 'max-w-full', 'h-auto');
-                messageDiv.appendChild(imgElement);
-            }
             
+            // Apply styling based on the message role.
             if (role === 'user') {
                 messageWrapper.classList.add('justify-end');
                 messageDiv.classList.add('bg-blue-600', 'rounded-br-none');
@@ -155,6 +145,7 @@
             
             messageWrapper.appendChild(messageDiv);
             chatMessages.appendChild(messageWrapper);
+            // Scroll to the bottom to show the latest message.
             chatMessages.scrollTop = chatMessages.scrollHeight;
             return messageWrapper;
         }
@@ -174,87 +165,182 @@
         }
 
         /**
-         * Reads a File object as a Base64 encoded string.
-         * @param {File} file - The File object to read.
-         * @returns {Promise<string>} A promise that resolves with the Base64 string.
+         * IMPORTANT: This function simulates a web search.
+         * In a real-world application for up-to-date data,
+         * you would integrate with an actual search API (e.g., Google Search API)
+         * or a specific financial data API (e.g., Alpha Vantage, Finnhub) via a backend proxy
+         * to avoid CORS issues and secure your API keys.
+         * @param {string} query - The search query.
+         * @returns {Promise<string>} A JSON string representing the simulated search results.
          */
-        function readFileAsBase64(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = () => resolve(reader.result.split(',')[1]); // Get only the base64 part
-                reader.onerror = error => reject(error);
-                reader.readAsDataURL(file);
-            });
+        async function simulateGoogleSearch(query) {
+            console.log(`Simulating Google Search for: "${query}"`);
+            let resultSnippet;
+            const today = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = today.toLocaleDateString('en-US', options);
+
+            if (query.toLowerCase().includes("weather")) {
+                resultSnippet = `The weather in Auckland today (${formattedDate}) is partly cloudy with a high of 18°C and a low of 10°C.`;
+            } else if (query.toLowerCase().includes("stock market") || query.toLowerCase().includes("spy current price")) {
+                // This is a simulated price, not real-time.
+                resultSnippet = `As of ${formattedDate}, the simulated current price for SPY is around $525.00. The broader stock market (NZX 50) is up 0.5% today. Global markets are stable.`;
+            } else if (query.toLowerCase().includes("bitcoin") || query.toLowerCase().includes("crypto")) {
+                // This is a simulated price, not real-time.
+                resultSnippet = `As of ${formattedDate}, Bitcoin (BTC) is currently trading around $65,000. Ethereum (ETH) is at $3,500.`;
+            } else if (query.toLowerCase().includes("current date") || query.toLowerCase().includes("today's date")) {
+                resultSnippet = `Today's date is ${formattedDate}.`;
+            } else {
+                resultSnippet = `Simulated information on "${query}" as of ${formattedDate}: This would typically contain up-to-date data relevant to your query if connected to a real search engine.`;
+            }
+            // Return a structured JSON string as expected by the tool output.
+            return JSON.stringify({ results: [{ snippet: resultSnippet }] });
         }
+
+        /**
+         * Defines the tools (functions) that Gemini can call.
+         * These declarations tell Gemini about the available external capabilities.
+         */
+        const toolDeclarations = [
+            {
+                functionDeclarations: [
+                    {
+                        name: "simulateGoogleSearch", // The name of the function to be called in JavaScript.
+                        description: "Searches the web for up-to-date information based on a query, useful for current events, news, or factual data. NOTE: This is a simulated search and does not fetch real-time data from the internet.",
+                        parameters: {
+                            type: "OBJECT",
+                            properties: {
+                                query: { type: "STRING", description: "The search query." },
+                            },
+                            required: ["query"], // 'query' is a mandatory parameter for this tool.
+                        },
+                    },
+                ],
+            },
+        ];
 
         /**
          * Main function to handle user input.
          */
         async function sendMessage() {
             const message = userInput.value.trim();
-            if (message === '' && !selectedFile) return; // Don't send empty message with no file
+            if (message === '') return; // Do nothing if the input is empty.
 
-            let userMessagePartsForAPI = [];
-            let displayedImage = null; // To display the image sent by the user in chat UI
+            addMessageToUI(message, 'user'); // Display user's message in the chat.
+            userInput.value = ''; // Clear the input field.
 
-            // Add text part if available
-            if (message !== '') {
-                userMessagePartsForAPI.push({ text: message });
-            }
-
-            // Add file part if available
-            if (selectedFile) {
-                try {
-                    const base64Data = await readFileAsBase64(selectedFile);
-                    userMessagePartsForAPI.push({
-                        inlineData: {
-                            mimeType: selectedFile.type,
-                            data: base64Data
-                        }
-                    });
-                    displayedImage = URL.createObjectURL(selectedFile); // Create a temporary URL for UI display
-                    console.log(`File Type: ${selectedFile.type}, Base64 Data Length: ${base64Data.length}`); // Debugging log
-                } catch (error) {
-                    console.error("Error reading file:", error);
-                    addMessageToUI(`❌ Error reading file: ${error.message}`, 'bot');
-                    clearSelectedFile();
-                    return; // Stop processing if file reading fails
-                }
-            }
-
-            // Display user message with potential image in the chat UI
-            if (message !== '' || displayedImage) {
-                addMessageToUI(message, 'user', null, displayedImage);
-            }
-            
-            userInput.value = '';
-            clearSelectedFile(); // Clear file input after sending
-
-            // Handle video command
+            // Check if the user intends to generate a video.
             if (message.toLowerCase().startsWith('/video ')) {
-                const videoPrompt = message.substring(7);
-                await generateVideo(videoPrompt);
+                const videoPrompt = message.substring(7); // Extract the prompt after '/video '.
+                await generateVideo(videoPrompt); // Call the video generation function.
             } else {
-                // For chat, pass the combined parts to the chat response function
-                await getChatResponse(userMessagePartsForAPI);
+                await getChatResponse(message); // Otherwise, get a standard chat response.
             }
         }
 
         /**
-         * Calls the Gemini API for a standard text chat response, potentially with images.
-         * @param {Array<Object>} currentUserMessageParts - Array of parts (text, inlineData) for the current user turn.
+         * Handles the file upload process.
+         * This function now supports both documents (PDF/DOCX - simulated) and images (actual upload to Gemini).
          */
-        async function getChatResponse(currentUserMessageParts) {
+        async function handleFileUpload() {
+            const file = fileInput.files[0];
+            if (!file) return;
+
+            const statusId = `status-upload-${Date.now()}`;
+            addMessageToUI(`Uploading and processing "${file.name}"...`, 'user');
+            showStatusIndicator('Processing file content...', statusId);
+
+            const reader = new FileReader();
+
+            reader.onload = async (e) => {
+                let parts = []; // To store content parts for Gemini (text or inlineData)
+
+                // Handle image files
+                if (file.type.startsWith('image/')) {
+                    const base64Data = e.target.result.split(',')[1]; // Get Base64 part after "data:image/png;base64,"
+                    parts.push({
+                        inlineData: {
+                            mimeType: file.type,
+                            data: base64Data
+                        }
+                    });
+                    // Add a textual part to describe the image or prompt the AI, optional but helpful
+                    parts.push({ text: `User uploaded an image (${file.name}). Please describe it or ask how you can help analyze it.` });
+                    
+                    // Display the uploaded image in the chat UI
+                    const imgElement = document.createElement('img');
+                    imgElement.src = e.target.result;
+                    imgElement.classList.add('w-full', 'max-w-xs', 'rounded-lg', 'mt-2', 'mx-auto');
+                    addMessageToUI(imgElement, 'user'); // Display image as part of user's message
+                    
+                } 
+                // Handle document files (PDF/DOCX - simulated)
+                else if (file.type === "application/pdf" || file.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
+                    let simulatedDocumentContent;
+                    if (file.type === "application/pdf") {
+                        simulatedDocumentContent = `This is a simulated summary of the PDF document "${file.name}". It contains important information about financial trends and market analysis.`;
+                    } else { // DOCX
+                        simulatedDocumentContent = `This is a simulated summary of the DOCX document "${file.name}". It outlines trading strategies and investment portfolios.`;
+                    }
+                    parts.push({ text: `Document uploaded: ${file.name}. Content summary: ${simulatedDocumentContent}` });
+                } else {
+                    document.getElementById(statusId)?.remove();
+                    addMessageToUI(`❌ Unsupported file type: ${file.type}. Please upload a PDF, DOCX, or an image (PNG, JPG, etc.).`, 'bot');
+                    return;
+                }
+
+                // Add the constructed parts to the chat history
+                chatHistory.push({ role: "user", parts: parts });
+
+                // Get Gemini's response based on the uploaded content.
+                // Sending an empty string as user message as the actual "message" is in `parts`.
+                await getChatResponse(''); 
+                document.getElementById(statusId)?.remove();
+                addMessageToUI(`File "${file.name}" processed. How can I help you analyze it?`, 'bot');
+            };
+
+            reader.onerror = (e) => {
+                document.getElementById(statusId)?.remove();
+                console.error("File reading error:", e);
+                addMessageToUI(`❌ Error reading file: ${file.name}`, 'bot');
+            };
+
+            // Read the file. For images, read as DataURL for Base64. For documents, read as ArrayBuffer for potential parsing.
+            if (file.type.startsWith('image/')) {
+                reader.readAsDataURL(file);
+            } else {
+                reader.readAsArrayBuffer(file);
+            }
+        }
+
+        /**
+         * Calls the Gemini API for a standard text chat response,
+         * handling potential tool calls.
+         * @param {string} userMessage - The user's text message. An empty string means the
+         * message comes from a file upload processed into chatHistory.
+         */
+        async function getChatResponse(userMessage) {
             const statusId = `status-${Date.now()}`;
-            showStatusIndicator('Thinking...', statusId);
+            // Only show 'Thinking...' if there's an actual user message, not just a document upload trigger.
+            if (userMessage) {
+                showStatusIndicator('Thinking...', statusId); 
+                // Add user's message to chat history for context.
+                chatHistory.push({ role: "user", parts: [{ text: userMessage }] });
+            } else {
+                 // If it's a document-triggered response, status might already be shown by handleFileUpload.
+                 // Ensure a general thinking indicator is there if not.
+                 if (!document.getElementById(statusId)) {
+                     showStatusIndicator('Processing file with AI...', statusId);
+                 }
+            }
             
-            // Add user's new message parts to chat history
-            chatHistory.push({ role: "user", parts: currentUserMessageParts });
 
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-            const payload = { contents: chatHistory };
-
-            console.log("Sending payload to Gemini API:", payload); // Debugging log
+            // Include tool declarations in the payload so Gemini knows what tools are available.
+            const payload = { 
+                contents: chatHistory,
+                tools: toolDeclarations 
+            };
 
             try {
                 const response = await fetch(apiUrl, {
@@ -263,31 +349,105 @@
                     body: JSON.stringify(payload),
                 });
                 
+                // Get raw response text and check if it's empty.
+                const responseText = await response.text();
+                if (!responseText) {
+                    throw new Error("Empty response from Gemini API.");
+                }
+
+                // Parse the response text as JSON.
+                const result = JSON.parse(responseText);
+
+                // Remove the thinking indicator once a response is received.
                 document.getElementById(statusId)?.remove();
 
                 if (!response.ok) {
-                    let errorMessage = `API Error: ${response.status}`;
-                    try {
-                        const errorData = await response.json();
-                        if (errorData && errorData.error && errorData.error.message) {
-                            errorMessage += ` - ${errorData.error.message}`;
-                            console.error("Detailed API Error:", errorData.error);
-                        }
-                    } catch (parseError) {
-                        console.error("Failed to parse API error response:", parseError);
-                    }
-                    throw new Error(errorMessage);
+                    // If response is not ok (e.g., 4xx, 5xx), log error details.
+                    throw new Error(`API Error: ${response.status} - ${result.error?.message || 'Unknown error'}`);
                 }
-
-                const result = await response.json();
                 
-                if (result.candidates && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts[0].text) {
+                // Check if Gemini wants to call a function.
+                if (result.candidates && result.candidates.length > 0 && 
+                    result.candidates[0].content && result.candidates[0].content.parts.length > 0 && 
+                    result.candidates[0].content.parts[0].functionCall) {
+                    
+                    const functionCall = result.candidates[0].content.parts[0].functionCall;
+                    console.log("Gemini wants to call a function:", functionCall);
+                    addMessageToUI(`Grant AI is using a tool to get more information...`, 'bot');
+
+                    // Execute the function suggested by Gemini.
+                    let toolOutput;
+                    try {
+                        if (functionCall.name === "simulateGoogleSearch") {
+                            // Ensure the query argument is passed correctly
+                            toolOutput = await simulateGoogleSearch(functionCall.args.query);
+                        } else {
+                            throw new Error(`Unknown function called: ${functionCall.name}`);
+                        }
+                    } catch (toolError) {
+                        throw new Error(`Error executing tool '${functionCall.name}': ${toolError.message}`);
+                    }
+
+                    // Validate and parse toolOutput
+                    if (typeof toolOutput !== 'string' || toolOutput.trim() === '') {
+                        throw new Error("Tool returned empty or non-string output.");
+                    }
+                    let parsedToolOutput;
+                    try {
+                        parsedToolOutput = JSON.parse(toolOutput);
+                    } catch (parseError) {
+                        throw new Error(`Failed to parse tool output JSON: ${parseError.message}. Output was: "${toolOutput}"`);
+                    }
+
+                    // Send the tool's output back to Gemini to get a final response.
+                    chatHistory.push({
+                        role: "function",
+                        parts: [{ 
+                            functionResponse: { 
+                                name: functionCall.name, 
+                                response: parsedToolOutput // Use the already parsed object
+                            } 
+                        }]
+                    });
+
+                    // Make another API call to Gemini with the tool's response.
+                    const followUpPayload = { contents: chatHistory };
+                    const followUpResponse = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(followUpPayload),
+                    });
+
+                    const followUpResponseText = await followUpResponse.text();
+                    if (!followUpResponseText) {
+                        throw new Error("Empty follow-up response from Gemini API.");
+                    }
+                    const followUpResult = JSON.parse(followUpResponseText);
+
+                    if (!followUpResponse.ok) {
+                        throw new Error(`Follow-up API Error: ${followUpResponse.status} - ${followUpResult.error?.message || 'Unknown error'}`);
+                    }
+
+                    if (followUpResult.candidates && followUpResult.candidates.length > 0 && 
+                        followUpResult.candidates[0].content && followUpResult.candidates[0].content.parts.length > 0 &&
+                        followUpResult.candidates[0].content.parts[0].text) {
+                        
+                        const botResponseText = followUpResult.candidates[0].content.parts[0].text;
+                        chatHistory.push({ role: "model", parts: [{ text: botResponseText }] });
+                        addMessageToUI(botResponseText, 'bot');
+                    } else {
+                        addMessageToUI("I received an unusual response after tool use. Please try again.", 'bot');
+                    }
+
+                } else if (result.candidates && result.candidates.length > 0 && 
+                           result.candidates[0].content && result.candidates[0].content.parts.length > 0 &&
+                           result.candidates[0].content.parts[0].text) {
+                    // If no function call, process the text response directly.
                     const botResponseText = result.candidates[0].content.parts[0].text;
                     chatHistory.push({ role: "model", parts: [{ text: botResponseText }] });
                     addMessageToUI(botResponseText, 'bot');
                 } else {
-                    addMessageToUI("I received an unusual response from the AI. Please try again.", 'bot');
-                    console.warn("Unusual API response structure:", result);
+                    addMessageToUI("I received an unusual response. Please try again.", 'bot');
                 }
             } catch (error) {
                 console.error("Chat API Error:", error);
@@ -297,13 +457,13 @@
         }
         
         /**
-         * A helper function to pause execution.
+         * A helper function to pause execution for a given duration.
          * @param {number} ms - Milliseconds to wait.
          */
         const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
         /**
-         * Handles the entire video generation flow.
+         * Handles the entire video generation flow using Veo API.
          * @param {string} prompt - The user's prompt for the video.
          */
         async function generateVideo(prompt) {
@@ -313,128 +473,91 @@
             const GCS_API_URL = "https://generativelanguage.googleapis.com/v1beta";
 
             try {
-                // 1. Initial request to start the video generation operation
-                const startResponse = await fetch(`${GCS_API_URL}/models/veo-2.0-generate-002:generateVideos`, {
+                // 1. Initial request to start the video generation operation.
+                // This call returns an operation that needs to be polled for completion.
+                const startResponse = await fetch(`${GCS_API_URL}/models/veo-2.0-generate-002:generateVideos?key=${apiKey}`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ prompt: prompt })
                 });
 
                 if (!startResponse.ok) {
-                    let errorMessage = `Video creation failed to start: ${startResponse.statusText}`;
-                    try {
-                        const errorData = await startResponse.json();
-                        if (errorData && errorData.error && errorData.error.message) {
-                            errorMessage += ` - ${errorData.error.message}`;
-                            console.error("Detailed Video API Error:", errorData.error);
-                        }
-                    } catch (parseError) {
-                            console.error("Failed to parse video API error response:", parseError);
-                    }
-                    throw new Error(errorMessage);
+                    const errorData = await startResponse.json();
+                    throw new Error(`Video creation failed to start: ${startResponse.statusText} - ${errorData.error.message || 'Unknown error'}`);
                 }
                 const operation = await startResponse.json();
                 const operationName = operation.name;
 
+                // Update status indicator to reflect polling.
                 document.getElementById(statusId).querySelector('span').textContent = 'Video is processing... (can take 2-3 mins)';
 
-                // 2. Poll the operation status until it's done
+                // 2. Poll the operation status until it's done.
                 let isDone = false;
                 let finalResult;
                 while (!isDone) {
-                    await sleep(20000); // Poll every 20 seconds
-                    const statusResponse = await fetch(`${GCS_API_URL}/${operationName}`, {
+                    await sleep(20000); // Wait for 20 seconds before polling again.
+                    const statusResponse = await fetch(`${GCS_API_URL}/${operationName}?key=${apiKey}`, {
                         method: 'GET',
-                        headers: { 'Authorization': `Bearer ${apiKey}` }
+                        headers: { 'Authorization': `Bearer ${apiKey}` } // Authorization may not be needed for simple GET with API key in Canvas.
                     });
                     
                     if (!statusResponse.ok) {
-                        let errorMessage = `Failed to get operation status: ${statusResponse.statusText}`;
-                        try {
-                            const errorData = await statusResponse.json();
-                            if (errorData && errorData.error && errorData.error.message) {
-                                errorMessage += ` - ${errorData.error.message}`;
-                                console.error("Detailed Video Status API Error:", errorData.error);
-                            }
-                        } catch (parseError) {
-                            console.error("Failed to parse video status API error response:", parseError);
-                        }
-                        throw new Error(errorMessage);
+                        const errorData = await statusResponse.json();
+                        throw new Error(`Failed to get operation status: ${statusResponse.statusText} - ${errorData.error.message || 'Unknown error'}`);
                     }
                     
                     const statusData = await statusResponse.json();
                     isDone = statusData.done;
 
                     if (isDone) {
-                        finalResult = statusData;
+                        finalResult = statusData; // Store the final result once done.
                     }
                 }
                 
+                // Remove the status indicator when the operation is complete.
                 document.getElementById(statusId).remove();
 
-                // 3. Process and display the final video
-                if (finalResult && finalResult.response && finalResult.response.generatedVideos) {
+                // 3. Process and display the final video.
+                if (finalResult && finalResult.response && finalResult.response.generatedVideos && finalResult.response.generatedVideos.length > 0) {
                     const videoData = finalResult.response.generatedVideos[0];
                     // The API response contains the video as base64 encoded bytes.
                     const videoBytes = videoData.video.data;
                     const mimeType = videoData.video.mimeType;
                     
                     const videoElement = document.createElement('video');
-                    videoElement.src = `data:${mimeType};base64,${videoBytes}`;
-                    videoElement.controls = true;
-                    videoElement.classList.add('w-full', 'rounded-lg');
+                    videoElement.src = `data:${mimeType};base64,${videoBytes}`; // Set video source from base64 data.
+                    videoElement.controls = true; // Add video controls (play, pause, etc.).
+                    videoElement.classList.add('w-full', 'rounded-lg'); // Apply Tailwind classes for styling.
                     
-                    addMessageToUI(videoElement, 'bot');
+                    addMessageToUI(videoElement, 'bot'); // Display the video in the chat.
                     
                 } else {
+                    // Handle cases where video generation finishes but no video data is found.
                     throw new Error('Video generation finished, but no video data was found.');
                 }
 
             } catch (error) {
                 console.error("Video Generation Error:", error);
-                document.getElementById(statusId)?.remove();
-                addMessageToUI(`❌ Video creation failed: ${error.message}`, 'bot');
+                document.getElementById(statusId)?.remove(); // Remove status indicator on error.
+                addMessageToUI(`❌ Video creation failed: ${error.message}`, 'bot'); // Display error message.
             }
         }
 
-        /**
-         * Handles file selection from the input.
-         */
-        fileUploadInput.addEventListener('change', (event) => {
-            if (event.target.files.length > 0) {
-                selectedFile = event.target.files[0];
-                fileDisplay.textContent = `File selected: ${selectedFile.name}`;
-                clearFileButton.classList.remove('hidden');
-            } else {
-                clearSelectedFile();
-            }
-        });
-
-        /**
-         * Clears the selected file and updates the UI.
-         */
-        function clearSelectedFile() {
-            selectedFile = null;
-            fileUploadInput.value = ''; // Clear the input field
-            fileDisplay.textContent = 'No file selected.';
-            clearFileButton.classList.add('hidden');
-            // If there's an object URL created for display, revoke it to free memory
-            if (window.displayObjectUrl) {
-                URL.revokeObjectURL(window.displayObjectUrl);
-                window.displayObjectUrl = null;
-            }
-        }
-
-        // Event listener for clearing the selected file
-        clearFileButton.addEventListener('click', clearSelectedFile);
-
+        // Event listeners for sending messages.
         sendButton.addEventListener('click', sendMessage);
         userInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
-                e.preventDefault();
+                e.preventDefault(); // Prevent default form submission behavior.
                 sendMessage();
             }
         });
+
+        // Event listeners for file upload.
+        uploadButton.addEventListener('click', () => {
+            fileInput.click(); // Trigger the hidden file input click.
+        });
+
+        fileInput.addEventListener('change', handleFileUpload);
     </script>
   </body>
 </html>
