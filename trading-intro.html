@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MostlyFutures - Stocks</title>
+    <title>MostlyFutures - Trading</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
       body {
         margin: 0;
@@ -59,8 +62,9 @@
       }
 
       @media (max-width: 768px) {
+        /* This rule was already present, keeping for consistency */
         img {
-          max-width: 80% !important; /* 50% + 30% increase = 80% */
+          max-width: 80% !important;
         }
       }
 
@@ -88,6 +92,65 @@
         line-height: 1.6;
         animation: fadeIn 0.5s ease-out;
       }
+
+      .trading-section {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(8px);
+        border-radius: 12px;
+        line-height: 1.6;
+        animation: fadeIn 0.5s ease-out;
+      }
+      .trading-section h2 {
+        font-size: 1.8em;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: #93c5fd; /* Light blue for headings */
+      }
+      .trading-section h3 {
+        font-size: 1.4em;
+        font-weight: 500;
+        margin-top: 1.5rem;
+        margin-bottom: 0.8rem;
+        color: #bfdbfe; /* Lighter blue for subheadings */
+      }
+      .trading-section ul {
+        list-style-type: disc;
+        margin-left: 1.5rem;
+        margin-bottom: 1rem;
+      }
+      .trading-section p {
+        margin-bottom: 1em;
+      }
+      .trading-section strong {
+        color: #e0f2fe; /* Slightly brighter white for emphasis */
+      }
+      .trading-section .pros-cons {
+        display: flex;
+        gap: 2rem;
+        margin-top: 1rem;
+        flex-wrap: wrap;
+      }
+      .trading-section .pros-cons > div {
+        flex: 1;
+        min-width: 250px;
+      }
+      .trading-section .pros-cons ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+      .trading-section .pros-cons li::before {
+        content: '• ';
+        color: #a7f3d0; /* Green for pros */
+        margin-right: 0.5em;
+      }
+      .trading-section .pros-cons .cons li::before {
+        content: '• ';
+        color: #fca5a5; /* Red for cons */
+      }
     </style>
   </head>
 
@@ -95,33 +158,116 @@
     <a href="landing.html" class="back-button">Back</a>
     <h1 style="animation: fadeIn 1s ease-out">What is Trading?</h1>
     <div class="trading-description">
-      The word "Trading" is an umbrella term for the exchange of goods at point in time. Trading uses
-      These markets you will be capitalizing off of refer to the facilitatation an the exchange of goods.
-        The same way someone is willing to buy a fruit at a price is the same way a person is willing to buy a 
-        stock or commodoty like a car. Once you start to associate a demand with every particular thing in life
-        trading becomes easier. People change their mind about how much they are willing to pay for things all
-        the time, this is called demand. Every stock, car, piece of technology, or even a gold brick will always have demand
-        for it at any given time and trading is all about knowing when its likey for demand of a product to go up or go down
-        given the variety of factors related to the underlaying product at the time.
-
-        For example if a beyblade comerial starts to get kids interested in buying their toys, the demand
-        for beyblades will go up. Now image only 100 beyblades are released by the company who
-        makes them, if 100 people buy up all the beyblades priced at $10, the first person who doesnt want 
-        their beyblade anymore can sell it for $11. This facilitation of scare goods is what makes markets
-        like Bitcoin and the S&P500 "tradeable". The things we will be "trading" are scarce, which allows us to 
-        capitilize on the fluctuations in demand, completly online at the comfort of a nice chair.
+      <p>
+        The word "Trading" is an umbrella term for the exchange of goods at a point in time. Trading uses these markets where you will be capitalizing off of the facilitation and the exchange of goods. The same way someone is willing to buy a fruit at a price is the same way a person is willing to buy a stock or commodity like a car. Once you start to associate a demand with every particular thing in life, trading becomes easier. People change their mind about how much they are willing to pay for things all the time, this is called demand. Every stock, car, piece of technology, or even a gold brick will always have demand for it at any given time, and trading is all about knowing when it's likely for demand of a product to go up or go down given the variety of factors related to the underlying product at the time.
+      </p>
+      <p>
+        For example, if a Beyblade commercial starts to get kids interested in buying their toys, the demand for Beyblades will go up. Now, imagine only 100 Beyblades are released by the company who makes them; if 100 people buy up all the Beyblades priced at $10, the first person who doesn't want their Beyblade anymore can sell it for $11. This facilitation of scarce goods is what makes markets like Bitcoin and the S&P500 "tradeable". The things we will be "trading" are scarce, which allows us to capitalize on the fluctuations in demand, completely online at the comfort of a nice chair.
+      </p>
     </div>
+
     <div class="link-card" style="margin-bottom: 1rem">
-      <a href="/mfDex/dex.html" target="_blank"
-        >Start Trading</a
-      >
+      <a href="/mfDex/dex.html" target="_blank">Start Trading</a>
     </div>
     <div class="link-card">
-      <a target="_blank"
-        >New to Trading?</a
-      >
+      <a href="#asset-types">New to Trading?</a>
     </div>
-    </div>
+
+    <!-- New Section for "New to Trading?" content -->
+    <div id="asset-types" class="trading-section">
+      <h2>Asset Types</h2>
+
+      <h3>Stocks</h3>
+      <p>
+        Represent **ownership within a company**. Whenever you purchase shares, you own a piece of that business, which gives you entitlement over capital appreciation (the stock price going up) and potentially dividends (a share of the company's profits). Traders usually look at price movements driven by earnings reports, market sentiment, and other macroeconomic factors, along with technical analysis.
+      </p>
+      <div class="pros-cons">
+        <div>
+          <h4>Pros:</h4>
+          <ul>
+            <li>Works for both short-term and long-term strategies</li>
+            <li>Regulated and transparent, rarely any shady things</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="cons">Cons:</h4>
+          <ul>
+            <li>Pattern Day Trading Rule restricting intraday trading for small accounts</li>
+            <li>Significant Capital needed for proper returns</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Futures</h3>
+      <p>
+        **Leveraged contracts** that allow traders to “bet” on the future price of commodities (like oil, gold), indices (like the S&P 500), and bonds. Compared to stocks, you don’t own the underlying asset, but are simply trading a contract based on its future price.
+      </p>
+      <div class="pros-cons">
+        <div>
+          <h4>Pros:</h4>
+          <ul>
+            <li>High leverage allows for massive gains from small price movements</li>
+            <li>Trade around the clock (24/5)</li>
+            <li>No Pattern Day Trading rule restrictions</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="cons">Cons:</h4>
+          <ul>
+            <li>High leverage also means magnified losses</li>
+            <li>Requires much better risk management and psychology</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Forex (Foreign Exchange)</h3>
+      <p>
+        The **global exchange of currencies**. This is usually the most liquid market in the world, also being open 24/5. It’s quite simple: you’re just trading the exchange rate between two different currencies, that’s all.
+      </p>
+      <div class="pros-cons">
+        <div>
+          <h4>Pros:</h4>
+          <ul>
+            <li>Low Barrier for entry, you can trade with literal $10</li>
+            <li>High Liquidity and tight spreads (low cost to trade)</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="cons">Cons:</h4>
+          <ul>
+            <li>Extreme leverage at disposal can liquidate your account fast</li>
+            <li>Requires stronger risk management and psychology</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>Where to trade?</h2>
+      <p>
+        **Futures** can be analyzed on <a href="https://www.tradingview.com/" target="_blank" style="color: #63b3ed; text-decoration: underline;">tradingview.com</a> (free), but you will need market data or otherwise your data will be 10 minutes delayed. This market data thankfully does come with prop firms. Talking about prop firms, you can trade futures two ways: either on a live account with your own money and own personal risk, or on a demo account with a firm that let’s you keep the profits in real time from the demo account.
+      </p>
+
+      <h3>DEXs (Decentralized Exchanges)</h3>
+      <p>
+        A DEX is a cryptocurrency trading platform that operates without a central authority or intermediary. Unlike traditional centralized exchanges like Coinbase or Binance, DEXs use smart contracts on blockchain networks to facilitate peer-to-peer trading directly between users.
+      </p>
+      <h4>How DEXs Work</h4>
+      <p>
+        DEXs typically use **Automated Market Makers (AMMs)** instead of traditional order books. In an AMM system, trades happen against **liquidity pools** - collections of tokens locked in smart contracts. When you want to trade Token A for Token B, the smart contract automatically calculates the exchange rate based on the relative amounts of each token in the pool, following mathematical formulas like the constant product formula (x * y = k). Users can also become liquidity providers by depositing pairs of tokens into these pools. In return, they earn a portion of the trading fees generated by the pool, typically ranging from 0.05% to 1% per trade.
+      </p>
+      <h4>Trading Tokenized Assets</h4>
+      <p>
+        DEXs excel at trading various tokenized assets including traditional cryptocurrencies, stablecoins, governance tokens, NFTs (through specialized DEX platforms), and even tokenized real-world assets like stocks or commodities when available on-chain. Popular DEX platforms include <a href="https://dydx.exchange/" target="_blank" style="color: #63b3ed; text-decoration: underline;">Dydx</a>, <a href="https://hyperliquid.xyz/" target="_blank" style="color: #63b3ed; text-decoration: underline;">Hyperliquid</a>, and <a href="https://ostium.app/" target="_blank" style="color: #63b3ed; text-decoration: underline;">Ostium.app</a>. Each offers slightly different features but follows the same core principle of decentralized, automated trading through smart contracts. The main advantages are lower fees, no need for account creation or KYC, direct wallet-to-wallet trading, and 24/7 availability. However, users need to manage their own private keys and navigate the technical aspects of blockchain interactions. This can be done using a web3 wallet like Metamask.
+      </p>
+
+      <h2>How to Trade?</h2>
+      <p>
+        This is the most important part of trading, the how? As I said before, trading mainly consists of three things:
+      </p>
+      <ul style="list-style-type: disc; text-align: left; margin: 1rem auto; max-width: 600px;">
+        <li><strong>Strategy</strong></li>
+        <li><strong>Psychology</strong></li>
+        <li>& Consistency</li>
+      </ul>
     </div>
   </body>
 </html>
