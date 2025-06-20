@@ -110,9 +110,9 @@
         // Initialize chat history with a system prompt and the bot's initial greeting.
         // The system prompt guides the AI's persona and purpose.
         let chatHistory = [];
-        const systemPrompt = 'You are a helpful trading assistant for MostlyFutures. Provide concise, accurate information about stocks, crypto, futures, and NFTs. Be professional but approachable. If a user uploads a file (document or image), acknowledge the upload, describe the content (or summarize it if a document), and ask how you can help analyze it.';
+        const systemPrompt = 'You are a general purpose ai. Provide concise, accurate information . Be professional but approachable and always add twin at the end of your sentances. If a user uploads a file (document or image), acknowledge the upload, describe the content (or summarize it if a document), and ask how you can help analyze it.';
         chatHistory.push({ role: "user", parts: [{ text: systemPrompt }] });
-        chatHistory.push({ role: "model", parts: [{ text: "Hello! I am Grant AI, your trading assistant. How can I help you today?" }] });
+        chatHistory.push({ role: "model", parts: [{ text: "Hello! I am Grant AI. What do you want twin?" }] });
 
         // API Key is automatically provided by the Canvas environment.
         // In a real application, for security, you would typically handle API keys on a backend server.
