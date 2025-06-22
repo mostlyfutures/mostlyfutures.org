@@ -90,6 +90,15 @@
             <button id="upload-button" class="py-3 px-4 bg-purple-600 text-white border-none rounded-xl cursor-pointer font-bold transition hover:bg-purple-500 active:scale-95 whitespace-nowrap flex-1">
               Upload File
             </button>
+            <button id="payment-button" class="py-3 px-4 bg-green-600 text-white border-none rounded-xl cursor-pointer font-bold transition hover:bg-green-500 active:scale-95 whitespace-nowrap flex-1">
+                💸 Send Money
+            </button>
+            <button id="upload-button" class="py-3 px-4 bg-purple-600 text-white border-none rounded-xl cursor-pointer font-bold transition hover:bg-purple-500 active:scale-95 whitespace-nowrap flex-1">
+                Upload File
+            </button>
+            <button id="send-button" class="py-3 px-6 bg-blue-600 text-white border-none rounded-xl cursor-pointer font-bold transition hover:bg-blue-500 active:scale-95 flex-1">
+                Send
+            </button>
             <input type="file" id="file-input" class="hidden" accept=".pdf,.docx,image/*">
             <button id="send-button" class="py-3 px-6 bg-blue-600 text-white border-none rounded-xl cursor-pointer font-bold transition hover:bg-blue-500 active:scale-95 flex-1">
               Send
@@ -236,8 +245,10 @@
             addMessageToUI(message, 'user'); // Display user's message in the chat.
             userInput.value = ''; // Clear the input field.
 
-            // Check if the user intends to generate a video.
-            if (message.toLowerCase().startsWith('/video ')) {
+            // Check for payment commands
+            if (message.toLowerCase().includes('send') && message.includes('$')) {
+                await handlePaymentRequest(message);
+            } else if (message.toLowerCase().startsWith('/video ')) {
                 const videoPrompt = message.substring(7); // Extract the prompt after '/video '.
                 await generateVideo(videoPrompt); // Call the video generation function.
             } else {
@@ -549,6 +560,75 @@
                 addMessageToUI(`❌ Video creation failed: ${error.message}`, 'bot'); // Display error message.
             }
         }
+
+        // Payment Function (Preserves All Styling)
+        async function processPayment(amount, targetCurrency) {
+            const statusId = `status-payment-${Date.now()}`;
+            showStatusIndicator('Processing cross-border payment...', statusId);
+
+            try {
+                const response = await fetch('https://eolac8ta1qv3tgz.m.pipedream.net', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        amount: Math.round(amount * 100), // Convert to cents
+                        sourceCurrency: 'USD',
+                        targetCurrency: targetCurrency,
+                        timestamp: new Date().toISOString()
+                    })
+                });
+
+                const result = await response.json();
+                document.getElementById(statusId)?.remove();
+
+                if (result.steps) {
+                    const conversion = result.steps.calculate_conversion.$return_value;
+                    const transfer = result.steps.execute_transfer.$return_value;
+                    
+                    const paymentResult = `
+                        ✅ **Payment Completed Successfully!**
+                        
+                        💰 **Conversion Details:**
+                        • Original: ${conversion.original.amountFormatted}
+                        • Exchange Rate: ${conversion.exchangeRate}
+                        • Recipient Receives: **${conversion.finalRecipient.amountFormatted}**
+                        • Fees: ${conversion.fees.totalFormatted}
+                        
+                        🔗 **Blockchain Transaction:**
+                        • Network: ${transfer.network}
+                        • TX Hash: \`${transfer.blockchainTxHash}\`
+                        • Confirmations: ${transfer.confirmations}
+                        
+                        Your money has been sent successfully, twin!
+                    `;
+                    
+                    addMessageToUI(paymentResult, 'bot');
+                }
+            } catch (error) {
+                document.getElementById(statusId)?.remove();
+                addMessageToUI(`❌ Payment failed: ${error.message}. Try again, twin!`, 'bot');
+            }
+        }
+
+        async function handlePaymentRequest(message) {
+            // Parse payment request (e.g., "Send $5 to EUR")
+            const amountMatch = message.match(/\$(\d+(?:\.\d{2})?)/);
+            const currencyMatch = message.match(/to\s+([A-Z]{3})/i);
+            
+            if (amountMatch && currencyMatch) {
+                const amount = parseFloat(amountMatch[1]);
+                const currency = currencyMatch[1].toUpperCase();
+                await processPayment(amount, currency);
+            } else {
+                addMessageToUI('I need more details, twin! Please specify like: "Send $5 to EUR"', 'bot');
+            }
+        }
+
+        // Add payment button event listener:
+        document.getElementById('payment-button').addEventListener('click', () => {
+            addMessageToUI('💸 Starting payment process...', 'user');
+            addMessageToUI('Please tell me: How much USD would you like to send and to which currency? (e.g., "Send $5 to EUR")', 'bot');
+        });
 
         // Event listeners for sending messages.
         sendButton.addEventListener('click', sendMessage);
