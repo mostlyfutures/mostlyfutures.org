@@ -93,16 +93,10 @@
             <button id="payment-button" class="py-3 px-4 bg-green-600 text-white border-none rounded-xl cursor-pointer font-bold transition hover:bg-green-500 active:scale-95 whitespace-nowrap flex-1">
                 💸 Send Money
             </button>
-            <button id="upload-button" class="py-3 px-4 bg-purple-600 text-white border-none rounded-xl cursor-pointer font-bold transition hover:bg-purple-500 active:scale-95 whitespace-nowrap flex-1">
-                Upload File
-            </button>
             <button id="send-button" class="py-3 px-6 bg-blue-600 text-white border-none rounded-xl cursor-pointer font-bold transition hover:bg-blue-500 active:scale-95 flex-1">
                 Send
             </button>
             <input type="file" id="file-input" class="hidden" accept=".pdf,.docx,image/*">
-            <button id="send-button" class="py-3 px-6 bg-blue-600 text-white border-none rounded-xl cursor-pointer font-bold transition hover:bg-blue-500 active:scale-95 flex-1">
-              Send
-            </button>
           </div>
         </div>
         <p class="text-xs text-white/50 text-center mt-2">Example: /video a majestic eagle flying over mountains</p>
@@ -115,6 +109,7 @@
         const sendButton = document.getElementById('send-button');
         const uploadButton = document.getElementById('upload-button');
         const fileInput = document.getElementById('file-input');
+        const paymentButton = document.getElementById('payment-button');
 
         // Initialize chat history with a system prompt and the bot's initial greeting.
         // The system prompt guides the AI's persona and purpose.
@@ -561,7 +556,7 @@
             }
         }
 
-        // Enhanced Payment Function with Correct Response Structure
+        // CORRECTED Payment Function
         async function processPayment(amount, targetCurrency) {
             const statusId = `status-payment-${Date.now()}`;
             showStatusIndicator('Processing cross-border payment...', statusId);
@@ -580,31 +575,25 @@
                     })
                 });
 
-                // Enhanced response handling
-                let result;
-                const contentType = response.headers.get('content-type');
+                const responseText = await response.text(); // Always get text first for robust parsing.
                 
                 if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    // For HTTP errors, throw with the response body for more context.
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}. Response: ${responseText}`);
                 }
 
-                // Check if response is JSON
-                if (contentType && contentType.includes('application/json')) {
-                    try {
-                        result = await response.json();
-                    } catch (jsonError) {
-                        throw new Error(`Invalid JSON response: ${jsonError.message}`);
-                    }
-                } else {
-                    // Handle non-JSON responses
-                    const textResponse = await response.text();
-                    throw new Error(`Expected JSON but received: ${contentType || 'unknown'}`);
+                let result;
+                try {
+                    result = JSON.parse(responseText);
+                } catch (jsonError) {
+                    // If parsing fails, we know the response wasn't JSON.
+                    // Include the raw text in the error for debugging.
+                    throw new Error(`Invalid JSON response. Raw text: "${responseText}"`);
                 }
 
                 document.getElementById(statusId)?.remove();
 
-                // UPDATED: Use the correct response structure
-                if (result && result.results) {
+                if (result && result.results && result.results.conversionDetails && result.results.blockchainTransferResults) {
                     const conversion = result.results.conversionDetails;
                     const transfer = result.results.blockchainTransferResults;
                     
@@ -626,8 +615,9 @@ Your money has been sent successfully, twin! 🚀`;
                     
                     addMessageToUI(paymentResult, 'bot');
                 } else {
-                    // Fallback for unexpected response structure
-                    addMessageToUI('✅ Payment processed successfully, but response format was unexpected. Please check your transaction history, twin!', 'bot');
+                    // Enhanced debugging for unexpected success response
+                    console.error("Payment success, but response structure is unexpected.", result);
+                    addMessageToUI('✅ Payment processed, but the response format was unexpected. Please check your transaction history, twin!', 'bot');
                 }
                 
             } catch (error) {
@@ -651,6 +641,7 @@ Your money has been sent successfully, twin! 🚀`;
                 // Log detailed error for debugging
                 console.error('Payment Error Details:', {
                     originalError: error,
+                    message: error.message,
                     timestamp: new Date().toISOString(),
                     amount: amount,
                     targetCurrency: targetCurrency
@@ -673,7 +664,7 @@ Your money has been sent successfully, twin! 🚀`;
         }
 
         // Add payment button event listener:
-        document.getElementById('payment-button').addEventListener('click', () => {
+        paymentButton.addEventListener('click', () => {
             addMessageToUI('💸 Starting payment process...', 'user');
             addMessageToUI('Please tell me: How much USD would you like to send and to which currency? (e.g., "Send $5 to EUR")', 'bot');
         });
