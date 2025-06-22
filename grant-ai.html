@@ -561,15 +561,17 @@
             }
         }
 
-        // Payment Function (Preserves All Styling)
+        // Enhanced Payment Function with Correct Response Structure
         async function processPayment(amount, targetCurrency) {
             const statusId = `status-payment-${Date.now()}`;
             showStatusIndicator('Processing cross-border payment...', statusId);
 
             try {
-                const response = await fetch('tps://eo86866z1pfg4k0.m.pipedream.net', {
+                const response = await fetch('https://eo86866z1pfg4k0.m.pipedream.net', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
                     body: JSON.stringify({
                         amount: Math.round(amount * 100), // Convert to cents
                         sourceCurrency: 'USD',
@@ -578,35 +580,81 @@
                     })
                 });
 
-                const result = await response.json();
+                // Enhanced response handling
+                let result;
+                const contentType = response.headers.get('content-type');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                // Check if response is JSON
+                if (contentType && contentType.includes('application/json')) {
+                    try {
+                        result = await response.json();
+                    } catch (jsonError) {
+                        throw new Error(`Invalid JSON response: ${jsonError.message}`);
+                    }
+                } else {
+                    // Handle non-JSON responses
+                    const textResponse = await response.text();
+                    throw new Error(`Expected JSON but received: ${contentType || 'unknown'}`);
+                }
+
                 document.getElementById(statusId)?.remove();
 
-                if (result.steps) {
-                    const conversion = result.steps.calculate_conversion.$return_value;
-                    const transfer = result.steps.execute_transfer.$return_value;
+                // UPDATED: Use the correct response structure
+                if (result && result.results) {
+                    const conversion = result.results.conversionDetails;
+                    const transfer = result.results.blockchainTransferResults;
                     
-                    const paymentResult = `
-                        ✅ **Payment Completed Successfully!**
-                        
-                        💰 **Conversion Details:**
-                        • Original: ${conversion.original.amountFormatted}
-                        • Exchange Rate: ${conversion.exchangeRate}
-                        • Recipient Receives: **${conversion.finalRecipient.amountFormatted}**
-                        • Fees: ${conversion.fees.totalFormatted}
-                        
-                        🔗 **Blockchain Transaction:**
-                        • Network: ${transfer.network}
-                        • TX Hash: \`${transfer.blockchainTxHash}\`
-                        • Confirmations: ${transfer.confirmations}
-                        
-                        Your money has been sent successfully, twin!
-                    `;
+                    const paymentResult = `✅ **Payment Completed Successfully, twin!**
+
+💰 **Conversion Details:**
+• Original: ${conversion.original.amountFormatted}
+• Exchange Rate: ${conversion.exchangeRate}
+• Recipient Receives: **${conversion.finalRecipient.amountFormatted}**
+• Fees: ${conversion.fees.totalFormatted} (${conversion.fees.breakdown.percentageUsed})
+
+🔗 **Blockchain Transaction:**
+• Network: ${transfer.network}
+• TX Hash: \`${transfer.blockchainTxHash.substring(0, 16)}...\`
+• Confirmations: ${transfer.confirmations}
+• Gas Used: ${transfer.gasUsed.toLocaleString()}
+
+Your money has been sent successfully, twin! 🚀`;
                     
                     addMessageToUI(paymentResult, 'bot');
+                } else {
+                    // Fallback for unexpected response structure
+                    addMessageToUI('✅ Payment processed successfully, but response format was unexpected. Please check your transaction history, twin!', 'bot');
                 }
+                
             } catch (error) {
                 document.getElementById(statusId)?.remove();
-                addMessageToUI(`❌ Payment failed: ${error.message}. Try again, twin!`, 'bot');
+                
+                // Enhanced error messages
+                let errorMessage = error.message;
+                
+                if (error.message.includes('Failed to fetch')) {
+                    errorMessage = 'Network connection failed. Please check your internet connection and try again.';
+                } else if (error.message.includes('JSON')) {
+                    errorMessage = 'Payment service returned an unexpected response format. The payment may have processed - please check your transaction history.';
+                } else if (error.message.includes('HTTP 500')) {
+                    errorMessage = 'Payment service is temporarily unavailable. Please try again in a few moments.';
+                } else if (error.message.includes('HTTP 400')) {
+                    errorMessage = 'Invalid payment request. Please check your amount and currency selection.';
+                }
+                
+                addMessageToUI(`❌ Payment failed: ${errorMessage} Try again, twin!`, 'bot');
+                
+                // Log detailed error for debugging
+                console.error('Payment Error Details:', {
+                    originalError: error,
+                    timestamp: new Date().toISOString(),
+                    amount: amount,
+                    targetCurrency: targetCurrency
+                });
             }
         }
 
