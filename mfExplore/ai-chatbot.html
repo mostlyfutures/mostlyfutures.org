@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MostlyFutures AI Chat</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #1e40af, #3b82f6);
+        color: #fff;
+        padding: 2rem;
+        box-sizing: border-box;
+      }
+
+      .chat-container {
+        max-width: 800px;
+        margin: 0 auto;
+        height: 80vh;
+        display: flex;
+        flex-direction: column;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      .chat-header {
+        padding: 1rem;
+        background: rgba(30, 64, 175, 0.8);
+        text-align: center;
+        font-size: 1.5em;
+        font-weight: bold;
+        font-style: italic;
+      }
+
+      .chat-messages {
+        flex: 1;
+        padding: 1rem;
+        overflow-y: auto;
+      }
+
+      .message {
+        margin-bottom: 1rem;
+        padding: 0.8rem 1rem;
+        border-radius: 8px;
+        max-width: 80%;
+      }
+
+      .user-message {
+        background: rgba(59, 130, 246, 0.3);
+        margin-left: auto;
+        border-bottom-right-radius: 0;
+      }
+
+      .bot-message {
+        background: rgba(255, 255, 255, 0.1);
+        margin-right: auto;
+        border-bottom-left-radius: 0;
+      }
+
+      .chat-input {
+        display: flex;
+        padding: 1rem;
+        background: rgba(30, 64, 175, 0.5);
+      }
+
+      #user-input {
+        flex: 1;
+        padding: 0.8rem;
+        border: none;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        font-size: 1em;
+      }
+
+      #send-button {
+        margin-left: 1rem;
+        padding: 0.8rem 1.5rem;
+        background: #3b82f6;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s;
+      }
+
+      #send-button:hover {
+        background: #2563eb;
+      }
+
+      .typing-indicator {
+        display: none;
+        padding: 0.8rem 1rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        width: fit-content;
+      }
+
+      .typing-dots {
+        display: inline-block;
+      }
+
+      .typing-dots span {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #fff;
+        margin: 0 2px;
+        opacity: 0.4;
+      }
+
+      .typing-dots span:nth-child(1) {
+        animation: bounce 1s infinite;
+      }
+
+      .typing-dots span:nth-child(2) {
+        animation: bounce 1s infinite 0.2s;
+      }
+
+      .typing-dots span:nth-child(3) {
+        animation: bounce 1s infinite 0.4s;
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+          opacity: 0.4;
+        }
+        50% {
+          transform: translateY(-5px);
+          opacity: 1;
+        }
+      }
+
+      /* Debug console styles */
+      #debug-console {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        padding: 10px;
+        font-family: monospace;
+        font-size: 12px;
+        max-height: 150px;
+        overflow-y: auto;
+        display: none;
+        z-index: 1000;
+      }
+
+      .debug-toggle {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        background: #3b82f6;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        z-index: 1001;
+      }
+
+      /* Hamburger menu styles */
+      .hamburger-menu {
+        display: block;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        cursor: pointer;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 8px;
+      }
+
+      .hamburger-menu span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        margin: 5px;
+        background-color: white;
+        transition: 0.3s;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -300px;
+        width: 300px;
+        height: 100vh;
+        background: rgba(30, 64, 175, 0.95);
+        backdrop-filter: blur(10px);
+        padding-top: 60px;
+        transition: 0.3s;
+        z-index: 999;
+      }
+
+      .nav-menu.active {
+        right: 0;
+      }
+
+      .nav-menu a {
+        display: block;
+        padding: 15px 30px;
+        color: white;
+        text-decoration: none;
+        font-size: 1.1em;
+        transition: 0.3s;
+      }
+
+      .nav-menu a:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <div class="hamburger-menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <nav class="nav-menu">
+      <a href="landing.html">Home</a>
+      <a href="trading-intro.html">Trading</a>
+      <a href="crypto-intro.html">Crypto</a>
+      <a href="/mfSart/landing.html">Sart</a>
+    </nav>
+
+    <!-- Chat Interface -->
+    <div class="chat-container">
+      <div class="chat-header">Grant AI</div>
+      <div class="chat-messages" id="chat-messages">
+        <div class="message bot-message">
+          I am the best specialized AI assistant. What do you need?
+        </div>
+      </div>
+      <div class="typing-indicator" id="typing-indicator">
+        <div class="typing-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+      <div class="chat-input">
+        <input
+          type="text"
+          id="user-input"
+          placeholder="Ask me anything about trading..."
+        />
+        <button id="send-button">Send</button>
+      </div>
+    </div>
+
+    <!-- Debug Console -->
+    <div id="debug-console"></div>
+    <button class="debug-toggle" id="debug-toggle">D</button>
+
+    <script>
+      // Hamburger menu functionality
+      const hamburger = document.querySelector('.hamburger-menu');
+      const navMenu = document.querySelector('.nav-menu');
+
+      hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+          navMenu.classList.remove('active');
+        }
+      });
+
+      // Chat functionality
+      const chatMessages = document.getElementById('chat-messages');
+      const userInput = document.getElementById('user-input');
+      const sendButton = document.getElementById('send-button');
+      const typingIndicator = document.getElementById('typing-indicator');
+      const debugConsole = document.getElementById('debug-console');
+      const debugToggle = document.getElementById('debug-toggle');
+
+      // Debug logging function
+      function debugLog(message) {
+        const timestamp = new Date().toLocaleTimeString();
+        const logEntry = document.createElement('div');
+        logEntry.textContent = `[${timestamp}] ${message}`;
+        debugConsole.appendChild(logEntry);
+        debugConsole.scrollTop = debugConsole.scrollHeight;
+      }
+
+      // Toggle debug console
+      debugToggle.addEventListener('click', () => {
+        debugConsole.style.display =
+          debugConsole.style.display === 'block' ? 'none' : 'block';
+      });
+
+      // Function to add a message to the chat
+      function addMessage(content, isUser) {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message');
+        messageDiv.classList.add(isUser ? 'user-message' : 'bot-message');
+        messageDiv.textContent = content;
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        debugLog(`${isUser ? 'User' : 'Bot'} message: ${content}`);
+      }
+
+      // Function to call the DeepSeek API
+      async function callDeepSeekAPI(message) {
+        typingIndicator.style.display = 'block';
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+
+        // Configuration - REPLACE WITH YOUR ACTUAL VALUES
+        const API_ENDPOINT = 'https://api.deepseek.com/v1/chat/completions';
+        const API_KEY = 'sk-5262609d72844200b751e37998477501'; // Replace with your actual key
+
+        debugLog(`Initiating API call to: ${API_ENDPOINT}`);
+        debugLog(`Message: ${message}`);
+
+        try {
+          const requestPayload = {
+            model: 'deepseek-chat',
+            messages: [
+              {
+                role: 'system',
+                content:
+                  'You are a helpful trading assistant for MostlyFutures. Provide concise, accurate information about stocks, crypto, futures, and NFTs. Focus on trading strategies, market analysis, and beginner advice. Be professional but approachable.',
+              },
+              {
+                role: 'user',
+                content: message,
+              },
+            ],
+            temperature: 0.7,
+            max_tokens: 500,
+          };
+
+          debugLog('Request payload:', JSON.stringify(requestPayload, null, 2));
+
+          const startTime = performance.now();
+          const response = await fetch(API_ENDPOINT, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${API_KEY}`,
+            },
+            body: JSON.stringify(requestPayload),
+          });
+
+          const responseTime = performance.now() - startTime;
+          debugLog(
+            `Response received in ${responseTime.toFixed(2)}ms. Status: ${
+              response.status
+            }`
+          );
+
+          if (!response.ok) {
+            const errorText = await response.text();
+            debugLog(`API error response: ${errorText}`);
+            throw new Error(
+              `API request failed with status ${response.status}`
+            );
+          }
+
+          const data = await response.json();
+          debugLog('API response data:', JSON.stringify(data, null, 2));
+
+          if (!data.choices || !data.choices[0]?.message?.content) {
+            throw new Error('Unexpected API response format');
+          }
+
+          return data.choices[0].message.content;
+        } catch (error) {
+          debugLog(`Error: ${error.message}`);
+          debugLog(`Stack: ${error.stack}`);
+
+          // Specific error messages
+          if (error.message.includes('Failed to fetch')) {
+            return '⚠️ Network error - please check your internet connection.';
+          } else if (error.message.includes('401')) {
+            return '🔑 API authentication failed - please check the API key configuration.';
+          } else if (error.message.includes('Unexpected API response format')) {
+            return '🔄 Received unexpected response from the AI service.';
+          } else if (error.message.includes('timed out')) {
+            return '⏱️ The request timed out - please try again.';
+          }
+
+          return "❌ Sorry, I'm having trouble connecting to the AI service. Please try again later.";
+        } finally {
+          typingIndicator.style.display = 'none';
+          debugLog('API call completed');
+        }
+      }
+
+      // Handle sending a message
+      async function sendMessage() {
+        const message = userInput.value.trim();
+        if (message === '') return;
+
+        addMessage(message, true);
+        userInput.value = '';
+
+        const botResponse = await callDeepSeekAPI(message);
+        addMessage(botResponse, false);
+      }
+
+      // Event listeners
+      sendButton.addEventListener('click', sendMessage);
+      userInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          sendMessage();
+        }
+      });
+
+      // Initialize debug console
+      debugLog('Chat interface initialized');
+      debugLog('Ready to accept messages');
+    </script>
+  </body>
+</html>
