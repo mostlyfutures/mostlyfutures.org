@@ -1,0 +1,27 @@
+{
+	"/": [
+		"src/routes/+layout.js",
+		"src/routes/+layout.js"
+	],
+	"/contact": [
+		"src/routes/+layout.js"
+	],
+	"/crypto-intro": [
+		"src/routes/+layout.js"
+	],
+	"/grant-ai": [
+		"src/routes/+layout.js"
+	],
+	"/landing": [
+		"src/routes/+layout.js"
+	],
+	"/nfts": [
+		"src/routes/+layout.js"
+	],
+	"/quizgen": [
+		"src/routes/+layout.js"
+	],
+	"/trading-intro": [
+		"src/routes/+layout.js"
+	]
+}
