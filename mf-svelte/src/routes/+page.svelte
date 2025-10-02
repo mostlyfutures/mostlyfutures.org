@@ -1,147 +1,177 @@
+<script lang="ts">
+  import Hero from '$lib/components/Hero.svelte';
+  import FeatureCard from '$lib/components/FeatureCard.svelte';
+</script>
+
 <svelte:head>
-  <title>MostlyFutures</title>
+  <title>MostlyFutures - A Standard Appchain</title>
+  <meta name="description" content="Your gateway to cryptocurrency and trading education. Learn, trade, and grow with confidence." />
 </svelte:head>
 
-<div class="main-content">
-  <div class="compass-container">
-    
+<Hero 
+  title="MostlyFutures" 
+  subtitle="A Standard Appchain - Explore the world of trading and cryptocurrency"
+  primaryCta={{ text: 'Get Started', href: '/landing' }}
+  secondaryCta={{ text: 'Learn More', href: '/crypto-intro' }}
+/>
+
+<!-- Features Section -->
+<section class="features">
+  <div class="container">
+    <div class="section-header">
+      <h2>Everything you need to start trading</h2>
+      <p>Comprehensive tools and education for your trading journey</p>
+    </div>
+
+    <div class="features-grid">
+      <FeatureCard 
+        icon="💰"
+        title="How to Buy Crypto"
+        description="Learn the fundamentals of purchasing cryptocurrency safely and securely. Get started with exchanges and wallets."
+        href="/crypto-intro"
+      />
+
+      <FeatureCard 
+        icon="📈"
+        title="Learn Trading"
+        description="Master the art of trading with our comprehensive guides covering stocks, futures, and forex markets."
+        href="/trading-intro"
+      />
+
+      <FeatureCard 
+        icon="🎨"
+        title="NFT Gallery"
+        description="Explore the world of NFTs and digital collectibles. Discover unique digital assets and blockchain art."
+        href="/nfts"
+      />
+
+      <FeatureCard 
+        icon="🚀"
+        title="Start Trading"
+        description="Ready to begin? Access our trading platform and start your journey to financial freedom."
+        href="https://www.mostlyfutures.finance"
+      />
+    </div>
   </div>
-  <h1>MostlyFutures</h1>
-  <div class="subtitle-text">A Standerd Appchain</div>
-  <div class="links">
-    <div class="link-card">
-      <a href="/crypto-intro">How to Buy Crypto</a>
-    </div>
-    <div class="link-card">
-      <a href="/trading-intro">Learn Trading</a>
-    </div>
-    <div class="link-card">
-      <a href="/nfts">NFT Gallery</a>
-    </div>
-    <div class="link-card">
-      <a href="/dex">Start Trading</a>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-content">
+      <h2>Ready to start your trading journey?</h2>
+      <p>Join thousands of traders who are already using MostlyFutures to grow their wealth.</p>
+      <div class="cta-buttons">
+        <a href="/landing" class="btn btn-primary">Get Started Free</a>
+        <a href="/contact" class="btn btn-secondary">Contact Us</a>
+      </div>
     </div>
   </div>
-</div>
+</section>
 
 <style>
-  .main-content {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  .features {
+    padding: 6rem 1rem;
   }
 
-  h1 {
-    font-size: 5em;
-    font-weight: 800;
-    margin-bottom: 0.5rem;
-    background: linear-gradient(to right, #60a5fa, #93c5fd);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: fadeIn 1s ease-out;
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .section-header {
     text-align: center;
-  }
-
-  .subtitle-text {
-    font-size: 1.5em;
-    font-weight: 800;
     margin-bottom: 4rem;
-    background: linear-gradient(to right, #60a5fa, #93c5fd);
+  }
+
+  .section-header h2 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    background: linear-gradient(to right, #e0e7ff, #c7d2fe);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    opacity: 0;
-    animation: slideIn 1s ease-out 0.5s forwards;
-    text-align: center;
   }
 
-  .compass-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
+  .section-header p {
+    font-size: 1.25rem;
+    color: rgba(156, 163, 175, 1);
   }
 
-  .compass {
-    font-size: 20px;
-    animation: spin 1s infinite linear;
-    align-items: center;
-  }
-
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-
-  .links {
+  .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1rem;
-    width: 100%;
-    max-width: 1200px;
-    animation: slideIn 1s ease-out 1s backwards;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
   }
 
-  .link-card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border-radius: 12px;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    animation: fadeIn 0.5s ease-out;
+  .cta-section {
+    padding: 6rem 1rem;
+    margin: 4rem 0;
   }
 
-  .link-card a {
-    color: #fff;
-    text-decoration: none;
-    padding: 1.2rem;
-    display: block;
-    font-size: 1.1em;
-    font-weight: 500;
-    letter-spacing: 0.5px;
+  .cta-content {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2));
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 2rem;
+    padding: 4rem 2rem;
     text-align: center;
+    backdrop-filter: blur(12px);
   }
 
-  .link-card:hover {
+  .cta-content h2 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: white;
+  }
+
+  .cta-content p {
+    font-size: 1.125rem;
+    color: rgba(209, 213, 219, 0.9);
+    margin-bottom: 2rem;
+    max-width: 36rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .btn-primary {
+    background: linear-gradient(to bottom, #6366f1, #4f46e5);
+    color: white;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.16);
+  }
+
+  .btn-primary:hover {
+    background: linear-gradient(to bottom, #4f46e5, #4338ca);
     transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
   }
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .btn-secondary {
+    background: rgba(75, 85, 99, 0.6);
+    color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(107, 114, 128, 0.5);
   }
 
-  @keyframes slideIn {
-    from {
-      opacity: 0;
-      transform: translateX(-30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @media (max-width: 768px) {
-    h1 {
-      font-size: 3em;
-    }
-    .links {
-      grid-template-columns: 1fr;
-    }
+  .btn-secondary:hover {
+    background: rgba(75, 85, 99, 0.8);
   }
 </style>

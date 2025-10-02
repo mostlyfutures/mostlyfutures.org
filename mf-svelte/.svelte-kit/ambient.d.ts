@@ -55,6 +55,7 @@ declare module '$env/static/private' {
 	export const npm_config_userconfig: string;
 	export const npm_config_local_prefix: string;
 	export const SYSTEMD_EXEC_PID: string;
+	export const VSCODE_PYTHON_AUTOACTIVATE_GUARD: string;
 	export const DBUS_SESSION_BUS_ADDRESS: string;
 	export const COLORTERM: string;
 	export const GIO_LAUNCHED_DESKTOP_FILE_PID: string;
@@ -101,6 +102,7 @@ declare module '$env/static/private' {
 	export const GPG_AGENT_INFO: string;
 	export const GSK_RENDERER: string;
 	export const VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
+	export const GIT_PAGER: string;
 	export const XDG_VTNR: string;
 	export const npm_config_globalconfig: string;
 	export const npm_config_init_module: string;
@@ -175,6 +177,7 @@ declare module '$env/dynamic/private' {
 		npm_config_userconfig: string;
 		npm_config_local_prefix: string;
 		SYSTEMD_EXEC_PID: string;
+		VSCODE_PYTHON_AUTOACTIVATE_GUARD: string;
 		DBUS_SESSION_BUS_ADDRESS: string;
 		COLORTERM: string;
 		GIO_LAUNCHED_DESKTOP_FILE_PID: string;
@@ -221,6 +224,7 @@ declare module '$env/dynamic/private' {
 		GPG_AGENT_INFO: string;
 		GSK_RENDERER: string;
 		VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
+		GIT_PAGER: string;
 		XDG_VTNR: string;
 		npm_config_globalconfig: string;
 		npm_config_init_module: string;
