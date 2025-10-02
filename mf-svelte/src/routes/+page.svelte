@@ -7,7 +7,7 @@
     
   </div>
   <h1>MostlyFutures</h1>
-  <div class="subtitle-text">Explore the world of trading and cryptocurrency</div>
+  <div class="subtitle-text">A Standerd Appchain</div>
   <div class="links">
     <div class="link-card">
       <a href="/crypto-intro">How to Buy Crypto</a>
