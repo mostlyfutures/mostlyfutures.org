@@ -49,8 +49,6 @@
   <a href="crypto-intro.html">Crypto Introduction</a>
   <a href="trading-intro.html">Trading</a>
   <a href="/mfSart/landing.html">Sart</a>
-  <a href="grant-ai.html">Grant AI</a>
-  <a href="quizgen.html">QuizGen Flashcards</a>
 </nav>
 <div class="main-content">
   <div class="compass-container">
@@ -69,12 +67,6 @@
     </div>
     <div class="link-card">
       <a href="nfts.html">NFT Gallery</a>
-    </div>
-    <div class="link-card">
-      <a href="grant-ai.html">AI Assistant</a>
-    </div>
-    <div class="link-card">
-      <a href="quizgen.html">Quiz Generator</a>
     </div>
     <div class="link-card">
       <a href="/mfDex/dex.html">Start Trading</a>

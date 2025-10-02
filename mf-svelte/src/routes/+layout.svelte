@@ -25,8 +25,6 @@
   <a href="/crypto-intro">Crypto Introduction</a>
   <a href="/trading-intro">Trading</a>
   <a href="/landing">Sart</a>
-  <a href="/grant-ai">Grant AI</a>
-  <a href="/quizgen">QuizGen Flashcards</a>
 </nav>
 
 <main>

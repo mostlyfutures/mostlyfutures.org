@@ -9,16 +9,10 @@
 	"/crypto-intro": [
 		"src/routes/+layout.js"
 	],
-	"/grant-ai": [
-		"src/routes/+layout.js"
-	],
 	"/landing": [
 		"src/routes/+layout.js"
 	],
 	"/nfts": [
-		"src/routes/+layout.js"
-	],
-	"/quizgen": [
 		"src/routes/+layout.js"
 	],
 	"/trading-intro": [

@@ -19,12 +19,6 @@
       <a href="/nfts">NFT Gallery</a>
     </div>
     <div class="link-card">
-      <a href="/grant-ai">AI Assistant</a>
-    </div>
-    <div class="link-card">
-      <a href="/quizgen">Quiz Generator</a>
-    </div>
-    <div class="link-card">
       <a href="/dex">Start Trading</a>
     </div>
   </div>
