@@ -4,7 +4,7 @@
 
 <div class="main-content">
   <div class="compass-container">
-    <div class="compass">🧭</div>
+    
   </div>
   <h1>MostlyFutures</h1>
   <div class="subtitle-text">Explore the world of trading and cryptocurrency</div>
