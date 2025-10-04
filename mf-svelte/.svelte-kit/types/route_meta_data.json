@@ -9,10 +9,19 @@
 	"/crypto-intro": [
 		"src/routes/+layout.js"
 	],
+	"/dashboard": [
+		"src/routes/+layout.js"
+	],
+	"/features": [
+		"src/routes/+layout.js"
+	],
 	"/landing": [
 		"src/routes/+layout.js"
 	],
 	"/nfts": [
+		"src/routes/+layout.js"
+	],
+	"/pricing": [
 		"src/routes/+layout.js"
 	],
 	"/trading-intro": [

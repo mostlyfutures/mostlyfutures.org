@@ -1,244 +1,260 @@
-<script lang="ts"><svelte:head>
+<script lang="ts"><script lang="ts">
 
-  import Hero from '$lib/components/Hero.svelte';  <title>Contact MostlyFutures</title>
+  import * as Card from '$lib/components/ui/card';  import * as Card from '$lib/components/ui/card';
 
-</script></svelte:head>
+  import { Button } from '$lib/components/ui/button';  import { Button } from '$lib/components/ui/button';
 
+</script></script>
 
 
-<svelte:head><div class="header">Contact me at</div>
 
-  <title>Contact - MostlyFutures</title><div class="email">mostlyfutures@gmail.com</div>
+<svelte:head><svelte:head>
 
-  <meta name="description" content="Get in touch with the MostlyFutures team" /><a href="/" class="back-button">Back</a>
+  <title>Contact - MostlyFutures</title>  <title>Contact - MostlyFutures</title>
 
-</svelte:head>
+  <meta name="description" content="Get in touch with the MostlyFutures team" />  <meta name="description" content="Get in touch with the MostlyFutures team" />
 
-<style>
+</svelte:head></svelte:head>
 
-<Hero   :global(main) {
 
-  title="Get in Touch"     min-height: 100vh;
 
-  subtitle="Have questions? We'd love to hear from you"    display: flex;
+<div class="container mx-auto px-4 py-24"><div class="container mx-auto px-4 py-24">
 
-  primaryCta={{ text: 'Send Email', href: 'mailto:mostlyfutures@gmail.com' }}    flex-direction: column;
+  <!-- Header -->  <!-- Header -->
 
-  secondaryCta={{ text: 'Start Trading', href: 'https://www.mostlyfutures.finance' }}    align-items: center;
+  <div class="text-center mb-16">  <div class="text-center mb-16">
 
-/>    justify-content: center;
+    <h1 class="text-4xl font-bold tracking-tight sm:text-5xl mb-6">    <h1 class="text-4xl font-bold tracking-tight sm:text-5xl mb-6">
 
-    padding: 2rem;
+      Get in       Get in 
 
-<section class="contact-section">    box-sizing: border-box;
+      <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">      <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
 
-  <div class="container">  }
+        touch        touch
 
-    <div class="contact-card">
+      </span>      </span>
 
-      <div class="contact-info">  .header {
+    </h1>    </h1>
 
-        <div class="contact-icon">✉️</div>    font-size: 1.5em;
+    <p class="text-lg text-muted-foreground max-w-2xl mx-auto">    <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
 
-        <h2>Email Us</h2>    margin-bottom: 1rem;
+      Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.      Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
 
-        <a href="mailto:mostlyfutures@gmail.com" class="email-link">    animation: fadeIn 1s ease-out;
+    </p>    </p>
 
-          mostlyfutures@gmail.com    font-weight: 500;
+  </div>  </div>
 
-        </a>  }
 
-        <p>We typically respond within 24 hours</p>
 
-      </div>  .email {
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">  <div class="text-center">
 
-    </div>    font-size: 2.2em;
+    <!-- Email Card -->    <Card.Root class="max-w-md mx-auto">
 
-    word-wrap: break-word;
+    <Card.Root class="text-center">      <Card.Content class="p-8">
 
-    <div class="info-grid">    margin-bottom: 2rem;
+      <Card.Content class="p-8">        <div class="mb-6">
 
-      <div class="info-card">    animation: fadeIn 1s ease-out 0.3s backwards;
+        <div class="text-6xl mb-6">📧</div>          <span class="text-6xl">�</span>
 
-        <div class="info-icon">📚</div>    background: linear-gradient(to right, #60a5fa, #93c5fd);
+        <Card.Title class="text-2xl mb-4">Email Us</Card.Title>        </div>
 
-        <h3>Educational Resources</h3>    -webkit-background-clip: text;
+        <a href="mailto:mostlyfutures@gmail.com" class="text-xl text-primary hover:underline font-medium block mb-4">        <Card.Title class="text-2xl mb-4">Email Us</Card.Title>
 
-        <p>Access our comprehensive guides on crypto and trading</p>    background-clip: text;
+          mostlyfutures@gmail.com        <a href="mailto:mostlyfutures@gmail.com" class="text-xl text-primary hover:underline font-medium block mb-4">
 
-        <a href="/crypto-intro" class="card-link">Learn More →</a>    color: transparent;
+        </a>          mostlyfutures@gmail.com
 
-      </div>    font-weight: 700;
+        <p class="text-muted-foreground mb-6">We typically respond within 24 hours</p>        </a>
 
-    text-align: center;
+        <Button class="w-full">        <p class="text-muted-foreground mb-6">We typically respond within 24 hours</p>
 
-      <div class="info-card">  }
+          Send Email        <Button>
 
-        <div class="info-icon">🚀</div>
+        </Button>          <a href="mailto:mostlyfutures@gmail.com" class="no-underline text-white">Send Email</a>
 
-        <h3>Trading Platform</h3>  .back-button {
+      </Card.Content>        </Button>
 
-        <p>Start trading with our secure and user-friendly platform</p>    background: rgba(255, 255, 255, 0.1);
+    </Card.Root>      </Card.Content>
 
-        <a href="https://www.mostlyfutures.finance" class="card-link">Get Started →</a>    color: white;
+    </Card.Root>
 
-      </div>    border: none;
+    <!-- Support Card -->  </div>
 
-    padding: 1rem 2rem;
+    <Card.Root class="text-center"></div>
 
-      <div class="info-card">    font-size: 1em;
+      <Card.Content class="p-8">    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2));
 
-        <div class="info-icon">🎨</div>    cursor: pointer;
+        <div class="text-6xl mb-6">🛠️</div>    border: 1px solid rgba(99, 102, 241, 0.4);
 
-        <h3>NFT Collection</h3>    text-decoration: none;
+        <Card.Title class="text-2xl mb-4">Support</Card.Title>    border-radius: 1.5rem;
 
-        <p>Explore our unique digital art and collectibles</p>    border-radius: 12px;
+        <p class="text-muted-foreground mb-4">    padding: 4rem 2rem;
 
-        <a href="/nfts" class="card-link">View Gallery →</a>    transition: all 0.3s ease;
+          Technical support and platform assistance    margin-bottom: 3rem;
 
-      </div>    animation: fadeIn 1s ease-out 0.6s backwards;
+        </p>  }
 
-    </div>    backdrop-filter: blur(10px);
+        <p class="text-sm text-muted-foreground mb-6">
 
-  }
+          Available Monday-Friday, 9 AM - 6 PM EST  .contact-info {
 
-    <div class="social-card">
+        </p>    text-align: center;
 
-      <h3>Follow Our Journey</h3>  .back-button:hover {
+        <Button variant="outline" class="w-full">    max-width: 600px;
 
-      <p>Stay updated with the latest news and insights from MostlyFutures</p>    background: rgba(255, 255, 255, 0.2);
+          Get Help    margin: 0 auto;
 
-      <div class="social-links">    transform: translateY(-2px);
+        </Button>  }
 
-        <a href="https://opensea.io/mostlyfutures" target="_blank" class="social-link">  }
+      </Card.Content>
 
-          <span class="social-icon">🌊</span>
+    </Card.Root>  .contact-icon {
 
-          <span>OpenSea</span>  @keyframes fadeIn {
-
-        </a>    from {
-
-        <a href="https://www.mostlyfutures.finance" target="_blank" class="social-link">      opacity: 0;
-
-          <span class="social-icon">📈</span>      transform: translateY(-20px);
-
-          <span>Trading</span>    }
-
-        </a>    to {
-
-      </div>      opacity: 1;
-
-    </div>      transform: translateY(0);
-
-  </div>    }
-
-</section>  }
-
-
-
-<style>  @media (max-width: 768px) {
-
-  .contact-section {    .email {
-
-    padding: 4rem 1rem 6rem;      font-size: 1.8em;
-
-  }    }
-
-  }
-
-  .container {</style>
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .contact-card {
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2));
-    border: 1px solid rgba(99, 102, 241, 0.4);
-    border-radius: 1.5rem;
-    padding: 4rem 2rem;
-    margin-bottom: 3rem;
-  }
-
-  .contact-info {
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  .contact-icon {
     font-size: 4rem;
-    margin-bottom: 1.5rem;
+
+    <!-- Community Card -->    margin-bottom: 1.5rem;
+
+    <Card.Root class="text-center md:col-span-2 lg:col-span-1">  }
+
+      <Card.Content class="p-8">
+
+        <div class="text-6xl mb-6">💬</div>  .contact-info h2 {
+
+        <Card.Title class="text-2xl mb-4">Community</Card.Title>    font-size: 2rem;
+
+        <p class="text-muted-foreground mb-4">    font-weight: 800;
+
+          Join our community for discussions and updates    margin-bottom: 1.5rem;
+
+        </p>    color: white;
+
+        <div class="space-y-3 mb-6">  }
+
+          <a href="#" class="flex items-center justify-center gap-2 text-sm text-primary hover:underline">
+
+            <span>📱</span> Discord  .email-link {
+
+          </a>    display: inline-block;
+
+          <a href="#" class="flex items-center justify-center gap-2 text-sm text-primary hover:underline">    font-size: 1.5rem;
+
+            <span>🐦</span> Twitter    font-weight: 700;
+
+          </a>    background: linear-gradient(to right, #60a5fa, #a78bfa);
+
+          <a href="#" class="flex items-center justify-center gap-2 text-sm text-primary hover:underline">    -webkit-background-clip: text;
+
+            <span>📖</span> Blog    background-clip: text;
+
+          </a>    color: transparent;
+
+        </div>    text-decoration: none;
+
+        <Button variant="outline" class="w-full">    margin-bottom: 1rem;
+
+          Join Community    transition: opacity 0.3s ease;
+
+        </Button>  }
+
+      </Card.Content>
+
+    </Card.Root>  .email-link:hover {
+
+  </div>    opacity: 0.8;
+
   }
 
-  .contact-info h2 {
-    font-size: 2rem;
-    font-weight: 800;
-    margin-bottom: 1.5rem;
-    color: white;
-  }
+  <!-- FAQ Section -->
 
-  .email-link {
-    display: inline-block;
-    font-size: 1.5rem;
-    font-weight: 700;
-    background: linear-gradient(to right, #60a5fa, #a78bfa);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-decoration: none;
-    margin-bottom: 1rem;
-    transition: opacity 0.3s ease;
-  }
+  <div class="max-w-4xl mx-auto">  .contact-info p {
 
-  .email-link:hover {
-    opacity: 0.8;
-  }
+    <h2 class="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>    color: rgba(209, 213, 219, 0.8);
 
-  .contact-info p {
-    color: rgba(209, 213, 219, 0.8);
-    font-size: 1rem;
-  }
+    <div class="space-y-6">    font-size: 1rem;
 
-  .info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    margin-bottom: 3rem;
-  }
+      <Card.Root>  }
+
+        <Card.Content class="p-6">
+
+          <h3 class="text-lg font-semibold mb-3">How do I get started with MostlyFutures?</h3>  .info-grid {
+
+          <p class="text-muted-foreground">    display: grid;
+
+            Simply create an account and explore our platform. We offer a comprehensive onboarding process    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+            to help you understand futures trading and our advanced tools.    gap: 2rem;
+
+          </p>    margin-bottom: 3rem;
+
+        </Card.Content>  }
+
+      </Card.Root>
 
   .info-card {
-    background: rgba(17, 24, 39, 0.6);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(99, 102, 241, 0.3);
-    border-radius: 1.5rem;
-    padding: 2rem;
-    text-align: center;
-    transition: all 0.3s ease;
-  }
+
+      <Card.Root>    background: rgba(17, 24, 39, 0.6);
+
+        <Card.Content class="p-6">    backdrop-filter: blur(12px);
+
+          <h3 class="text-lg font-semibold mb-3">What are your trading fees?</h3>    border: 1px solid rgba(99, 102, 241, 0.3);
+
+          <p class="text-muted-foreground">    border-radius: 1.5rem;
+
+            We offer competitive trading fees starting at 0.1% for makers and 0.2% for takers.    padding: 2rem;
+
+            Volume-based discounts are available for high-frequency traders.    text-align: center;
+
+          </p>    transition: all 0.3s ease;
+
+        </Card.Content>  }
+
+      </Card.Root>
 
   .info-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(99, 102, 241, 0.5);
-  }
 
-  .info-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-  }
+      <Card.Root>    transform: translateY(-4px);
+
+        <Card.Content class="p-6">    border-color: rgba(99, 102, 241, 0.5);
+
+          <h3 class="text-lg font-semibold mb-3">Is my data secure?</h3>  }
+
+          <p class="text-muted-foreground">
+
+            Yes, we use industry-leading security measures including 256-bit encryption,  .info-icon {
+
+            cold storage for funds, and regular security audits to protect your assets and data.    font-size: 3rem;
+
+          </p>    margin-bottom: 1rem;
+
+        </Card.Content>  }
+
+      </Card.Root>
 
   .info-card h3 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: 0.75rem;
-    color: white;
-  }
 
-  .info-card p {
-    color: rgba(209, 213, 219, 0.8);
-    line-height: 1.6;
-    font-size: 0.9375rem;
-    margin-bottom: 1rem;
-  }
+      <Card.Root>    font-size: 1.25rem;
+
+        <Card.Content class="p-6">    font-weight: 700;
+
+          <h3 class="text-lg font-semibold mb-3">Do you offer customer support?</h3>    margin-bottom: 0.75rem;
+
+          <p class="text-muted-foreground">    color: white;
+
+            We provide 24/7 customer support through multiple channels including email, live chat,  }
+
+            and our community forums. Our team is always ready to help.
+
+          </p>  .info-card p {
+
+        </Card.Content>    color: rgba(209, 213, 219, 0.8);
+
+      </Card.Root>    line-height: 1.6;
+
+    </div>    font-size: 0.9375rem;
+
+  </div>    margin-bottom: 1rem;
+
+</div>  }
 
   .card-link {
     color: #60a5fa;

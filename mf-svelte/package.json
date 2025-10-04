@@ -15,10 +15,15 @@
     "svelte": "^5.39.4",
     "svelte-check": "^4.3.1",
     "typescript": "~5.8.3",
-    "vite": "^7.1.7"
+    "vite": "^7.1.7",
+    "tailwindcss": "^3.4.0",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32"
   },
   "dependencies": {
     "@sveltejs/adapter-static": "^3.0.9",
-    "@sveltejs/kit": "^2.43.4"
+    "@sveltejs/kit": "^2.43.4",
+    "clsx": "^2.0.0",
+    "tailwind-merge": "^2.2.0"
   }
 }
