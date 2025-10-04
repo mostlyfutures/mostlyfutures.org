@@ -27,7 +27,7 @@ export {};
 
 declare module "$app/types" {
 	export interface AppTypes {
-		RouteId(): "/" | "/contact" | "/crypto-intro" | "/landing" | "/nfts" | "/trading-intro";
+		RouteId(): "/" | "/contact" | "/crypto-intro" | "/dashboard" | "/features" | "/landing" | "/nfts" | "/pricing" | "/trading-intro";
 		RouteParams(): {
 			
 		};
@@ -35,11 +35,14 @@ declare module "$app/types" {
 			"/": Record<string, never>;
 			"/contact": Record<string, never>;
 			"/crypto-intro": Record<string, never>;
+			"/dashboard": Record<string, never>;
+			"/features": Record<string, never>;
 			"/landing": Record<string, never>;
 			"/nfts": Record<string, never>;
+			"/pricing": Record<string, never>;
 			"/trading-intro": Record<string, never>
 		};
-		Pathname(): "/" | "/contact" | "/contact/" | "/crypto-intro" | "/crypto-intro/" | "/landing" | "/landing/" | "/nfts" | "/nfts/" | "/trading-intro" | "/trading-intro/";
+		Pathname(): "/" | "/contact" | "/contact/" | "/crypto-intro" | "/crypto-intro/" | "/dashboard" | "/dashboard/" | "/features" | "/features/" | "/landing" | "/landing/" | "/nfts" | "/nfts/" | "/pricing" | "/pricing/" | "/trading-intro" | "/trading-intro/";
 		ResolvedPathname(): `${"" | `/${string}`}${ReturnType<AppTypes['Pathname']>}`;
 		Asset(): string & {};
 	}
