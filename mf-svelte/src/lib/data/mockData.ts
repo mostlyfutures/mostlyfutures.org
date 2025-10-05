@@ -808,6 +808,11 @@ export const navLinks: NavLink[] = [
     description: 'Latest market insights'
   },
   { 
+    href: '/ai-agent', 
+    label: '🤖 AI Agent',
+    description: 'AI-powered project editor'
+  },
+  { 
     href: '/dashboard', 
     label: 'Dashboard',
     description: 'Manage your trades'
@@ -844,6 +849,11 @@ export const routes: RouteInfo[] = [
     path: '/blog',
     title: 'Trading Blog',
     description: 'Latest insights, analysis, and market trends',
+  },
+  {
+    path: '/ai-agent',
+    title: 'AI Agent',
+    description: 'AI-powered SvelteKit project editor using PydanticAI',
   },
   {
     path: '/dashboard',
