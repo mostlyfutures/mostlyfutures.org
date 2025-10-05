@@ -2,12 +2,14 @@
   import FeatureCard from '$lib/components/saas/FeatureCard.svelte';
   import { Button } from '$lib/components/ui/button';
   import { features } from '$lib/data/mockData.js';
+  import AnimatedIcon from '$lib/components/AnimatedIcon.svelte';
+  import Tooltip from '$lib/components/Tooltip.svelte';
   
   const featureCategories = [
-    { id: 'trading', name: 'Trading Tools', icon: '📊', color: 'blue' },
-    { id: 'education', name: 'Education', icon: '👥', color: 'green' },
-    { id: 'analytics', name: 'Analytics', icon: '⚡', color: 'purple' },
-    { id: 'community', name: 'Community', icon: '🛡️', color: 'orange' }
+    { id: 'trading', name: 'Trading Tools', variant: 'default', color: 'blue' },
+    { id: 'education', name: 'Education', variant: 'book', color: 'green' },
+    { id: 'analytics', name: 'Analytics', variant: 'lightning', color: 'purple' },
+    { id: 'community', name: 'Community', variant: 'shield', color: 'orange' }
   ];
   
   let selectedCategory: string | null = null;
@@ -50,7 +52,9 @@
         on:click={() => selectedCategory = category.id}
         class="capitalize"
       >
-        <svelte:component this={category.icon} class="mr-2 h-4 w-4" />
+        <span class="mr-2 inline-block" style="width: 16px; height: 16px;">
+          <AnimatedIcon size={16} color="currentColor" variant={category.variant} />
+        </span>
         {category.name}
       </Button>
     {/each}
@@ -98,7 +102,11 @@
       <div class="bg-alice-blue dark:bg-cool-black/20 rounded-2xl p-8">
         <!-- Placeholder for feature image/demo -->
         <div class="aspect-square bg-white dark:bg-slate-800 rounded-xl shadow-lg flex items-center justify-center">
-          <span class="text-6xl text-blue-500">📊</span>
+          <Tooltip content="Trading Tools" placement="top">
+            <div>
+              <AnimatedIcon size={96} color="#3b82f6" variant="default" />
+            </div>
+          </Tooltip>
         </div>
       </div>
     </section>
@@ -107,7 +115,11 @@
     <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
       <div class="order-2 lg:order-1 bg-jordy-blue/20 dark:bg-cool-black/20 rounded-2xl p-8">
         <div class="aspect-square bg-white dark:bg-slate-800 rounded-xl shadow-lg flex items-center justify-center">
-          <span class="text-6xl text-green-500">👥</span>
+          <Tooltip content="Education" placement="top">
+            <div>
+              <AnimatedIcon size={96} color="#10b981" variant="book" />
+            </div>
+          </Tooltip>
         </div>
       </div>
       <div class="order-1 lg:order-2">
@@ -172,7 +184,11 @@
       </div>
       <div class="bg-tufts-blue/20 dark:bg-cool-black/20 rounded-2xl p-8">
         <div class="aspect-square bg-white dark:bg-slate-800 rounded-xl shadow-lg flex items-center justify-center">
-          <span class="text-6xl text-purple-500">⚡</span>
+          <Tooltip content="Analytics" placement="top">
+            <div>
+              <AnimatedIcon size={96} color="#a855f7" variant="lightning" />
+            </div>
+          </Tooltip>
         </div>
       </div>
     </section>
