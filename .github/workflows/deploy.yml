@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ['main', 'seopholia']  # Deploy from main and current branch
+    branches: ['main']  # Only deploy from main branch (seopholia is for testing)
   workflow_dispatch:  # Allow manual trigger
 
 jobs:
