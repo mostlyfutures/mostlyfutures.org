@@ -9,7 +9,7 @@
 	<Card.Header>
 		<div class="flex items-center gap-1 mb-2">
 			{#each Array(5) as _, i}
-				<span class={`text-sm ${i < testimonial.rating ? 'text-yellow-400' : 'text-gray-300'}`}>★</span>
+				<span class={`text-sm ${i < testimonial.rating ? 'text-tufts-blue' : 'text-gray-300'}`}>★</span>
 			{/each}
 		</div>
 		<Card.Description class="text-base leading-relaxed">

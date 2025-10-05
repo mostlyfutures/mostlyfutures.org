@@ -1,22 +1,22 @@
-<script lang="ts"><svelte:head>
+<script lang="ts">
+  import Hero from '$lib/components/Hero.svelte';
+</script>
 
-  import Hero from '$lib/components/Hero.svelte';  <title>MostlyFutures - NFT Gallery</title>
+<svelte:head>
+  <title>MostlyFutures - NFT Gallery</title>
+  <meta name="description" content="Explore our collection of digital assets and NFTs" />
+</svelte:head>
 
-</script></svelte:head>
+<a href="/" class="back-button">Back</a>
 
+<h1 style="animation: fadeIn 1s ease-out; margin-bottom: 0.4rem;">NFTs</h1>
+<p style="text-align: center; max-width: 600px; margin: 0.4rem auto 2rem; line-height: 1.6; animation: fadeIn 1s ease-out 0.3s backwards;">a collection of my life digitized</p>
 
-
-<svelte:head><a href="/" class="back-button">Back</a>
-
-  <title>MostlyFutures - NFT Gallery</title><h1 style="animation: fadeIn 1s ease-out; margin-bottom: 0.4rem;">NFTs</h1>
-
-  <meta name="description" content="Explore our collection of digital assets and NFTs" /><p style="text-align: center; max-width: 600px; margin: 0.4rem auto 2rem; line-height: 1.6; animation: fadeIn 1s ease-out 0.3s backwards;">a collection of my life digitized</p>
-
-</svelte:head><div class="link-card">
-
+<div class="link-card">
   <a href="https://opensea.io/mostlyfutures" target="_blank">NFT Gallery</a>
+</div>
 
-<Hero </div>
+<Hero
 
   title="NFT Gallery" 
 

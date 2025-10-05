@@ -16,7 +16,7 @@
 			<!-- Logo -->
 			<div class="flex items-center space-x-4">
 				<a href="/" class="flex items-center space-x-2">
-					<span class="font-bold text-xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+					<span class="font-bold text-xl text-tufts-blue">
 						MostlyFutures
 					</span>
 				</a>

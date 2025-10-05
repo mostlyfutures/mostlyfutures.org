@@ -51,8 +51,8 @@
 
 <style>
   .footer {
-    background: linear-gradient(to bottom, transparent, rgba(17, 24, 39, 0.8));
-    border-top: 1px solid rgba(99, 102, 241, 0.2);
+    background: rgba(17, 24, 39, 0.95);
+    border-top: 1px solid rgba(70, 139, 230, 0.2);
     padding: 4rem 1rem 2rem;
     margin-top: 6rem;
   }
@@ -93,10 +93,7 @@
   }
 
   .logo-text {
-    background: linear-gradient(to right, #60a5fa, #a78bfa);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: #468BE6;
   }
 
   .brand-description {
@@ -130,7 +127,7 @@
   }
 
   .link-column a:hover {
-    color: #60a5fa;
+    color: #468BE6;
   }
 
   .footer-bottom {
@@ -167,6 +164,6 @@
   }
 
   .footer-bottom-links a:hover {
-    color: #60a5fa;
+    color: #468BE6;
   }
 </style>

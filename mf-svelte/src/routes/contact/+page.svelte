@@ -1,24 +1,14 @@
-<script lang="ts"><script lang="ts">
+<script lang="ts">
+  import * as Card from '$lib/components/ui/card';
+  import { Button } from '$lib/components/ui/button';
+</script>
 
-  import * as Card from '$lib/components/ui/card';  import * as Card from '$lib/components/ui/card';
+<svelte:head>
+  <title>Contact - MostlyFutures</title>
+  <meta name="description" content="Get in touch with the MostlyFutures team" />
+</svelte:head>
 
-  import { Button } from '$lib/components/ui/button';  import { Button } from '$lib/components/ui/button';
-
-</script></script>
-
-
-
-<svelte:head><svelte:head>
-
-  <title>Contact - MostlyFutures</title>  <title>Contact - MostlyFutures</title>
-
-  <meta name="description" content="Get in touch with the MostlyFutures team" />  <meta name="description" content="Get in touch with the MostlyFutures team" />
-
-</svelte:head></svelte:head>
-
-
-
-<div class="container mx-auto px-4 py-24"><div class="container mx-auto px-4 py-24">
+<div class="container mx-auto px-4 py-24">
 
   <!-- Header -->  <!-- Header -->
 
