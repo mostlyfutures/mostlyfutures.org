@@ -19,7 +19,7 @@
     <div class="text-center mb-16">
       <h2 class="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
         Everything you need to 
-        <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+        <span class="text-tufts-blue font-bold">
           succeed in trading
         </span>
       </h2>

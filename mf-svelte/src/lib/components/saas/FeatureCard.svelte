@@ -31,10 +31,10 @@
 		
 		<div class="mt-4">
 			<span class={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ${
-				feature.category === 'trading' ? 'bg-blue-100 text-blue-800' :
-				feature.category === 'education' ? 'bg-green-100 text-green-800' :
-				feature.category === 'analytics' ? 'bg-purple-100 text-purple-800' :
-				'bg-orange-100 text-orange-800'
+				feature.category === 'trading' ? 'bg-tufts-blue/10 text-tufts-blue' :
+				feature.category === 'education' ? 'bg-jordy-blue/10 text-jordy-blue' :
+				feature.category === 'analytics' ? 'bg-alice-blue text-cool-black' :
+				'bg-primary/10 text-primary'
 			}`}>
 				{feature.category}
 			</span>

@@ -32,7 +32,7 @@
   <div class="text-center mb-16">
     <h1 class="text-4xl font-bold tracking-tight sm:text-5xl mb-6">
       Simple, transparent 
-      <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+      <span class="text-tufts-blue font-bold">
         pricing
       </span>
     </h1>

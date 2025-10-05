@@ -3,8 +3,8 @@
 </script>
 
 <section class="relative overflow-hidden bg-background">
-  <!-- Background gradient -->
-  <div class="absolute inset-0 bg-mostlyfutures-gradient dark:from-slate-900 dark:via-slate-800 dark:to-slate-900"></div>
+  <!-- Solid background -->
+  <div class="absolute inset-0 bg-alice-blue dark:bg-cool-black"></div>
   
   <!-- Grid pattern -->
   <div class="absolute inset-0 bg-grid-mostlyfutures dark:bg-grid-dark"></div>	<div class="relative container mx-auto px-4 py-24 sm:py-32">
@@ -17,9 +17,9 @@
 			</div>
 			
 			<!-- Heading -->
-			<h1 class="text-4xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+			<h1 class="text-4xl font-bold tracking-tight text-cool-black sm:text-6xl lg:text-7xl">
 				Master Trading with
-				<span class="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
+				<span class="text-tufts-blue font-bold">
 					Professional Tools
 				</span>
 			</h1>
@@ -63,14 +63,5 @@
 	</div>
 	
   
-  <!-- Bottom fade -->
-  <div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-background to-transparent"></div>
-</section><style>
-	.bg-grid-slate-200\/50 {
-		background-image: url("data:image/svg+xml,%3csvg width='40' height='40' viewBox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cg clip-path='url(%23clip0_17_17)'%3e%3cg clip-path='url(%23clip1_17_17)' opacity='0.5'%3e%3cpath d='M.5 40V.5H40' stroke='%23e2e8f0' stroke-miterlimit='10'/%3e%3c/g%3e%3c/g%3e%3cdefs%3e%3cclipPath id='clip0_17_17'%3e%3cpath fill='%23fff' d='M0 0h40v40H0z'/%3e%3c/clipPath%3e%3cclipPath id='clip1_17_17'%3e%3cpath fill='%23fff' d='M0 0h40v40H0z'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e");
-	}
-	
-	.dark .bg-grid-slate-700\/25 {
-		background-image: url("data:image/svg+xml,%3csvg width='40' height='40' viewBox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cg clip-path='url(%23clip0_17_17)'%3e%3cg clip-path='url(%23clip1_17_17)' opacity='0.25'%3e%3cpath d='M.5 40V.5H40' stroke='%23374151' stroke-miterlimit='10'/%3e%3c/g%3e%3c/g%3e%3cdefs%3e%3cclipPath id='clip0_17_17'%3e%3cpath fill='%23fff' d='M0 0h40v40H0z'/%3e%3c/clipPath%3e%3cclipPath id='clip1_17_17'%3e%3cpath fill='%23fff' d='M0 0h40v40H0z'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e");
-	}
-</style>
+
+</section>

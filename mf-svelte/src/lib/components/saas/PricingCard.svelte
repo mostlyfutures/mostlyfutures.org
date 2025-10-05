@@ -27,7 +27,7 @@
 		<ul class="space-y-3">
 			{#each plan.features as feature}
 				<li class="flex items-center gap-3">
-					<span class="w-5 h-5 text-green-500 shrink-0">✓</span>
+					<span class="w-5 h-5 text-tufts-blue shrink-0">✓</span>
 					<span class="text-sm">{feature}</span>
 				</li>
 			{/each}

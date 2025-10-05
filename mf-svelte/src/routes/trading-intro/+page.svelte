@@ -1,12 +1,12 @@
-<script lang="ts"><script lang="ts"><svelte:head>
-
+<script lang="ts">
   import Hero from '$lib/components/Hero.svelte';
-
-  import FeatureList from '$lib/components/FeatureList.svelte';  import Hero from '$lib/components/Hero.svelte';  <title>MostlyFutures - How to Trade</title>
-
+  import FeatureList from '$lib/components/FeatureList.svelte';
   import { tradingAssets } from '$lib/data/routes';
+</script>
 
-</script>  import FeatureList from '$lib/components/FeatureList.svelte';</svelte:head>
+<svelte:head>
+  <title>MostlyFutures - How to Trade</title>
+</svelte:head>
 
 
 

@@ -27,7 +27,7 @@
   <div class="text-center mb-16">
     <h1 class="text-4xl font-bold tracking-tight sm:text-5xl mb-6">
       Powerful features for 
-      <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+      <span class="text-tufts-blue font-bold">
         serious traders
       </span>
     </h1>
@@ -95,7 +95,7 @@
           Explore Trading Tools →
         </Button>
       </div>
-      <div class="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-blue-950/50 dark:to-indigo-950/50 rounded-2xl p-8">
+      <div class="bg-alice-blue dark:bg-cool-black/20 rounded-2xl p-8">
         <!-- Placeholder for feature image/demo -->
         <div class="aspect-square bg-white dark:bg-slate-800 rounded-xl shadow-lg flex items-center justify-center">
           <span class="text-6xl text-blue-500">📊</span>
@@ -105,7 +105,7 @@
 
     <!-- Education Section -->
     <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-      <div class="order-2 lg:order-1 bg-gradient-to-br from-green-50 to-emerald-100 dark:from-green-950/50 dark:to-emerald-950/50 rounded-2xl p-8">
+      <div class="order-2 lg:order-1 bg-jordy-blue/20 dark:bg-cool-black/20 rounded-2xl p-8">
         <div class="aspect-square bg-white dark:bg-slate-800 rounded-xl shadow-lg flex items-center justify-center">
           <span class="text-6xl text-green-500">👥</span>
         </div>
@@ -170,7 +170,7 @@
           View Analytics →
         </Button>
       </div>
-      <div class="bg-gradient-to-br from-purple-50 to-violet-100 dark:from-purple-950/50 dark:to-violet-950/50 rounded-2xl p-8">
+      <div class="bg-tufts-blue/20 dark:bg-cool-black/20 rounded-2xl p-8">
         <div class="aspect-square bg-white dark:bg-slate-800 rounded-xl shadow-lg flex items-center justify-center">
           <span class="text-6xl text-purple-500">⚡</span>
         </div>
@@ -180,7 +180,7 @@
 
   <!-- CTA Section -->
   <div class="text-center mt-24">
-    <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-12 text-white">
+    <div class="bg-tufts-blue rounded-2xl p-12 text-white">
       <h2 class="text-3xl font-bold mb-4">Ready to experience these features?</h2>
       <p class="text-lg mb-8 opacity-90">
         Start your free trial today and see how our platform can transform your trading.
