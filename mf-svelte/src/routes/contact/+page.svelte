@@ -12,27 +12,17 @@
 
   <!-- Header -->  <!-- Header -->
 
-  <div class="text-center mb-16">  <div class="text-center mb-16">
-
-    <h1 class="text-4xl font-bold tracking-tight sm:text-5xl mb-6">    <h1 class="text-4xl font-bold tracking-tight sm:text-5xl mb-6">
-
-      Get in       Get in 
-
-      <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">      <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-
-        touch        touch
-
-      </span>      </span>
-
-    </h1>    </h1>
-
-    <p class="text-lg text-muted-foreground max-w-2xl mx-auto">    <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
-
-      Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.      Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
-
-    </p>    </p>
-
-  </div>  </div>
+  <div class="text-center mb-16">
+    <h1 class="text-4xl font-bold tracking-tight sm:text-5xl mb-6">
+      Get in 
+      <span class="text-tufts-blue font-bold">
+        touch
+      </span>
+    </h1>
+    <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+      Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+    </p>
+  </div>
 
 
 
