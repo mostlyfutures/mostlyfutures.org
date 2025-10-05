@@ -6,7 +6,7 @@
 	"/blog": [
 		"src/routes/+layout.js"
 	],
-	"/blog/[slug]": [
+	"/community": [
 		"src/routes/+layout.js"
 	],
 	"/contact": [
@@ -16,6 +16,9 @@
 		"src/routes/+layout.js"
 	],
 	"/dashboard": [
+		"src/routes/+layout.js"
+	],
+	"/education": [
 		"src/routes/+layout.js"
 	],
 	"/features": [

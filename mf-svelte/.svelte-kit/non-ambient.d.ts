@@ -27,24 +27,25 @@ export {};
 
 declare module "$app/types" {
 	export interface AppTypes {
-		RouteId(): "/" | "/blog" | "/blog/[slug]" | "/contact" | "/crypto-intro" | "/dashboard" | "/features" | "/landing" | "/nfts" | "/pricing" | "/trading-intro";
+		RouteId(): "/" | "/blog" | "/community" | "/contact" | "/crypto-intro" | "/dashboard" | "/education" | "/features" | "/landing" | "/nfts" | "/pricing" | "/trading-intro";
 		RouteParams(): {
-			"/blog/[slug]": { slug: string }
+			
 		};
 		LayoutParams(): {
-			"/": { slug?: string };
-			"/blog": { slug?: string };
-			"/blog/[slug]": { slug: string };
+			"/": Record<string, never>;
+			"/blog": Record<string, never>;
+			"/community": Record<string, never>;
 			"/contact": Record<string, never>;
 			"/crypto-intro": Record<string, never>;
 			"/dashboard": Record<string, never>;
+			"/education": Record<string, never>;
 			"/features": Record<string, never>;
 			"/landing": Record<string, never>;
 			"/nfts": Record<string, never>;
 			"/pricing": Record<string, never>;
 			"/trading-intro": Record<string, never>
 		};
-		Pathname(): "/" | "/blog" | "/blog/" | `/blog/${string}` & {} | `/blog/${string}/` & {} | "/contact" | "/contact/" | "/crypto-intro" | "/crypto-intro/" | "/dashboard" | "/dashboard/" | "/features" | "/features/" | "/landing" | "/landing/" | "/nfts" | "/nfts/" | "/pricing" | "/pricing/" | "/trading-intro" | "/trading-intro/";
+		Pathname(): "/" | "/blog" | "/blog/" | "/community" | "/community/" | "/contact" | "/contact/" | "/crypto-intro" | "/crypto-intro/" | "/dashboard" | "/dashboard/" | "/education" | "/education/" | "/features" | "/features/" | "/landing" | "/landing/" | "/nfts" | "/nfts/" | "/pricing" | "/pricing/" | "/trading-intro" | "/trading-intro/";
 		ResolvedPathname(): `${"" | `/${string}`}${ReturnType<AppTypes['Pathname']>}`;
 		Asset(): string & {};
 	}

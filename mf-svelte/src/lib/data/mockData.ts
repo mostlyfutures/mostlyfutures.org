@@ -62,6 +62,76 @@ export interface BlogPost {
   category: string;
   readTime: number;
   featuredImage?: string;
+  tags?: string[];
+}
+
+export interface Course {
+  id: string;
+  title: string;
+  description: string;
+  level: 'beginner' | 'intermediate' | 'advanced';
+  duration: string;
+  modules: number;
+  students: number;
+  rating: number;
+  instructor: string;
+  thumbnail?: string;
+  price?: number;
+  category: string;
+}
+
+export interface Lesson {
+  id: string;
+  courseId: string;
+  title: string;
+  description: string;
+  duration: string;
+  videoUrl?: string;
+  content: string;
+  order: number;
+}
+
+export interface CommunityMember {
+  id: string;
+  name: string;
+  username: string;
+  avatar?: string;
+  role: 'admin' | 'moderator' | 'expert' | 'member';
+  joinDate: string;
+  posts: number;
+  reputation: number;
+  badges: string[];
+  bio?: string;
+}
+
+export interface ForumPost {
+  id: string;
+  title: string;
+  content: string;
+  author: CommunityMember;
+  category: string;
+  replies: number;
+  views: number;
+  likes: number;
+  createdAt: string;
+  lastActivity: string;
+  tags: string[];
+  pinned?: boolean;
+  solved?: boolean;
+}
+
+export interface Event {
+  id: string;
+  title: string;
+  description: string;
+  type: 'webinar' | 'workshop' | 'meetup' | 'conference';
+  date: string;
+  duration: string;
+  speaker: string;
+  attendees: number;
+  maxAttendees?: number;
+  location: 'online' | string;
+  registrationUrl?: string;
 }
 
 // Mock Data
@@ -277,35 +347,425 @@ export const dashboardMetrics: DashboardMetric[] = [
 export const blogPosts: BlogPost[] = [
   {
     id: '1',
-    title: 'The Future of Cryptocurrency Trading',
-    excerpt: 'Explore emerging trends and technologies shaping the crypto trading landscape.',
-    content: 'Cryptocurrency trading continues to evolve at a rapid pace...',
+    title: 'The Future of Cryptocurrency Trading in 2025',
+    excerpt: 'Explore emerging trends and technologies shaping the crypto trading landscape, from DeFi innovations to institutional adoption.',
+    content: 'Cryptocurrency trading continues to evolve at a rapid pace. In 2025, we\'re seeing unprecedented institutional adoption, advanced DeFi protocols, and regulatory clarity that\'s transforming the market...',
     author: 'Sarah Chen',
     publishDate: '2024-10-01',
     category: 'Cryptocurrency',
-    readTime: 8
+    readTime: 8,
+    tags: ['crypto', 'DeFi', 'trends', 'institutional']
   },
   {
     id: '2',
     title: 'Risk Management Strategies for Futures Trading',
-    excerpt: 'Learn essential risk management techniques to protect your capital.',
-    content: 'Effective risk management is crucial for long-term success...',
+    excerpt: 'Learn essential risk management techniques to protect your capital and maximize long-term profitability in futures markets.',
+    content: 'Effective risk management is crucial for long-term success in futures trading. This comprehensive guide covers position sizing, stop-loss strategies, and portfolio diversification...',
     author: 'Marcus Rodriguez',
     publishDate: '2024-09-28',
     category: 'Futures',
-    readTime: 12
+    readTime: 12,
+    tags: ['risk management', 'futures', 'trading strategy']
   },
   {
     id: '3',
-    title: 'Technical Analysis Fundamentals',
-    excerpt: 'Master the basics of chart reading and technical indicators.',
-    content: 'Technical analysis forms the foundation of many trading strategies...',
+    title: 'Technical Analysis Fundamentals: A Complete Guide',
+    excerpt: 'Master the basics of chart reading, technical indicators, and pattern recognition to improve your trading decisions.',
+    content: 'Technical analysis forms the foundation of many trading strategies. Learn how to read candlestick patterns, use moving averages, RSI, MACD, and other essential indicators...',
     author: 'Emily Thompson',
     publishDate: '2024-09-25',
     category: 'Education',
-    readTime: 15
+    readTime: 15,
+    tags: ['technical analysis', 'indicators', 'charts', 'beginner']
+  },
+  {
+    id: '4',
+    title: 'How to Build a Profitable Forex Trading Strategy',
+    excerpt: 'Step-by-step guide to creating, testing, and optimizing a winning forex trading strategy that suits your style and risk tolerance.',
+    content: 'Building a profitable forex strategy requires understanding market dynamics, developing a clear plan, and rigorous backtesting. This guide walks you through the entire process...',
+    author: 'David Kim',
+    publishDate: '2024-09-20',
+    category: 'Forex',
+    readTime: 10,
+    tags: ['forex', 'strategy', 'backtesting', 'intermediate']
+  },
+  {
+    id: '5',
+    title: 'Understanding Market Psychology and Trading Emotions',
+    excerpt: 'Discover how psychology affects trading decisions and learn proven techniques to control emotions and trade more rationally.',
+    content: 'Market psychology plays a crucial role in trading success. Fear and greed drive market movements, and understanding these emotions is key to becoming a consistent trader...',
+    author: 'Lisa Wang',
+    publishDate: '2024-09-15',
+    category: 'Psychology',
+    readTime: 9,
+    tags: ['psychology', 'emotions', 'discipline', 'mindset']
+  },
+  {
+    id: '6',
+    title: 'Top 10 Trading Mistakes Beginners Make (And How to Avoid Them)',
+    excerpt: 'Learn from common mistakes that new traders make and discover practical strategies to avoid these costly errors.',
+    content: 'Every trader makes mistakes, but learning from others can save you time and money. We\'ve compiled the most common pitfalls beginners face and how to overcome them...',
+    author: 'Michael Brown',
+    publishDate: '2024-09-10',
+    category: 'Education',
+    readTime: 7,
+    tags: ['beginner', 'mistakes', 'tips', 'learning']
   }
 ];
+
+// Education Mock Data
+export const courses: Course[] = [
+  {
+    id: 'crypto-101',
+    title: 'Cryptocurrency Trading for Beginners',
+    description: 'Learn the fundamentals of cryptocurrency trading, from setting up your first wallet to executing your first trades safely and confidently.',
+    level: 'beginner',
+    duration: '6 weeks',
+    modules: 12,
+    students: 15420,
+    rating: 4.8,
+    instructor: 'Sarah Chen',
+    category: 'Cryptocurrency',
+    price: 0
+  },
+  {
+    id: 'technical-analysis',
+    title: 'Advanced Technical Analysis Masterclass',
+    description: 'Master advanced charting techniques, indicators, and pattern recognition to identify high-probability trading opportunities.',
+    level: 'intermediate',
+    duration: '8 weeks',
+    modules: 16,
+    students: 8950,
+    rating: 4.9,
+    instructor: 'Marcus Rodriguez',
+    category: 'Technical Analysis',
+    price: 199
+  },
+  {
+    id: 'forex-fundamentals',
+    title: 'Forex Trading: From Zero to Profitable',
+    description: 'Complete forex trading course covering currency pairs, economic indicators, risk management, and proven trading strategies.',
+    level: 'beginner',
+    duration: '10 weeks',
+    modules: 20,
+    students: 12350,
+    rating: 4.7,
+    instructor: 'Emily Thompson',
+    category: 'Forex',
+    price: 149
+  },
+  {
+    id: 'algorithmic-trading',
+    title: 'Algorithmic Trading & Automation',
+    description: 'Build and deploy automated trading systems using Python. Learn backtesting, optimization, and live trading deployment.',
+    level: 'advanced',
+    duration: '12 weeks',
+    modules: 24,
+    students: 4230,
+    rating: 4.9,
+    instructor: 'David Kim',
+    category: 'Programming',
+    price: 299
+  },
+  {
+    id: 'futures-mastery',
+    title: 'Futures Trading Mastery',
+    description: 'Deep dive into futures markets, leverage management, contract specifications, and institutional trading strategies.',
+    level: 'advanced',
+    duration: '8 weeks',
+    modules: 18,
+    students: 5670,
+    rating: 4.8,
+    instructor: 'Lisa Wang',
+    category: 'Futures',
+    price: 249
+  },
+  {
+    id: 'risk-management',
+    title: 'Professional Risk Management',
+    description: 'Learn portfolio theory, position sizing, risk-reward optimization, and capital preservation strategies used by professional traders.',
+    level: 'intermediate',
+    duration: '6 weeks',
+    modules: 14,
+    students: 9840,
+    rating: 4.9,
+    instructor: 'Michael Brown',
+    category: 'Risk Management',
+    price: 179
+  },
+  {
+    id: 'day-trading',
+    title: 'Day Trading Strategies That Work',
+    description: 'Proven intraday trading strategies, scalping techniques, and market timing methods for consistent daily profits.',
+    level: 'intermediate',
+    duration: '7 weeks',
+    modules: 15,
+    students: 11200,
+    rating: 4.7,
+    instructor: 'Alex Martinez',
+    category: 'Day Trading',
+    price: 189
+  },
+  {
+    id: 'options-trading',
+    title: 'Options Trading: Complete Guide',
+    description: 'Master options strategies from covered calls to advanced spreads. Learn Greeks, volatility trading, and income generation.',
+    level: 'advanced',
+    duration: '10 weeks',
+    modules: 22,
+    students: 6780,
+    rating: 4.8,
+    instructor: 'Jennifer Lee',
+    category: 'Options',
+    price: 279
+  }
+];
+
+export const lessons: Lesson[] = [
+  {
+    id: 'lesson-1',
+    courseId: 'crypto-101',
+    title: 'Introduction to Cryptocurrency',
+    description: 'Understanding blockchain technology, Bitcoin, Ethereum, and the crypto ecosystem.',
+    duration: '45 minutes',
+    content: 'Welcome to the world of cryptocurrency trading...',
+    order: 1
+  },
+  {
+    id: 'lesson-2',
+    courseId: 'crypto-101',
+    title: 'Setting Up Your First Wallet',
+    description: 'Step-by-step guide to creating and securing your cryptocurrency wallet.',
+    duration: '30 minutes',
+    content: 'Security is paramount in cryptocurrency...',
+    order: 2
+  },
+  {
+    id: 'lesson-3',
+    courseId: 'crypto-101',
+    title: 'Understanding Exchanges',
+    description: 'How to choose, register, and navigate cryptocurrency exchanges safely.',
+    duration: '40 minutes',
+    content: 'Cryptocurrency exchanges are the gateways...',
+    order: 3
+  }
+];
+
+// Community Mock Data
+export const communityMembers: CommunityMember[] = [
+  {
+    id: 'member-1',
+    name: 'Sarah Chen',
+    username: '@traderpro',
+    role: 'expert',
+    joinDate: '2023-01-15',
+    posts: 1247,
+    reputation: 9850,
+    badges: ['Top Contributor', 'Verified Trader', 'Mentor', '1000+ Posts'],
+    bio: 'Professional trader with 10+ years of experience in crypto and forex markets. Love helping new traders succeed!'
+  },
+  {
+    id: 'member-2',
+    name: 'Marcus Rodriguez',
+    username: '@cryptoking',
+    role: 'moderator',
+    joinDate: '2023-03-20',
+    posts: 892,
+    reputation: 7230,
+    badges: ['Moderator', 'Expert Analyst', '500+ Posts'],
+    bio: 'Cryptocurrency enthusiast and technical analysis expert. Trading full-time since 2018.'
+  },
+  {
+    id: 'member-3',
+    name: 'Emily Thompson',
+    username: '@forexqueen',
+    role: 'expert',
+    joinDate: '2023-02-10',
+    posts: 1056,
+    reputation: 8920,
+    badges: ['Forex Expert', 'Top Contributor', 'Educator'],
+    bio: 'Forex trader and educator. Specialized in swing trading and macro analysis.'
+  },
+  {
+    id: 'member-4',
+    name: 'David Kim',
+    username: '@algotrader',
+    role: 'expert',
+    joinDate: '2023-04-05',
+    posts: 634,
+    reputation: 6450,
+    badges: ['Algorithm Specialist', 'Code Contributor'],
+    bio: 'Quantitative trader building automated systems. Python and trading bot enthusiast.'
+  },
+  {
+    id: 'member-5',
+    name: 'Lisa Wang',
+    username: '@riskmanager',
+    role: 'member',
+    joinDate: '2023-06-12',
+    posts: 423,
+    reputation: 4820,
+    badges: ['Rising Star', 'Helpful Member'],
+    bio: 'Risk management specialist helping traders protect their capital.'
+  }
+];
+
+export const forumPosts: ForumPost[] = [
+  {
+    id: 'post-1',
+    title: 'Best Crypto Exchange for Beginners in 2025?',
+    content: 'I\'m new to cryptocurrency trading and overwhelmed by the number of exchanges. Which platform would you recommend for someone just starting out?',
+    author: communityMembers[4],
+    category: 'Cryptocurrency',
+    replies: 23,
+    views: 1247,
+    likes: 45,
+    createdAt: '2024-10-02',
+    lastActivity: '2024-10-03',
+    tags: ['beginner', 'exchange', 'crypto'],
+    pinned: false,
+    solved: true
+  },
+  {
+    id: 'post-2',
+    title: 'My Trading Strategy: 3R Risk-Reward Ratio',
+    content: 'Sharing my profitable strategy that uses a 3:1 risk-reward ratio with proper position sizing. Been consistently profitable for 6 months now!',
+    author: communityMembers[0],
+    category: 'Trading Strategies',
+    replies: 67,
+    views: 3420,
+    likes: 128,
+    createdAt: '2024-10-01',
+    lastActivity: '2024-10-04',
+    tags: ['strategy', 'risk-reward', 'profitable'],
+    pinned: true,
+    solved: false
+  },
+  {
+    id: 'post-3',
+    title: 'How to Handle Trading Losses Emotionally?',
+    content: 'I took a big loss yesterday and it\'s affecting my confidence. How do experienced traders deal with drawdowns and emotional trading?',
+    author: communityMembers[4],
+    category: 'Psychology',
+    replies: 42,
+    views: 2156,
+    likes: 89,
+    createdAt: '2024-09-30',
+    lastActivity: '2024-10-02',
+    tags: ['psychology', 'losses', 'emotions'],
+    pinned: false,
+    solved: true
+  },
+  {
+    id: 'post-4',
+    title: 'Technical Analysis vs Fundamental Analysis',
+    content: 'What\'s more important for trading success? I\'ve been using only technicals but wondering if I should incorporate fundamentals too.',
+    author: communityMembers[3],
+    category: 'General Discussion',
+    replies: 38,
+    views: 1892,
+    likes: 56,
+    createdAt: '2024-09-28',
+    lastActivity: '2024-10-01',
+    tags: ['technical', 'fundamental', 'analysis'],
+    pinned: false,
+    solved: false
+  },
+  {
+    id: 'post-5',
+    title: 'Automated Trading Bots: Are They Worth It?',
+    content: 'Considering building a trading bot with Python. Anyone here successfully using automation? What are the pros and cons?',
+    author: communityMembers[3],
+    category: 'Automation',
+    replies: 52,
+    views: 2734,
+    likes: 94,
+    createdAt: '2024-09-27',
+    lastActivity: '2024-10-03',
+    tags: ['automation', 'bots', 'python', 'algo trading'],
+    pinned: false,
+    solved: false
+  },
+  {
+    id: 'post-6',
+    title: 'Risk Management: The 2% Rule Explained',
+    content: 'Never risk more than 2% of your account on a single trade. Here\'s why this rule has kept me profitable for years...',
+    author: communityMembers[2],
+    category: 'Risk Management',
+    replies: 71,
+    views: 4123,
+    likes: 156,
+    createdAt: '2024-09-25',
+    lastActivity: '2024-10-02',
+    tags: ['risk management', '2% rule', 'position sizing'],
+    pinned: true,
+    solved: false
+  }
+];
+
+export const events: Event[] = [
+  {
+    id: 'event-1',
+    title: 'Live Market Analysis: Crypto Markets Q4 2024',
+    description: 'Join our expert analysts as they break down current crypto market trends, key levels to watch, and potential trading opportunities.',
+    type: 'webinar',
+    date: '2024-10-15',
+    duration: '90 minutes',
+    speaker: 'Sarah Chen & Marcus Rodriguez',
+    attendees: 342,
+    maxAttendees: 500,
+    location: 'online'
+  },
+  {
+    id: 'event-2',
+    title: 'Forex Trading Workshop: Price Action Mastery',
+    description: 'Hands-on workshop teaching advanced price action techniques for forex trading. Limited to 50 participants for personalized attention.',
+    type: 'workshop',
+    date: '2024-10-22',
+    duration: '3 hours',
+    speaker: 'Emily Thompson',
+    attendees: 48,
+    maxAttendees: 50,
+    location: 'online'
+  },
+  {
+    id: 'event-3',
+    title: 'Algorithmic Trading Conference 2024',
+    description: 'Annual conference featuring leading quant traders, algo developers, and fintech innovators. Network with professionals and learn cutting-edge strategies.',
+    type: 'conference',
+    date: '2024-11-05',
+    duration: '2 days',
+    speaker: 'Multiple Speakers',
+    attendees: 1240,
+    maxAttendees: 2000,
+    location: 'New York City & Online'
+  },
+  {
+    id: 'event-4',
+    title: 'Community Trading Meetup: San Francisco',
+    description: 'Local meetup for Mostlyfutures community members. Share strategies, network, and learn from fellow traders over coffee.',
+    type: 'meetup',
+    date: '2024-10-18',
+    duration: '2 hours',
+    speaker: 'Community Led',
+    attendees: 23,
+    maxAttendees: 30,
+    location: 'San Francisco, CA'
+  },
+  {
+    id: 'event-5',
+    title: 'Beginner Trading Q&A Session',
+    description: 'Ask anything about trading! Our expert team answers your questions live. Perfect for beginners getting started.',
+    type: 'webinar',
+    date: '2024-10-12',
+    duration: '60 minutes',
+    speaker: 'Community Experts',
+    attendees: 567,
+    location: 'online'
+  }
+];
+
+// Trading-specific data from existing structure
 
 // Navigation and route data (enhanced from existing)
 export interface NavLink {
