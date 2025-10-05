@@ -3,13 +3,6 @@
   import { Button } from '$lib/components/ui/button';
   import { pricingPlans } from '$lib/data/mockData.js';
   
-  // Simple checkmark SVG component
-  const CheckIcon = (props: { class?: string }) => `
-    <svg class="${props.class || ''}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  `;
-  
   let billingPeriod: 'monthly' | 'yearly' = 'monthly';
   
   function toggleBilling() {
@@ -145,32 +138,72 @@
           <tr>
             <td class="py-4 px-4">Trading signals</td>
             <td class="text-center py-4 px-4"><span class="text-muted-foreground">Basic</span></td>
-            <td class="text-center py-4 px-4"><Check class="h-4 w-4 text-green-500 mx-auto" /></td>
-            <td class="text-center py-4 px-4"><Check class="h-4 w-4 text-green-500 mx-auto" /></td>
+            <td class="text-center py-4 px-4">
+              <svg class="h-4 w-4 text-green-500 mx-auto" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </td>
+            <td class="text-center py-4 px-4">
+              <svg class="h-4 w-4 text-green-500 mx-auto" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </td>
           </tr>
           <tr>
             <td class="py-4 px-4">Educational content</td>
-            <td class="text-center py-4 px-4"><Check class="h-4 w-4 text-green-500 mx-auto" /></td>
-            <td class="text-center py-4 px-4"><Check class="h-4 w-4 text-green-500 mx-auto" /></td>
-            <td class="text-center py-4 px-4"><Check class="h-4 w-4 text-green-500 mx-auto" /></td>
+            <td class="text-center py-4 px-4">
+              <svg class="h-4 w-4 text-green-500 mx-auto" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </td>
+            <td class="text-center py-4 px-4">
+              <svg class="h-4 w-4 text-green-500 mx-auto" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </td>
+            <td class="text-center py-4 px-4">
+              <svg class="h-4 w-4 text-green-500 mx-auto" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </td>
           </tr>
           <tr>
             <td class="py-4 px-4">Portfolio tracking</td>
             <td class="text-center py-4 px-4">-</td>
-            <td class="text-center py-4 px-4"><Check class="h-4 w-4 text-green-500 mx-auto" /></td>
-            <td class="text-center py-4 px-4"><Check class="h-4 w-4 text-green-500 mx-auto" /></td>
+            <td class="text-center py-4 px-4">
+              <svg class="h-4 w-4 text-green-500 mx-auto" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </td>
+            <td class="text-center py-4 px-4">
+              <svg class="h-4 w-4 text-green-500 mx-auto" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </td>
           </tr>
           <tr>
             <td class="py-4 px-4">Advanced charting</td>
             <td class="text-center py-4 px-4">-</td>
-            <td class="text-center py-4 px-4"><Check class="h-4 w-4 text-green-500 mx-auto" /></td>
-            <td class="text-center py-4 px-4"><Check class="h-4 w-4 text-green-500 mx-auto" /></td>
+            <td class="text-center py-4 px-4">
+              <svg class="h-4 w-4 text-green-500 mx-auto" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </td>
+            <td class="text-center py-4 px-4">
+              <svg class="h-4 w-4 text-green-500 mx-auto" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </td>
           </tr>
           <tr>
             <td class="py-4 px-4">API access</td>
             <td class="text-center py-4 px-4">-</td>
             <td class="text-center py-4 px-4">-</td>
-            <td class="text-center py-4 px-4"><Check class="h-4 w-4 text-green-500 mx-auto" /></td>
+            <td class="text-center py-4 px-4">
+              <svg class="h-4 w-4 text-green-500 mx-auto" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </td>
           </tr>
         </tbody>
       </table>
