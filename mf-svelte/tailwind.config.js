@@ -15,6 +15,12 @@ const config = {
 		},
 		extend: {
 			colors: {
+				// MostlyFutures Colorway
+				'alice-blue': '#E9F5FF',    // Light background
+				'jordy-blue': '#93BFEF',    // Grid pattern & accents
+				'tufts-blue': '#468BE6',    // Primary brand
+				'cool-black': '#092F64',    // Dark contrast
+				// Semantic mappings
 				border: "hsl(var(--border) / <alpha-value>)",
 				input: "hsl(var(--input) / <alpha-value>)",
 				ring: "hsl(var(--ring) / <alpha-value>)",

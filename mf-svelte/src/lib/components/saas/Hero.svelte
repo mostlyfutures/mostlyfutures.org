@@ -4,10 +4,10 @@
 
 <section class="relative overflow-hidden bg-background">
   <!-- Background gradient -->
-  <div class="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900"></div>
+  <div class="absolute inset-0 bg-mostlyfutures-gradient dark:from-slate-900 dark:via-slate-800 dark:to-slate-900"></div>
   
   <!-- Grid pattern -->
-  <div class="absolute inset-0 bg-grid-slate-200/50 dark:bg-grid-slate-700/25"></div>	<div class="relative container mx-auto px-4 py-24 sm:py-32">
+  <div class="absolute inset-0 bg-grid-mostlyfutures dark:bg-grid-dark"></div>	<div class="relative container mx-auto px-4 py-24 sm:py-32">
 		<div class="max-w-4xl mx-auto text-center">
 			<!-- Announcement badge -->
 			<div class="mb-8">

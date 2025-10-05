@@ -59,3 +59,24 @@
     @apply bg-background text-foreground font-sans;
   }
 }
+
+/* MostlyFutures Grid Background Colorway */
+@layer utilities {
+  .bg-grid-mostlyfutures {
+    background-image: 
+      linear-gradient(rgba(147, 191, 239, 0.3) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(147, 191, 239, 0.3) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  
+  .bg-grid-dark {
+    background-image: 
+      linear-gradient(rgba(9, 47, 100, 0.25) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(9, 47, 100, 0.25) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  
+  .bg-mostlyfutures-gradient {
+    background: linear-gradient(135deg, #E9F5FF 0%, #93BFEF 50%, #468BE6 100%);
+  }
+}
