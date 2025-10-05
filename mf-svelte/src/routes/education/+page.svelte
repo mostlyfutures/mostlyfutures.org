@@ -34,7 +34,7 @@
         
         <div class="stats-grid">
           <div class="stat-card">
-            <Tooltip text="Total enrolled students across all courses">
+            <Tooltip content="Total enrolled students across all courses">
               <div class="stat-content">
                 <AnimatedIcon variant="users" size={32} color="#60a5fa" />
                 <div>
@@ -45,7 +45,7 @@
             </Tooltip>
           </div>
           <div class="stat-card">
-            <Tooltip text="Expert instructors with real trading experience">
+            <Tooltip content="Expert instructors with real trading experience">
               <div class="stat-content">
                 <AnimatedIcon variant="shield" size={32} color="#10b981" />
                 <div>
@@ -56,7 +56,7 @@
             </Tooltip>
           </div>
           <div class="stat-card">
-            <Tooltip text="Average course rating from student reviews">
+            <Tooltip content="Average course rating from student reviews">
               <div class="stat-content">
                 <AnimatedIcon variant="lightning" size={32} color="#f59e0b" />
                 <div>
@@ -107,17 +107,17 @@
               
               <div class="course-meta">
                 <div class="meta-item">
-                  <Tooltip text="Course duration">
+                  <Tooltip content="Course duration">
                     <span class="meta-label">⏱️ {course.duration}</span>
                   </Tooltip>
                 </div>
                 <div class="meta-item">
-                  <Tooltip text="Number of modules/lessons">
+                  <Tooltip content="Number of modules/lessons">
                     <span class="meta-label">📚 {course.modules} modules</span>
                   </Tooltip>
                 </div>
                 <div class="meta-item">
-                  <Tooltip text="Currently enrolled students">
+                  <Tooltip content="Currently enrolled students">
                     <span class="meta-label">👥 {course.students.toLocaleString()}</span>
                   </Tooltip>
                 </div>

@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Post } from '$lib/data/posts';
   import AnimatedIcon from '$lib/components/AnimatedIcon.svelte';
+  import Tooltip from './Tooltip.svelte';
   export let post: Post;
 </script>
 

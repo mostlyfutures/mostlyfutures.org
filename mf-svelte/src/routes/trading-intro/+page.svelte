@@ -305,7 +305,7 @@
     margin-right: 0.5rem;
   }
 
-  .pros-cons .cons li::before {
+  .pros-cons .cons + ul li::before {
     color: #fca5a5;
   }
 

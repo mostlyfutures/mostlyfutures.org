@@ -50,7 +50,7 @@
       >
         <div class={`absolute w-4 h-4 bg-white rounded-full transition-transform duration-200 ${
           billingPeriod === 'yearly' ? 'translate-x-6' : 'translate-x-1'
-        }`} />
+        }`}></div>
       </Button>
       <span class={billingPeriod === 'yearly' ? 'font-medium' : 'text-muted-foreground'}>
         Yearly
