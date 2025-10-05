@@ -27,12 +27,13 @@ export {};
 
 declare module "$app/types" {
 	export interface AppTypes {
-		RouteId(): "/" | "/blog" | "/community" | "/contact" | "/crypto-intro" | "/dashboard" | "/education" | "/features" | "/landing" | "/nfts" | "/pricing" | "/trading-intro";
+		RouteId(): "/" | "/ai-agent" | "/blog" | "/community" | "/contact" | "/crypto-intro" | "/dashboard" | "/education" | "/features" | "/landing" | "/nfts" | "/pricing" | "/trading-intro";
 		RouteParams(): {
 			
 		};
 		LayoutParams(): {
 			"/": Record<string, never>;
+			"/ai-agent": Record<string, never>;
 			"/blog": Record<string, never>;
 			"/community": Record<string, never>;
 			"/contact": Record<string, never>;
@@ -45,7 +46,7 @@ declare module "$app/types" {
 			"/pricing": Record<string, never>;
 			"/trading-intro": Record<string, never>
 		};
-		Pathname(): "/" | "/blog" | "/blog/" | "/community" | "/community/" | "/contact" | "/contact/" | "/crypto-intro" | "/crypto-intro/" | "/dashboard" | "/dashboard/" | "/education" | "/education/" | "/features" | "/features/" | "/landing" | "/landing/" | "/nfts" | "/nfts/" | "/pricing" | "/pricing/" | "/trading-intro" | "/trading-intro/";
+		Pathname(): "/" | "/ai-agent" | "/ai-agent/" | "/blog" | "/blog/" | "/community" | "/community/" | "/contact" | "/contact/" | "/crypto-intro" | "/crypto-intro/" | "/dashboard" | "/dashboard/" | "/education" | "/education/" | "/features" | "/features/" | "/landing" | "/landing/" | "/nfts" | "/nfts/" | "/pricing" | "/pricing/" | "/trading-intro" | "/trading-intro/";
 		ResolvedPathname(): `${"" | `/${string}`}${ReturnType<AppTypes['Pathname']>}`;
 		Asset(): "/.nojekyll" | string & {};
 	}

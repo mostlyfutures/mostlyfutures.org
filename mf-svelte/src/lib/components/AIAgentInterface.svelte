@@ -81,7 +81,7 @@
 		try {
 			const result = await agent.runAgent(
 				{
-					userMessage: currentMessage
+					messages: [{ role: 'user', content: currentMessage }]
 				},
 				{
 					onStateChange: (state) => {
@@ -96,12 +96,15 @@
 			);
 			
 			// Add agent response to chat
-			if (result.response) {
-				chatHistory = [...chatHistory, {
-					type: 'agent',
-					message: result.response,
-					timestamp: new Date()
-				}];
+			if (result.newMessages && result.newMessages.length > 0) {
+				const lastMessage = result.newMessages[result.newMessages.length - 1];
+				if (lastMessage.role === 'assistant') {
+					chatHistory = [...chatHistory, {
+						type: 'agent',
+						message: lastMessage.content || 'Response completed',
+						timestamp: new Date()
+					}];
+				}
 			}
 			
 		} catch (e) {

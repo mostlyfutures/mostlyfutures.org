@@ -28,6 +28,7 @@
 declare module '$env/static/private' {
 	export const MANPATH: string;
 	export const TERM_PROGRAM: string;
+	export const MallocProbGuardViaLaunchd: string;
 	export const NODE: string;
 	export const INIT_CWD: string;
 	export const TERM: string;
@@ -47,9 +48,9 @@ declare module '$env/static/private' {
 	export const COMMAND_MODE: string;
 	export const npm_config_globalconfig: string;
 	export const SSH_AUTH_SOCK: string;
-	export const VSCODE_PROFILE_INITIALIZED: string;
 	export const __CF_USER_TEXT_ENCODING: string;
 	export const npm_execpath: string;
+	export const PYDEVD_DISABLE_FILE_VALIDATION: string;
 	export const GOOGLE_API_KEY: string;
 	export const PATH: string;
 	export const npm_package_json: string;
@@ -64,6 +65,8 @@ declare module '$env/static/private' {
 	export const EDITOR: string;
 	export const npm_package_name: string;
 	export const LANG: string;
+	export const PYTHONSTARTUP: string;
+	export const BUNDLED_DEBUGPY_PATH: string;
 	export const npm_config_npm_version: string;
 	export const VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
 	export const XPC_FLAGS: string;
@@ -71,9 +74,11 @@ declare module '$env/static/private' {
 	export const npm_package_version: string;
 	export const XPC_SERVICE_NAME: string;
 	export const VSCODE_INJECTION: string;
+	export const VSCODE_DEBUGPY_ADAPTER_ENDPOINTS: string;
 	export const SHLVL: string;
 	export const HOME: string;
 	export const VSCODE_GIT_ASKPASS_MAIN: string;
+	export const PYTHON_BASIC_REPL: string;
 	export const HOMEBREW_PREFIX: string;
 	export const npm_config_cache: string;
 	export const LOGNAME: string;
@@ -84,6 +89,7 @@ declare module '$env/static/private' {
 	export const GIT_ASKPASS: string;
 	export const INFOPATH: string;
 	export const HOMEBREW_CELLAR: string;
+	export const GIT_PAGER: string;
 	export const npm_node_execpath: string;
 	export const npm_config_prefix: string;
 	export const COLORTERM: string;
@@ -119,6 +125,7 @@ declare module '$env/dynamic/private' {
 	export const env: {
 		MANPATH: string;
 		TERM_PROGRAM: string;
+		MallocProbGuardViaLaunchd: string;
 		NODE: string;
 		INIT_CWD: string;
 		TERM: string;
@@ -138,9 +145,9 @@ declare module '$env/dynamic/private' {
 		COMMAND_MODE: string;
 		npm_config_globalconfig: string;
 		SSH_AUTH_SOCK: string;
-		VSCODE_PROFILE_INITIALIZED: string;
 		__CF_USER_TEXT_ENCODING: string;
 		npm_execpath: string;
+		PYDEVD_DISABLE_FILE_VALIDATION: string;
 		GOOGLE_API_KEY: string;
 		PATH: string;
 		npm_package_json: string;
@@ -155,6 +162,8 @@ declare module '$env/dynamic/private' {
 		EDITOR: string;
 		npm_package_name: string;
 		LANG: string;
+		PYTHONSTARTUP: string;
+		BUNDLED_DEBUGPY_PATH: string;
 		npm_config_npm_version: string;
 		VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
 		XPC_FLAGS: string;
@@ -162,9 +171,11 @@ declare module '$env/dynamic/private' {
 		npm_package_version: string;
 		XPC_SERVICE_NAME: string;
 		VSCODE_INJECTION: string;
+		VSCODE_DEBUGPY_ADAPTER_ENDPOINTS: string;
 		SHLVL: string;
 		HOME: string;
 		VSCODE_GIT_ASKPASS_MAIN: string;
+		PYTHON_BASIC_REPL: string;
 		HOMEBREW_PREFIX: string;
 		npm_config_cache: string;
 		LOGNAME: string;
@@ -175,6 +186,7 @@ declare module '$env/dynamic/private' {
 		GIT_ASKPASS: string;
 		INFOPATH: string;
 		HOMEBREW_CELLAR: string;
+		GIT_PAGER: string;
 		npm_node_execpath: string;
 		npm_config_prefix: string;
 		COLORTERM: string;

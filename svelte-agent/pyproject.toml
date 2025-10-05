@@ -9,13 +9,11 @@ requires-python = ">=3.9"
 dependencies = [
     "fastapi>=0.104.0",
     "uvicorn[standard]>=0.24.0",
-    "pydantic-ai-slim[openai,ag-ui]>=0.1.0",
+    "pydantic-ai-slim[anthropic,openai,ollama,groq,ag-ui]>=0.1.0",
     "python-dotenv>=1.0.0",
     "aiofiles>=23.0.0",
+    "httpx>=0.25.0",
 ]
 
 [project.scripts]
 dev = "sveltekit_editor_agent:main"
-
-[tool.uv.package]
-package = true
