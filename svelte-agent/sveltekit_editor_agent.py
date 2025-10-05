@@ -17,6 +17,7 @@ from pydantic_ai.ag_ui import StateDeps
 from ag_ui.core import StateSnapshotEvent, EventType
 import aiofiles
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 from dotenv import load_dotenv
 
@@ -295,6 +296,16 @@ app = agent.to_ag_ui(deps=StateDeps(AgentState()))
 
 # FastAPI setup
 fastapi_app = FastAPI(title='SvelteKit Editor Agent')
+
+# Add CORS middleware
+fastapi_app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 fastapi_app.mount('/agent', app, 'SvelteKit Editor Agent')
 
 @fastapi_app.get('/health')

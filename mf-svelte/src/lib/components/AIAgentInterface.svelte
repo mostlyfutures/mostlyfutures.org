@@ -79,9 +79,12 @@
 		userMessage = '';
 		
 		try {
+			// Set the messages on the agent
+			agent.messages = [{ id: Date.now().toString(), role: 'user', content: currentMessage }];
+			
 			const result = await agent.runAgent(
 				{
-					messages: [{ role: 'user', content: currentMessage }]
+					runId: `run_${Date.now()}`
 				},
 				{
 					onStateChange: (state) => {
