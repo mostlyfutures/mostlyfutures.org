@@ -20,7 +20,7 @@
 </script>
 
 <svelte:head>
-  <title>Features - MostlyFutures</title>
+  <title>Features - Mostlyfutures</title>
   <meta name="description" content="Discover powerful trading tools, comprehensive education, advanced analytics, and vibrant community features." />
 </svelte:head>
 

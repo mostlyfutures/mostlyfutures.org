@@ -5,7 +5,7 @@
       <div class="footer-brand">
         <div class="logo">
           <span class="logo-icon">🧭</span>
-          <span class="logo-text">MostlyFutures</span>
+          <span class="logo-text">Mostlyfutures</span>
         </div>
         <p class="brand-description">
           Your gateway to cryptocurrency and trading education. Learn, trade, and grow with confidence.
@@ -39,7 +39,7 @@
     <!-- Footer Bottom -->
     <div class="footer-bottom">
       <p class="copyright">
-        © {new Date().getFullYear()} MostlyFutures. All rights reserved.
+        © {new Date().getFullYear()} Mostlyfutures. All rights reserved.
       </p>
       <div class="footer-bottom-links">
         <a href="/#">Privacy Policy</a>

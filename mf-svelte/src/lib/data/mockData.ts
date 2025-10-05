@@ -1,4 +1,4 @@
-// Enhanced SaaS mock data for MostlyFutures
+// Enhanced SaaS mock data for Mostlyfutures
 
 export interface PricingPlan {
   id: string;
@@ -171,7 +171,7 @@ export const testimonials: Testimonial[] = [
     name: 'Sarah Chen',
     role: 'Quantitative Analyst',
     company: 'Goldman Sachs',
-    content: 'MostlyFutures transformed my trading approach. The educational content is top-notch and the community is incredibly supportive.',
+    content: 'Mostlyfutures transformed my trading approach. The educational content is top-notch and the community is incredibly supportive.',
     rating: 5
   },
   {
@@ -357,7 +357,7 @@ export const navLinks: NavLink[] = [
 export const routes: RouteInfo[] = [
   {
     path: '/',
-    title: 'MostlyFutures - Advanced Trading Platform',
+    title: 'Mostlyfutures - Advanced Trading Platform',
     description: 'Professional trading tools, education, and community for crypto, forex, and futures traders.',
   },
   {

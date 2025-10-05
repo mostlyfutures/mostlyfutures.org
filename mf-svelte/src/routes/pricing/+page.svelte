@@ -22,7 +22,7 @@
 </script>
 
 <svelte:head>
-  <title>Pricing - MostlyFutures</title>
+  <title>Pricing - Mostlyfutures</title>
   <meta name="description" content="Choose the perfect plan for your trading needs. Flexible pricing with powerful features." />
 </svelte:head>
 

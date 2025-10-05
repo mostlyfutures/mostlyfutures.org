@@ -5,7 +5,7 @@
 </script>
 
 <svelte:head>
-  <title>MostlyFutures - How to Trade</title>
+  <title>Mostlyfutures - How to Trade</title>
 </svelte:head>
 
 

@@ -25,7 +25,7 @@
       <div class="logo-section">
         <a href="/" class="logo">
           <span class="logo-icon">🧭</span>
-          <span class="logo-text">MostlyFutures</span>
+          <span class="logo-text">Mostlyfutures</span>
         </a>
       </div>
 

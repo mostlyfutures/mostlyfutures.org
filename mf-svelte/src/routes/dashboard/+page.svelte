@@ -26,7 +26,7 @@
 </script>
 
 <svelte:head>
-  <title>Dashboard - MostlyFutures</title>
+  <title>Dashboard - Mostlyfutures</title>
   <meta name="description" content="Your trading command center. Monitor portfolio, track performance, and manage trades." />
 </svelte:head>
 

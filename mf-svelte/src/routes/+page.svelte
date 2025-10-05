@@ -7,7 +7,7 @@
 </script>
 
 <svelte:head>
-  <title>MostlyFutures - Professional Trading Platform</title>
+  <title>Mostlyfutures - Professional Trading Platform</title>
   <meta name="description" content="Master trading with professional tools, education, and community. Trade crypto, forex, and futures with confidence." />
 </svelte:head>
 
@@ -64,7 +64,7 @@
         Ready to start your trading journey?
       </h2>
       <p class="text-lg mb-8 opacity-90">
-        Join thousands of traders who are already using MostlyFutures to grow their wealth. 
+        Join thousands of traders who are already using Mostlyfutures to grow their wealth. 
         Start with our free plan and upgrade as you grow.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">

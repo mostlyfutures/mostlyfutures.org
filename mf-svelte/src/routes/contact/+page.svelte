@@ -4,8 +4,8 @@
 </script>
 
 <svelte:head>
-  <title>Contact - MostlyFutures</title>
-  <meta name="description" content="Get in touch with the MostlyFutures team" />
+  <title>Contact - Mostlyfutures</title>
+  <meta name="description" content="Get in touch with the Mostlyfutures team" />
 </svelte:head>
 
 <div class="container mx-auto px-4 py-24">
@@ -156,7 +156,7 @@
 
         <Card.Content class="p-6">
 
-          <h3 class="text-lg font-semibold mb-3">How do I get started with MostlyFutures?</h3>  .info-grid {
+          <h3 class="text-lg font-semibold mb-3">How do I get started with Mostlyfutures?</h3>  .info-grid {
 
           <p class="text-muted-foreground">    display: grid;
 

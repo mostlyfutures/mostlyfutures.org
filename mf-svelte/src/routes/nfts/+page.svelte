@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-  <title>MostlyFutures - NFT Gallery</title>
+  <title>Mostlyfutures - NFT Gallery</title>
   <meta name="description" content="Explore our collection of digital assets and NFTs" />
 </svelte:head>
 

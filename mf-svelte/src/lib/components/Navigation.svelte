@@ -17,7 +17,7 @@
 			<div class="flex items-center space-x-4">
 				<a href="/" class="flex items-center space-x-2">
 					<span class="font-bold text-xl text-tufts-blue">
-						MostlyFutures
+						Mostlyfutures
 					</span>
 				</a>
 			</div>
