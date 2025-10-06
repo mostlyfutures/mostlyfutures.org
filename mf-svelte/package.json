@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@ag-ui/client": "^0.0.40",
+    "@privy-io/react-auth": "^3.0.1",
     "@sveltejs/adapter-static": "^3.0.9",
     "@sveltejs/kit": "^2.43.4",
     "class-variance-authority": "^0.7.1",
