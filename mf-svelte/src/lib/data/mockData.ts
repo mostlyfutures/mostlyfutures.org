@@ -784,37 +784,37 @@ export interface RouteInfo {
 export const navLinks: NavLink[] = [
   { 
     href: '/features', 
-    label: 'Features',
+    label: 'Data',
     description: 'Discover our powerful trading tools'
   },
   { 
     href: '/pricing', 
-    label: 'Pricing',
+    label: 'zzz',
     description: 'Choose the right plan for you'
   },
   { 
     href: '/education', 
-    label: 'Education',
+    label: 'Markets',
     description: 'Learn from trading experts'
   },
   { 
     href: '/community', 
-    label: 'Community',
+    label: 'Peers',
     description: 'Connect with fellow traders'
   },
   { 
     href: '/blog', 
-    label: 'Blog',
+    label: 'zzz',
     description: 'Latest market insights'
   },
   { 
     href: '/ai-agent', 
-    label: '🤖 AI Agent',
+    label: '🤖 zzz',
     description: 'AI-powered project editor'
   },
   { 
     href: '/dashboard', 
-    label: 'Dashboard',
+    label: 'Home',
     description: 'Manage your trades'
   }
 ];
