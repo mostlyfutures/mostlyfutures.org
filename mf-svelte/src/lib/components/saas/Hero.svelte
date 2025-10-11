@@ -12,13 +12,13 @@
 			<!-- Announcement badge -->
 			<div class="mb-8">
 				<span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary ring-1 ring-inset ring-primary/20">
-					🎉 New: Advanced AI Trading Signals
+					Everything you need to trade smarter, not harder	
 				</span>
 			</div>
 			
 			<!-- Heading -->
 			<h1 class="text-4xl font-bold tracking-tight text-cool-black sm:text-6xl lg:text-7xl">
-				Master Trading with
+				Master Any Market
 				<span class="text-tufts-blue font-bold">
 					Professional Tools
 				</span>
@@ -26,7 +26,7 @@
 			
 			<!-- Subheading -->
 			<p class="mt-6 text-lg leading-8 text-muted-foreground max-w-2xl mx-auto">
-				Join thousands of traders who use our platform to trade crypto, forex, and futures with confidence. 
+				Join thousands of traders who use our platform to trade anything with sleath & confidence. 
 				Learn from experts, get real-time signals, and track your performance.
 			</p>
 			
