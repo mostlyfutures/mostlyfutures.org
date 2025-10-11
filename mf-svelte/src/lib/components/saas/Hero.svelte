@@ -26,8 +26,8 @@
 			
 			<!-- Subheading -->
 			<p class="mt-6 text-lg leading-8 text-muted-foreground max-w-2xl mx-auto">
-				Join thousands of traders who use our platform to trade anything with sleath & confidence. 
-				Learn from experts, get real-time signals, and track your performance.
+				Join thousands who use our platform to trade anything 
+				<br>with sleath & confidence.<br> 
 			</p>
 			
 			<!-- CTA Buttons -->
@@ -36,7 +36,7 @@
 					Start Trading →
 				</Button>
 				<Button variant="outline" size="lg" class="text-base px-8 py-3">
-					▶ Watch Demo
+					▶ Use Tools
 				</Button>
 			</div>
 			
@@ -44,14 +44,14 @@
 			<div class="mt-16 grid grid-cols-2 gap-8 sm:grid-cols-4">
 				<div class="flex flex-col items-center">
 					<div class="text-2xl font-bold text-foreground">50K+</div>
-					<div class="text-sm text-muted-foreground">Active Traders</div>
+					<div class="text-sm text-muted-foreground">Active Tools</div>
 				</div>
 				<div class="flex flex-col items-center">
-					<div class="text-2xl font-bold text-foreground">$2B+</div>
+					<div class="text-2xl font-bold text-foreground">$500L+</div>
 					<div class="text-sm text-muted-foreground">Trading Volume</div>
 				</div>
 				<div class="flex flex-col items-center">
-					<div class="text-2xl font-bold text-foreground">98%</div>
+					<div class="text-2xl font-bold text-foreground">100%</div>
 					<div class="text-sm text-muted-foreground">Uptime</div>
 				</div>
 				<div class="flex flex-col items-center">
