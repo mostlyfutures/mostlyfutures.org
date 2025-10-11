@@ -47,7 +47,7 @@
 					<div class="text-sm text-muted-foreground">Active Tools</div>
 				</div>
 				<div class="flex flex-col items-center">
-					<div class="text-2xl font-bold text-foreground">$500L+</div>
+					<div class="text-2xl font-bold text-foreground">$500K+</div>
 					<div class="text-sm text-muted-foreground">Trading Volume</div>
 				</div>
 				<div class="flex flex-col items-center">
