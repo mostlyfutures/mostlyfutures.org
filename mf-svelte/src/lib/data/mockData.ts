@@ -783,6 +783,11 @@ export interface RouteInfo {
 
 export const navLinks: NavLink[] = [
   { 
+    href: '/markets', 
+    label: 'Markets',
+    description: 'Live crypto prices and analytics'
+  },
+  { 
     href: '/features', 
     label: 'Data',
     description: 'Discover our powerful trading tools'
@@ -791,11 +796,6 @@ export const navLinks: NavLink[] = [
     href: '/pricing', 
     label: 'zzz',
     description: 'Choose the right plan for you'
-  },
-  { 
-    href: '/education', 
-    label: 'Markets',
-    description: 'Learn from trading experts'
   },
   { 
     href: '/community', 

@@ -30,6 +30,9 @@
 	"/landing": [
 		"src/routes/+layout.js"
 	],
+	"/markets": [
+		"src/routes/+layout.js"
+	],
 	"/nfts": [
 		"src/routes/+layout.js"
 	],

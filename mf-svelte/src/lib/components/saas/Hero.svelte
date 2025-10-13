@@ -32,8 +32,10 @@
 			
 			<!-- CTA Buttons -->
 			<div class="mt-10 flex items-center justify-center gap-x-6">
-				<Button size="lg" class="text-base px-8 py-3">
-					Start Trading →
+				<Button size="lg" class="text-base px-8 py-3" asChild>
+					<a href="/markets">
+						Explore Markets →
+					</a>
 				</Button>
 				<Button variant="outline" size="lg" class="text-base px-8 py-3">
 					▶ Watch Demo
