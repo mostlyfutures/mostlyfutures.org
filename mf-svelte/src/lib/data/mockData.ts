@@ -322,35 +322,34 @@ export interface RouteInfo {
 }
 
 export const navLinks: NavLink[] = [
+  {
+    href: '/tools',
+    label: 'Tools',
+    description: 'Trading and DeFi tools'
+  },
+  {
+    href: '/data',
+    label: 'Data',
+    description: 'Market data and analytics'
   { 
     href: '/features', 
     label: 'Features',
     description: 'Discover our powerful trading tools'
   },
-  { 
-    href: '/pricing', 
-    label: 'Pricing',
-    description: 'Choose the right plan for you'
+  {
+    href: '/dashboard',
+    label: 'Home',
+    description: 'Your trading command center'
   },
-  { 
-    href: '/education', 
-    label: 'Education',
-    description: 'Learn from trading experts'
+  {
+    href: '/peers',
+    label: 'Peers',
+    description: 'Connect with traders'
   },
-  { 
-    href: '/community', 
-    label: 'Community',
-    description: 'Connect with fellow traders'
-  },
-  { 
-    href: '/blog', 
-    label: 'Blog',
-    description: 'Latest market insights'
-  },
-  { 
-    href: '/dashboard', 
-    label: 'Dashboard',
-    description: 'Manage your trades'
+  {
+    href: '/markets',
+    label: 'Market',
+    description: 'Live crypto prices'
   }
 ];
 
