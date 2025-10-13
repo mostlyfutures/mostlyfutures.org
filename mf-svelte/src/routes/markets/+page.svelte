@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
-	import { 
-		marketData, 
-		filteredMarketData, 
-		searchQuery, 
-		isLoadingMarketData, 
+	import {
+		marketData,
+		filteredMarketData,
+		searchQuery,
+		isLoadingMarketData,
 		marketDataError,
 		loadMarketData,
 		startAutoRefresh,
@@ -14,6 +14,7 @@
 	import MarketTable from '$lib/components/crypto/MarketTable.svelte';
 	import PriceCard from '$lib/components/crypto/PriceCard.svelte';
 	import { formatCurrency, formatPercent } from '$lib/utils/format';
+	import ComingSoonCard from '$lib/components/ComingSoonCard.svelte';
 
 	let stopAutoRefresh: (() => void) | null = null;
 	let viewMode: 'table' | 'grid' = 'table';
@@ -22,7 +23,7 @@
 	onMount(async () => {
 		// Load initial data
 		await loadMarketData();
-		
+
 		// Start auto-refresh every 60 seconds
 		stopAutoRefresh = startAutoRefresh(60000);
 	});
@@ -33,11 +34,32 @@
 		}
 	});
 
-	$: displayAssets = selectedTab === 'all' 
-		? $filteredMarketData 
-		: selectedTab === 'gainers' 
-			? $topGainers 
+	$: displayAssets = selectedTab === 'all'
+		? $filteredMarketData
+		: selectedTab === 'gainers'
+			? $topGainers
 			: $topLosers;
+
+	const marketFeatures = [
+		{
+			title: 'Advanced Market Indicators',
+			description: 'Access comprehensive market indicators including fear & greed index, market dominance, and more.',
+			category: 'Analytics',
+			icon: '📊'
+		},
+		{
+			title: 'Cross-Exchange Arbitrage Detection',
+			description: 'Identify arbitrage opportunities across multiple exchanges in real-time.',
+			category: 'Trading',
+			icon: '⚡'
+		},
+		{
+			title: 'Market Sentiment Analysis',
+			description: 'AI-powered sentiment analysis from social media, news, and on-chain data.',
+			category: 'AI',
+			icon: '🧠'
+		}
+	];
 </script>
 
 <svelte:head>
@@ -180,5 +202,20 @@
 				</div>
 			{/if}
 		{/if}
+
+		<!-- Coming Soon Features -->
+		<div class="mt-12">
+			<h2 class="text-2xl font-bold mb-6 dark:text-white">Coming Soon to Markets</h2>
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+				{#each marketFeatures as feature}
+					<ComingSoonCard
+						title={feature.title}
+						description={feature.description}
+						category={feature.category}
+						icon={feature.icon}
+					/>
+				{/each}
+			</div>
+		</div>
 	</div>
 </div>

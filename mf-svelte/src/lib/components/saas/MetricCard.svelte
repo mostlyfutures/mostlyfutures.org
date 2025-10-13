@@ -5,9 +5,9 @@
 	import AnimatedIcon from '$lib/components/AnimatedIcon.svelte';
 	import Tooltip from '$lib/components/Tooltip.svelte';
 
-	// Icon mapping - in a real app, you'd use a proper icon library
+	// Icon mapping - uses AnimatedIcon with phosphor-svelte
 	const getIconComponent = (iconName: string) => {
-		// This is a placeholder - you'd import actual icons from lucide-svelte
+		// This is a placeholder - AnimatedIcon handles the actual icon rendering
 		return iconName;
 	};
 

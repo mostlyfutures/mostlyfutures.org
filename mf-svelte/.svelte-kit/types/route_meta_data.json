@@ -21,6 +21,9 @@
 	"/dashboard": [
 		"src/routes/+layout.js"
 	],
+	"/data": [
+		"src/routes/+layout.js"
+	],
 	"/education": [
 		"src/routes/+layout.js"
 	],
@@ -36,7 +39,13 @@
 	"/nfts": [
 		"src/routes/+layout.js"
 	],
+	"/peers": [
+		"src/routes/+layout.js"
+	],
 	"/pricing": [
+		"src/routes/+layout.js"
+	],
+	"/tools": [
 		"src/routes/+layout.js"
 	],
 	"/trading-intro": [

@@ -6,22 +6,45 @@
   import { formatCurrency, formatPercentage } from '$lib/utils.js';
   import AnimatedIcon from '$lib/components/AnimatedIcon.svelte';
   import Tooltip from '$lib/components/Tooltip.svelte';
-  
+  import ComingSoonCard from '$lib/components/ComingSoonCard.svelte';
+
   // Mock current user (in a real app, this would come from authentication)
   const currentUser = mockUsers[0];
-  
+
   // Recent trades (mock data)
   const recentTrades = [
     { id: 1, symbol: 'BTC/USD', type: 'buy', amount: 0.5, price: 45230, pnl: 1250, time: '2024-10-04T14:30:00' },
     { id: 2, symbol: 'ETH/USD', type: 'sell', amount: 2.3, price: 2680, pnl: -340, time: '2024-10-04T13:15:00' },
     { id: 3, symbol: 'EUR/USD', type: 'buy', amount: 10000, price: 1.0845, pnl: 180, time: '2024-10-04T12:00:00' },
   ];
-  
+
   // Portfolio holdings (mock data)
   const portfolioHoldings = [
     { symbol: 'BTC', amount: 1.25, value: 56540, change: 2.4 },
     { symbol: 'ETH', amount: 4.8, value: 12864, change: -1.2 },
     { symbol: 'USD', amount: 15000, value: 15000, change: 0 },
+  ];
+
+  // Dashboard features coming soon
+  const dashboardFeatures = [
+    {
+      title: 'Infinite Scroll Effect',
+      description: 'Seamlessly browse through unlimited data with smooth infinite scrolling.',
+      category: 'UX',
+      icon: '∞'
+    },
+    {
+      title: 'Advanced Trading Charts',
+      description: 'Professional-grade charts with custom workspace saving like TradingView.',
+      category: 'Trading',
+      icon: '📊'
+    },
+    {
+      title: 'Real-time Portfolio Analytics',
+      description: 'Deep dive into your portfolio performance with advanced analytics and insights.',
+      category: 'Analytics',
+      icon: '📈'
+    }
   ];
 </script>
 
@@ -258,6 +281,21 @@
           </div>
         </Card.Content>
       </Card.Root>
+    </div>
+  </div>
+
+  <!-- Coming Soon Features -->
+  <div class="mt-12">
+    <h2 class="text-2xl font-bold mb-6">Coming Soon to Dashboard</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {#each dashboardFeatures as feature}
+        <ComingSoonCard
+          title={feature.title}
+          description={feature.description}
+          category={feature.category}
+          icon={feature.icon}
+        />
+      {/each}
     </div>
   </div>
 </div>
