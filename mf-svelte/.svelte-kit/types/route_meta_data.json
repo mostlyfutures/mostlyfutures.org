@@ -36,6 +36,10 @@
 	"/markets": [
 		"src/routes/+layout.js"
 	],
+	"/markets/[symbol]": [
+		"src/routes/markets/[symbol]/+page.ts",
+		"src/routes/+layout.js"
+	],
 	"/nfts": [
 		"src/routes/+layout.js"
 	],

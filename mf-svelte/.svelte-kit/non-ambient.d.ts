@@ -27,12 +27,12 @@ export {};
 
 declare module "$app/types" {
 	export interface AppTypes {
-		RouteId(): "/" | "/ai-agent" | "/blog" | "/community" | "/contact" | "/crypto-intro" | "/dashboard" | "/data" | "/education" | "/features" | "/landing" | "/markets" | "/nfts" | "/peers" | "/pricing" | "/tools" | "/trading-intro";
+		RouteId(): "/" | "/ai-agent" | "/blog" | "/community" | "/contact" | "/crypto-intro" | "/dashboard" | "/data" | "/education" | "/features" | "/landing" | "/markets" | "/markets/[symbol]" | "/nfts" | "/peers" | "/pricing" | "/tools" | "/trading-intro";
 		RouteParams(): {
-			
+			"/markets/[symbol]": { symbol: string }
 		};
 		LayoutParams(): {
-			"/": Record<string, never>;
+			"/": { symbol?: string };
 			"/ai-agent": Record<string, never>;
 			"/blog": Record<string, never>;
 			"/community": Record<string, never>;
@@ -43,14 +43,15 @@ declare module "$app/types" {
 			"/education": Record<string, never>;
 			"/features": Record<string, never>;
 			"/landing": Record<string, never>;
-			"/markets": Record<string, never>;
+			"/markets": { symbol?: string };
+			"/markets/[symbol]": { symbol: string };
 			"/nfts": Record<string, never>;
 			"/peers": Record<string, never>;
 			"/pricing": Record<string, never>;
 			"/tools": Record<string, never>;
 			"/trading-intro": Record<string, never>
 		};
-		Pathname(): "/" | "/ai-agent" | "/ai-agent/" | "/blog" | "/blog/" | "/community" | "/community/" | "/contact" | "/contact/" | "/crypto-intro" | "/crypto-intro/" | "/dashboard" | "/dashboard/" | "/data" | "/data/" | "/education" | "/education/" | "/features" | "/features/" | "/landing" | "/landing/" | "/markets" | "/markets/" | "/nfts" | "/nfts/" | "/peers" | "/peers/" | "/pricing" | "/pricing/" | "/tools" | "/tools/" | "/trading-intro" | "/trading-intro/";
+		Pathname(): "/" | "/ai-agent" | "/ai-agent/" | "/blog" | "/blog/" | "/community" | "/community/" | "/contact" | "/contact/" | "/crypto-intro" | "/crypto-intro/" | "/dashboard" | "/dashboard/" | "/data" | "/data/" | "/education" | "/education/" | "/features" | "/features/" | "/landing" | "/landing/" | "/markets" | "/markets/" | `/markets/${string}` & {} | `/markets/${string}/` & {} | "/nfts" | "/nfts/" | "/peers" | "/peers/" | "/pricing" | "/pricing/" | "/tools" | "/tools/" | "/trading-intro" | "/trading-intro/";
 		ResolvedPathname(): `${"" | `/${string}`}${ReturnType<AppTypes['Pathname']>}`;
 		Asset(): "/.nojekyll" | string & {};
 	}
