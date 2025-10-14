@@ -134,6 +134,35 @@ export interface Event {
   registrationUrl?: string;
 }
 
+// Velo/RWA-inspired data shapes
+export type DexChain = 'Arbitrum' | 'Ethereum' | 'Polygon';
+export interface DexPool {
+  id: string;
+  pool: string; // e.g., ETH/USDC
+  chain: DexChain;
+  tvl: number; // USD
+  volume24h: number; // USD
+  volume7d: number; // USD
+  volume30d: number; // USD
+  fees24h: number; // USD
+  fees7d: number; // USD
+  fees30d: number; // USD
+  apr7d: number; // percentage (e.g., 12.3 for 12.3%)
+  apr30d: number; // percentage
+}
+
+export type RwaClass = 'Treasury' | 'Real Estate' | 'Private Credit' | 'Commodities';
+export type RwaChain = 'Ethereum' | 'Polygon' | 'Solana';
+export interface RwaAsset {
+  id: string;
+  asset: string; // e.g., "USTB - Short-term Treasuries"
+  issuer: string; // e.g., Ondo, Matrixdock, Franklin
+  class: RwaClass;
+  chain: RwaChain;
+  yieldPct: number; // e.g., 5.2 -> 5.2%
+  maturity?: string; // e.g., "30D", "T+1", ISO date, or descriptive
+}
+
 // Mock Data
 
 export const pricingPlans: PricingPlan[] = [
@@ -763,6 +792,129 @@ export const events: Event[] = [
     attendees: 567,
     location: 'online'
   }
+];
+
+// --- Advanced Analytics Mock Data (Velo/RWA-inspired) ---
+
+export const dexPools: DexPool[] = [
+  {
+    id: 'pool-eth-usdc-arb',
+    pool: 'ETH/USDC',
+    chain: 'Arbitrum',
+    tvl: 480_000_000,
+    volume24h: 120_000_000,
+    volume7d: 690_000_000,
+    volume30d: 2_800_000_000,
+    fees24h: 180_000,
+    fees7d: 1_050_000,
+    fees30d: 4_200_000,
+    apr7d: 13.2,
+    apr30d: 11.4,
+  },
+  {
+    id: 'pool-btc-usdc-eth',
+    pool: 'WBTC/USDC',
+    chain: 'Ethereum',
+    tvl: 620_000_000,
+    volume24h: 95_000_000,
+    volume7d: 520_000_000,
+    volume30d: 2_100_000_000,
+    fees24h: 142_000,
+    fees7d: 785_000,
+    fees30d: 3_150_000,
+    apr7d: 9.8,
+    apr30d: 8.6,
+  },
+  {
+    id: 'pool-arb-usdc-arb',
+    pool: 'ARB/USDC',
+    chain: 'Arbitrum',
+    tvl: 210_000_000,
+    volume24h: 44_000_000,
+    volume7d: 268_000_000,
+    volume30d: 1_020_000_000,
+    fees24h: 55_000,
+    fees7d: 320_000,
+    fees30d: 1_180_000,
+    apr7d: 16.5,
+    apr30d: 12.7,
+  },
+  {
+    id: 'pool-matic-usdc-pol',
+    pool: 'MATIC/USDC',
+    chain: 'Polygon',
+    tvl: 150_000_000,
+    volume24h: 28_000_000,
+    volume7d: 170_000_000,
+    volume30d: 640_000_000,
+    fees24h: 33_000,
+    fees7d: 195_000,
+    fees30d: 740_000,
+    apr7d: 8.9,
+    apr30d: 7.3,
+  },
+  {
+    id: 'pool-gmx-usdc-arb',
+    pool: 'GMX/USDC',
+    chain: 'Arbitrum',
+    tvl: 95_000_000,
+    volume24h: 16_000_000,
+    volume7d: 96_000_000,
+    volume30d: 365_000_000,
+    fees24h: 19_000,
+    fees7d: 112_000,
+    fees30d: 425_000,
+    apr7d: 10.4,
+    apr30d: 9.1,
+  },
+];
+
+export const rwaAssets: RwaAsset[] = [
+  {
+    id: 'rwa-ustb-ondo',
+    asset: 'USTB - Short-term Treasuries',
+    issuer: 'Ondo',
+    class: 'Treasury',
+    chain: 'Ethereum',
+    yieldPct: 5.2,
+    maturity: 'T+1',
+  },
+  {
+    id: 'rwa-foxo-franklin',
+    asset: 'FOXO - U.S. Government Money Fund',
+    issuer: 'Franklin Templeton',
+    class: 'Treasury',
+    chain: 'Polygon',
+    yieldPct: 4.7,
+    maturity: 'Daily',
+  },
+  {
+    id: 'rwa-hifi-credit',
+    asset: 'HIFI Credit Pool',
+    issuer: 'Hifi',
+    class: 'Private Credit',
+    chain: 'Ethereum',
+    yieldPct: 10.8,
+    maturity: '30-90D',
+  },
+  {
+    id: 'rwa-realty',
+    asset: 'Tokenized Real Estate (REIT)',
+    issuer: 'RealT',
+    class: 'Real Estate',
+    chain: 'Polygon',
+    yieldPct: 7.1,
+    maturity: 'N/A',
+  },
+  {
+    id: 'rwa-gold',
+    asset: 'PAXG - Tokenized Gold',
+    issuer: 'Paxos',
+    class: 'Commodities',
+    chain: 'Ethereum',
+    yieldPct: 0.0,
+    maturity: 'Spot',
+  },
 ];
 
 // Trading-specific data from existing structure

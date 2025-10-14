@@ -1,5 +1,7 @@
 <script lang="ts">
 	import ComingSoonCard from '$lib/components/ComingSoonCard.svelte';
+	import { formatCurrency, formatPercentage, formatCompactNumber } from '$lib/utils';
+	import { dexPools, rwaAssets, type DexPool, type RwaAsset } from '$lib/data/mockData';
 
 	const metrics = [
 		{ label: 'Total Value Locked', value: '$168.44B', change: '+4.3%', changeType: 'positive' },
@@ -24,6 +26,76 @@
 		{ title: 'Cross-Exchange Orderbook', description: 'Aggregated orderbook depth from DEXs and CEXs for unified market liquidity view.', category: 'Trading', icon: '📚' },
 		{ title: 'Prediction Markets Dashboard', description: 'Aggregate prediction market odds and compute implied probabilities for macro events.', category: 'Predictions', icon: '🎯' }
 	];
+
+	// Feature flags (enable/disable sections)
+	const SHOW_DEX_ANALYTICS = true;
+	const SHOW_RWA_ANALYTICS = true;
+
+	// DEX Pools filters and sorting
+	let chainFilter: 'All' | 'Arbitrum' | 'Ethereum' | 'Polygon' = 'All';
+	let timeframe: '24h' | '7d' | '30d' = '24h';
+	let dexSortKey: 'pool' | 'tvl' | 'volume' | 'fees' | 'apr' = 'fees';
+	let dexSortDir: 'asc' | 'desc' = 'desc';
+
+	function getVolume(p: DexPool) {
+		return timeframe === '24h' ? p.volume24h : timeframe === '7d' ? p.volume7d : p.volume30d;
+	}
+	function getFees(p: DexPool) {
+		return timeframe === '24h' ? p.fees24h : timeframe === '7d' ? p.fees7d : p.fees30d;
+	}
+	function getApr(p: DexPool) {
+		return timeframe === '24h' ? (p.fees24h / Math.max(p.tvl, 1)) * 365 * 100 : timeframe === '7d' ? p.apr7d : p.apr30d;
+	}
+
+	$: filteredDex = dexPools.filter((p) => chainFilter === 'All' || p.chain === chainFilter);
+	$: sortedDex = [...filteredDex].sort((a, b) => {
+		let av = 0, bv = 0;
+		if (dexSortKey === 'pool') { av = a.pool.localeCompare(b.pool); bv = 0; return dexSortDir === 'asc' ? av : -av; }
+		if (dexSortKey === 'tvl') { av = a.tvl; bv = b.tvl; }
+		if (dexSortKey === 'volume') { av = getVolume(a); bv = getVolume(b); }
+		if (dexSortKey === 'fees') { av = getFees(a); bv = getFees(b); }
+		if (dexSortKey === 'apr') { av = getApr(a); bv = getApr(b); }
+		return dexSortDir === 'asc' ? av - bv : bv - av;
+	});
+
+	function setDexSort(key: typeof dexSortKey) {
+		if (dexSortKey === key) {
+			dexSortDir = dexSortDir === 'asc' ? 'desc' : 'asc';
+		} else {
+			dexSortKey = key;
+			dexSortDir = key === 'pool' ? 'asc' : 'desc';
+		}
+	}
+
+	// RWA filters and sorting
+	let rwaClass: 'All' | 'Treasury' | 'Real Estate' | 'Private Credit' | 'Commodities' = 'All';
+	let rwaIssuer = 'All';
+	let rwaSortKey: 'asset' | 'issuer' | 'yield' | 'maturity' | 'chain' = 'yield';
+	let rwaSortDir: 'asc' | 'desc' = 'desc';
+
+	let issuerOptions: string[] = [];
+	let filteredRwa: RwaAsset[] = [];
+	let sortedRwa: RwaAsset[] = [];
+
+	$: issuerOptions = ['All', ...Array.from(new Set(rwaAssets.map((a) => a.issuer)))];
+	$: filteredRwa = rwaAssets.filter((a) => (rwaClass === 'All' || a.class === rwaClass) && (rwaIssuer === 'All' || a.issuer === rwaIssuer));
+	$: sortedRwa = [...filteredRwa].sort((a, b) => {
+		if (rwaSortKey === 'asset') return rwaSortDir === 'asc' ? a.asset.localeCompare(b.asset) : b.asset.localeCompare(a.asset);
+		if (rwaSortKey === 'issuer') return rwaSortDir === 'asc' ? a.issuer.localeCompare(b.issuer) : b.issuer.localeCompare(a.issuer);
+		if (rwaSortKey === 'maturity') return (rwaSortDir === 'asc' ? (a.maturity || '').localeCompare(b.maturity || '') : (b.maturity || '').localeCompare(a.maturity || ''));
+		if (rwaSortKey === 'chain') return rwaSortDir === 'asc' ? a.chain.localeCompare(b.chain) : b.chain.localeCompare(a.chain);
+		// yield
+		return rwaSortDir === 'asc' ? a.yieldPct - b.yieldPct : b.yieldPct - a.yieldPct;
+	});
+
+	function setRwaSort(key: typeof rwaSortKey) {
+		if (rwaSortKey === key) {
+			rwaSortDir = rwaSortDir === 'asc' ? 'desc' : 'asc';
+		} else {
+			rwaSortKey = key;
+			rwaSortDir = key === 'asset' || key === 'issuer' || key === 'chain' ? 'asc' : 'desc';
+		}
+	}
 </script>
 
 <svelte:head>
@@ -119,6 +191,109 @@
 				</table>
 			</div>
 		</section>
+
+		{#if SHOW_DEX_ANALYTICS}
+		<section class="mb-8 p-6 rounded-xl bg-card border border-border">
+			<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
+				<h3 class="text-xl font-semibold">DEX Pools (Velo-style)</h3>
+				<div class="flex flex-wrap gap-2 text-sm">
+					<div class="flex items-center gap-2">
+						<span class="text-muted-foreground">Chain:</span>
+						<select bind:value={chainFilter} class="px-3 py-2 rounded border border-border bg-background">
+							<option>All</option>
+							<option>Arbitrum</option>
+							<option>Ethereum</option>
+							<option>Polygon</option>
+						</select>
+					</div>
+					<div class="flex items-center gap-2">
+						<span class="text-muted-foreground">Timeframe:</span>
+						<div class="flex gap-1">
+							<button class={`px-3 py-1 rounded ${timeframe === '24h' ? 'bg-tufts-blue/20 text-tufts-blue' : 'hover:bg-muted'}`} on:click={() => timeframe = '24h'}>24h</button>
+							<button class={`px-3 py-1 rounded ${timeframe === '7d' ? 'bg-tufts-blue/20 text-tufts-blue' : 'hover:bg-muted'}`} on:click={() => timeframe = '7d'}>7D</button>
+							<button class={`px-3 py-1 rounded ${timeframe === '30d' ? 'bg-tufts-blue/20 text-tufts-blue' : 'hover:bg-muted'}`} on:click={() => timeframe = '30d'}>30D</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="overflow-x-auto">
+				<table class="w-full text-left">
+					<thead class="border-b border-border text-sm text-muted-foreground">
+						<tr>
+							<th class="pb-3 font-semibold cursor-pointer" on:click={() => setDexSort('pool')}>Pool</th>
+							<th class="pb-3 font-semibold cursor-pointer" on:click={() => setDexSort('tvl')}>TVL</th>
+							<th class="pb-3 font-semibold cursor-pointer" on:click={() => setDexSort('volume')}>Volume ({timeframe})</th>
+							<th class="pb-3 font-semibold cursor-pointer" on:click={() => setDexSort('fees')}>Fees ({timeframe})</th>
+							<th class="pb-3 font-semibold cursor-pointer" on:click={() => setDexSort('apr')}>APR</th>
+						</tr>
+					</thead>
+					<tbody class="divide-y divide-border">
+						{#each sortedDex as p}
+						<tr class="hover:bg-muted/20 transition-colors">
+							<td class="py-3 font-medium">{p.pool} <span class="text-xs text-muted-foreground">({p.chain})</span></td>
+							<td class="py-3">{formatCurrency(p.tvl)}</td>
+							<td class="py-3">{formatCurrency(getVolume(p))}</td>
+							<td class="py-3">{formatCurrency(getFees(p))}</td>
+							<td class="py-3">{formatPercentage(getApr(p))}</td>
+						</tr>
+						{/each}
+					</tbody>
+				</table>
+			</div>
+		</section>
+		{/if}
+
+		{#if SHOW_RWA_ANALYTICS}
+		<section class="mb-8 p-6 rounded-xl bg-card border border-border">
+			<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
+				<h3 class="text-xl font-semibold">RWA Assets (rwa.xyz-style)</h3>
+				<div class="flex flex-wrap gap-2 text-sm">
+					<div class="flex items-center gap-2">
+						<span class="text-muted-foreground">Class:</span>
+						<select bind:value={rwaClass} class="px-3 py-2 rounded border border-border bg-background">
+							<option>All</option>
+							<option>Treasury</option>
+							<option>Real Estate</option>
+							<option>Private Credit</option>
+							<option>Commodities</option>
+						</select>
+					</div>
+					<div class="flex items-center gap-2">
+						<span class="text-muted-foreground">Issuer:</span>
+						<select bind:value={rwaIssuer} class="px-3 py-2 rounded border border-border bg-background">
+							{#each issuerOptions as issuer}
+								<option>{issuer}</option>
+							{/each}
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="overflow-x-auto">
+				<table class="w-full text-left">
+					<thead class="border-b border-border text-sm text-muted-foreground">
+						<tr>
+							<th class="pb-3 font-semibold cursor-pointer" on:click={() => setRwaSort('asset')}>Asset</th>
+							<th class="pb-3 font-semibold cursor-pointer" on:click={() => setRwaSort('issuer')}>Issuer</th>
+							<th class="pb-3 font-semibold cursor-pointer" on:click={() => setRwaSort('yield')}>Yield</th>
+							<th class="pb-3 font-semibold cursor-pointer" on:click={() => setRwaSort('maturity')}>Maturity</th>
+							<th class="pb-3 font-semibold cursor-pointer" on:click={() => setRwaSort('chain')}>Chain</th>
+						</tr>
+					</thead>
+					<tbody class="divide-y divide-border">
+						{#each sortedRwa as a}
+						<tr class="hover:bg-muted/20 transition-colors">
+							<td class="py-3 font-medium">{a.asset}</td>
+							<td class="py-3 text-muted-foreground">{a.issuer}</td>
+							<td class="py-3">{formatPercentage(a.yieldPct)}</td>
+							<td class="py-3">{a.maturity || '—'}</td>
+							<td class="py-3">{a.chain}</td>
+						</tr>
+						{/each}
+					</tbody>
+				</table>
+			</div>
+		</section>
+		{/if}
 
 		<section class="mb-8">
 			<h3 class="text-2xl font-semibold mb-4">Analytics Tools</h3>
