@@ -945,6 +945,9 @@ export interface CryptoAssetAnalytics {
   cvd24h: number; // Cumulative Volume Delta (positive = net buying)
   buyPressure: number; // Buy pressure score (0-100)
   sellPressure: number; // Sell pressure score (0-100)
+  // UI enhancements
+  sparklineData: number[]; // 7-day price sparkline (normalized 0-100)
+  sentiment: 'Hope' | 'Fear' | 'Optimism' | 'Greed' | 'Anxiety' | 'Denial' | 'Neutral';
 }
 
 export const cryptoAnalytics: CryptoAssetAnalytics[] = [
@@ -971,6 +974,8 @@ export const cryptoAnalytics: CryptoAssetAnalytics[] = [
     cvd24h: 2_340_000_000,
     buyPressure: 58,
     sellPressure: 42,
+    sparklineData: [45, 52, 48, 55, 58, 62, 70, 68, 72, 78, 75, 82, 88, 92],
+    sentiment: 'Hope',
   },
   {
     id: 'eth',
@@ -995,6 +1000,8 @@ export const cryptoAnalytics: CryptoAssetAnalytics[] = [
     cvd24h: -1_560_000_000,
     buyPressure: 45,
     sellPressure: 55,
+    sparklineData: [68, 72, 70, 65, 62, 58, 55, 52, 48, 50, 53, 58, 60, 62],
+    sentiment: 'Fear',
   },
   {
     id: 'sol',
@@ -1019,6 +1026,8 @@ export const cryptoAnalytics: CryptoAssetAnalytics[] = [
     cvd24h: -480_000_000,
     buyPressure: 48,
     sellPressure: 52,
+    sparklineData: [75, 72, 68, 65, 60, 58, 55, 52, 48, 45, 42, 38, 35, 32],
+    sentiment: 'Fear',
   },
   {
     id: 'xrp',
@@ -1043,6 +1052,8 @@ export const cryptoAnalytics: CryptoAssetAnalytics[] = [
     cvd24h: 120_000_000,
     buyPressure: 53,
     sellPressure: 47,
+    sparklineData: [40, 42, 45, 48, 52, 50, 48, 45, 42, 45, 48, 50, 52, 55],
+    sentiment: 'Hope',
   },
   {
     id: 'bnb',
@@ -1067,6 +1078,8 @@ export const cryptoAnalytics: CryptoAssetAnalytics[] = [
     cvd24h: 340_000_000,
     buyPressure: 61,
     sellPressure: 39,
+    sparklineData: [55, 58, 62, 65, 68, 70, 65, 62, 58, 55, 52, 50, 48, 52],
+    sentiment: 'Optimism',
   },
   {
     id: 'doge',
@@ -1091,6 +1104,8 @@ export const cryptoAnalytics: CryptoAssetAnalytics[] = [
     cvd24h: -560_000_000,
     buyPressure: 42,
     sellPressure: 58,
+    sparklineData: [62, 65, 68, 70, 68, 65, 62, 58, 55, 52, 48, 45, 42, 40],
+    sentiment: 'Fear',
   },
 ];
 

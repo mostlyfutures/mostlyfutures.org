@@ -2,6 +2,7 @@
 	import { formatCurrency, formatPercentage, formatCompactNumber } from '$lib/utils';
 	import { cryptoAnalytics, marketOverview, fundingRateLeaderboard } from '$lib/data/mockData';
 	import type { CryptoAssetAnalytics } from '$lib/data/mockData';
+	import Sparkline from '$lib/components/Sparkline.svelte';
 
 	// Feature flags
 	const SHOW_COMPREHENSIVE = true;
@@ -10,6 +11,9 @@
 	let selectedSymbol: string = 'BTC';
 	let searchQuery = '';
 	let viewMode: 'overview' | 'derivatives' | 'onchain' | 'orderflow' = 'overview';
+	
+	// Tab filter
+	let filterTab: 'top' | 'trending' | 'gainers' | 'losers' = 'top';
 
 	// Filtering and sorting
 	let sortKey: keyof CryptoAssetAnalytics = 'marketCap';
@@ -45,6 +49,23 @@
 		if (value >= 1e6) return `$${(value / 1e6).toFixed(2)}M`;
 		return formatCurrency(value);
 	}
+	
+	function getSentimentColor(sentiment: string): string {
+		const colors: Record<string, string> = {
+			'Hope': 'bg-blue-500/10 text-blue-500 border-blue-500/30',
+			'Fear': 'bg-red-500/10 text-red-500 border-red-500/30',
+			'Optimism': 'bg-green-500/10 text-green-500 border-green-500/30',
+			'Greed': 'bg-emerald-500/10 text-emerald-500 border-emerald-500/30',
+			'Anxiety': 'bg-orange-500/10 text-orange-500 border-orange-500/30',
+			'Denial': 'bg-purple-500/10 text-purple-500 border-purple-500/30',
+			'Neutral': 'bg-gray-500/10 text-gray-500 border-gray-500/30',
+		};
+		return colors[sentiment] || colors['Neutral'];
+	}
+	
+	function getSparklineColor(priceChange: number): string {
+		return priceChange >= 0 ? '#10b981' : '#ef4444'; // green or red
+	}
 </script>
 
 <svelte:head>
@@ -53,14 +74,44 @@
 </svelte:head>
 
 <div class="min-h-screen bg-background">
+	<!-- Enhanced Metrics Bar (CoinMarketCap-style) -->
+	<div class="bg-card border-b border-border py-2.5 px-4">
+		<div class="container mx-auto flex items-center gap-6 text-xs overflow-x-auto">
+			<div class="flex items-center gap-2 whitespace-nowrap">
+				<span class="text-muted-foreground">Market Cap:</span>
+				<span class="font-semibold">{formatCurrency(marketOverview.totalVolume24h)}</span>
+				<span class="{marketOverview.totalVolumeChange24h >= 0 ? 'text-green-500' : 'text-red-500'}">
+					{marketOverview.totalVolumeChange24h >= 0 ? '▲' : '▼'} {formatPercentage(Math.abs(marketOverview.totalVolumeChange24h))}
+				</span>
+			</div>
+			<div class="flex items-center gap-2 whitespace-nowrap">
+				<span class="text-muted-foreground">24h Vol:</span>
+				<span class="font-semibold">{formatCurrency(marketOverview.totalVolume24h)}</span>
+			</div>
+			<div class="flex items-center gap-2 whitespace-nowrap">
+				<span class="text-muted-foreground">BTC Dominance:</span>
+				<span class="font-semibold">{marketOverview.btcDominance.toFixed(2)}%</span>
+			</div>
+			<div class="flex items-center gap-2 whitespace-nowrap">
+				<span class="text-muted-foreground">Fear & Greed:</span>
+				<span class="font-semibold">{marketOverview.fearGreedIndex}</span>
+				<span class="text-orange-500">{marketOverview.fearGreedLabel}</span>
+			</div>
+			<div class="flex items-center gap-2 whitespace-nowrap">
+				<span class="text-muted-foreground">ETH Gas:</span>
+				<span class="font-semibold text-tufts-blue">12 Gwei</span>
+			</div>
+		</div>
+	</div>
+
 	<!-- Header -->
-	<div class="bg-gradient-to-b from-tufts-blue/10 to-background border-b border-border">
+	<div class="bg-gradient-to-b from-background via-tufts-blue/5 to-background border-b border-border">
 		<div class="container mx-auto px-4 py-8">
-			<h1 class="text-4xl font-bold mb-3 bg-gradient-to-r from-tufts-blue to-jordy-blue bg-clip-text text-transparent">
-				Comprehensive Crypto Analytics
+			<h1 class="text-4xl font-bold mb-2 bg-gradient-to-r from-tufts-blue to-jordy-blue bg-clip-text text-transparent">
+				Cryptocurrency Market Data
 			</h1>
-			<p class="text-lg text-muted-foreground max-w-3xl">
-				Real-time market data, derivatives analytics, funding rates, open interest, order flow, on-chain metrics, and wallet activity.
+			<p class="text-muted-foreground">
+				Real-time prices, derivatives analytics, and on-chain metrics for top cryptocurrencies
 			</p>
 		</div>
 	</div>
@@ -202,49 +253,132 @@
 		</section>
 		{/if}
 
-		<!-- All Assets Table -->
+		<!-- All Assets Table with Enhanced UI -->
 		<section class="mb-6 p-6 rounded-xl bg-card border border-border">
-			<div class="flex justify-between items-center mb-4">
-				<h3 class="text-xl font-semibold">All Assets</h3>
-				<input type="text" bind:value={searchQuery} placeholder="Search symbol or name..." class="px-4 py-2 rounded border border-border bg-background" />
+			<!-- Tab Filters (CoinMarketCap-style) -->
+			<div class="flex items-center justify-between mb-6">
+				<div class="flex items-center gap-2">
+					<button 
+						class={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${filterTab === 'top' ? 'bg-tufts-blue text-white' : 'bg-muted hover:bg-muted/80'}`}
+						on:click={() => filterTab = 'top'}
+					>
+						Top
+					</button>
+					<button 
+						class={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${filterTab === 'trending' ? 'bg-tufts-blue text-white' : 'bg-muted hover:bg-muted/80'}`}
+						on:click={() => filterTab = 'trending'}
+					>
+						Trending
+					</button>
+					<button 
+						class={`px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1 ${filterTab === 'gainers' ? 'bg-tufts-blue text-white' : 'bg-muted hover:bg-muted/80'}`}
+						on:click={() => filterTab = 'gainers'}
+					>
+						🔥 Gainers
+					</button>
+					<button 
+						class={`px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1 ${filterTab === 'losers' ? 'bg-tufts-blue text-white' : 'bg-muted hover:bg-muted/80'}`}
+						on:click={() => filterTab = 'losers'}
+					>
+						📉 Losers
+					</button>
+				</div>
+				<input 
+					type="text" 
+					bind:value={searchQuery} 
+					placeholder="Search assets..." 
+					class="px-4 py-2 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-tufts-blue/50" 
+				/>
 			</div>
+			
 			<div class="overflow-x-auto">
 				<table class="w-full text-left text-sm">
 					<thead class="border-b border-border text-muted-foreground">
 						<tr>
-							<th class="pb-3 font-semibold cursor-pointer" on:click={() => setSort('symbol')}>Symbol</th>
-							<th class="pb-3 font-semibold cursor-pointer" on:click={() => setSort('price')}>Price</th>
-							<th class="pb-3 font-semibold cursor-pointer" on:click={() => setSort('priceChange24h')}>24h %</th>
-							<th class="pb-3 font-semibold cursor-pointer" on:click={() => setSort('fundingRate')}>Funding</th>
-							<th class="pb-3 font-semibold cursor-pointer" on:click={() => setSort('openInterest')}>OI</th>
-							<th class="pb-3 font-semibold cursor-pointer" on:click={() => setSort('oiChange24h')}>OI 24h %</th>
-							<th class="pb-3 font-semibold cursor-pointer" on:click={() => setSort('liquidations24h')}>Liq 24h</th>
-							<th class="pb-3 font-semibold cursor-pointer" on:click={() => setSort('cvd24h')}>CVD 24h</th>
+							<th class="pb-3 pr-4 font-semibold">#</th>
+							<th class="pb-3 pr-4 font-semibold cursor-pointer hover:text-foreground transition-colors" on:click={() => setSort('symbol')}>
+								NAME
+							</th>
+							<th class="pb-3 pr-4 font-semibold cursor-pointer hover:text-foreground transition-colors text-right" on:click={() => setSort('price')}>
+								PRICE
+							</th>
+							<th class="pb-3 pr-4 font-semibold cursor-pointer hover:text-foreground transition-colors text-right" on:click={() => setSort('priceChange24h')}>
+								24H %
+							</th>
+							<th class="pb-3 pr-4 font-semibold cursor-pointer hover:text-foreground transition-colors text-right" on:click={() => setSort('volume24h')}>
+								VOLUME
+							</th>
+							<th class="pb-3 pr-4 font-semibold cursor-pointer hover:text-foreground transition-colors text-right" on:click={() => setSort('marketCap')}>
+								MARKET CAP
+							</th>
+							<th class="pb-3 pr-4 font-semibold text-center">
+								SENTIMENT
+							</th>
+							<th class="pb-3 font-semibold text-center">
+								LAST 7 DAYS
+							</th>
 						</tr>
 					</thead>
 					<tbody class="divide-y divide-border">
-						{#each sortedAssets as asset}
-						<tr class="hover:bg-muted/20 transition-colors cursor-pointer" on:click={() => selectedSymbol = asset.symbol}>
-							<td class="py-3 font-medium">{asset.symbol}</td>
-							<td class="py-3">{formatCurrency(asset.price)}</td>
-							<td class="py-3 {asset.priceChange24h >= 0 ? 'text-green-500' : 'text-red-500'}">
-								{formatPercentage(asset.priceChange24h)}
+						{#each sortedAssets as asset, index}
+						<tr class="hover:bg-muted/20 transition-colors cursor-pointer group" on:click={() => selectedSymbol = asset.symbol}>
+							<td class="py-4 pr-4 text-muted-foreground">{index + 1}</td>
+							<td class="py-4 pr-4">
+								<div class="flex items-center gap-3">
+									<div class="w-8 h-8 rounded-full bg-gradient-to-br from-tufts-blue to-jordy-blue flex items-center justify-center text-white font-bold text-xs">
+										{asset.symbol.charAt(0)}
+									</div>
+									<div>
+										<div class="font-semibold">{asset.name}</div>
+										<div class="text-xs text-muted-foreground">{asset.symbol}</div>
+									</div>
+								</div>
 							</td>
-							<td class="py-3 {asset.fundingRate >= 0 ? 'text-green-500' : 'text-red-500'}">
-								{formatPercentage(asset.fundingRate)}
+							<td class="py-4 pr-4 text-right font-medium">
+								{formatCurrency(asset.price)}
 							</td>
-							<td class="py-3">{formatOI(asset.openInterest)}</td>
-							<td class="py-3 {asset.oiChange24h >= 0 ? 'text-green-500' : 'text-red-500'}">
-								{formatPercentage(asset.oiChange24h)}
+							<td class="py-4 pr-4 text-right">
+								<div class="flex items-center justify-end gap-1">
+									<span class="{asset.priceChange24h >= 0 ? 'text-green-500' : 'text-red-500'}">
+										{asset.priceChange24h >= 0 ? '▲' : '▼'}
+									</span>
+									<span class="font-medium {asset.priceChange24h >= 0 ? 'text-green-500' : 'text-red-500'}">
+										{formatPercentage(Math.abs(asset.priceChange24h))}
+									</span>
+								</div>
 							</td>
-							<td class="py-3">{formatCurrency(asset.liquidations24h)}</td>
-							<td class="py-3 {asset.cvd24h >= 0 ? 'text-green-500' : 'text-red-500'}">
-								{asset.cvd24h >= 0 ? '+' : ''}{formatCompactNumber(asset.cvd24h)}
+							<td class="py-4 pr-4 text-right text-muted-foreground">
+								{formatCurrency(asset.volume24h)}
+							</td>
+							<td class="py-4 pr-4 text-right font-medium">
+								{formatCurrency(asset.marketCap)}
+							</td>
+							<td class="py-4 pr-4">
+								<div class="flex justify-center">
+									<span class="px-3 py-1 rounded-full text-xs font-medium border {getSentimentColor(asset.sentiment)}">
+										{asset.sentiment}
+									</span>
+								</div>
+							</td>
+							<td class="py-4">
+								<div class="flex justify-center">
+									<Sparkline 
+										data={asset.sparklineData} 
+										width={120} 
+										height={40} 
+										color={getSparklineColor(asset.priceChange24h)}
+										lineWidth={2}
+									/>
+								</div>
 							</td>
 						</tr>
 						{/each}
 					</tbody>
 				</table>
+			</div>
+			
+			<div class="mt-4 text-sm text-muted-foreground">
+				Showing {sortedAssets.length} of {cryptoAnalytics.length} assets
 			</div>
 		</section>
 
