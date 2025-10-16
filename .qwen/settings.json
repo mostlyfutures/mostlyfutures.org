@@ -1,7 +1,15 @@
 {
   "mcpServers": {
     "archon": {
-      "httpUrl": "http://localhost:8051/mcp"
-    }
+      "httpUrl": "http://localhost:3737/mcp"
+    },
+    "chrome-devtools": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"-y",
+				"chrome-devtools-mcp@latest"
+			]
+		}
   }
 }

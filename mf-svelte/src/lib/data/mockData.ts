@@ -917,6 +917,265 @@ export const rwaAssets: RwaAsset[] = [
   },
 ];
 
+// --- Comprehensive Crypto Analytics Data (Coinglass-inspired) ---
+
+export interface CryptoAssetAnalytics {
+  id: string;
+  symbol: string;
+  name: string;
+  price: number;
+  priceChange24h: number;
+  volume24h: number;
+  volumeChange24h: number;
+  marketCap: number;
+  // Derivatives metrics
+  fundingRate: number; // Current funding rate (%)
+  fundingRateChange: number; // Change in funding rate
+  openInterest: number; // Total OI in USD
+  oiChange1h: number; // OI change % (1 hour)
+  oiChange24h: number; // OI change % (24 hours)
+  liquidations24h: number; // Liquidation volume (24h)
+  longShortRatio: number; // Ratio of longs vs shorts (e.g., 1.23 = 55% longs, 45% shorts)
+  // On-chain metrics
+  exchangeBalance: number; // Coins held on exchanges
+  exchangeBalanceChange24h: number; // Change in exchange balance
+  whaleTransactions24h: number; // Number of large transactions
+  activeAddresses24h: number; // Active addresses count
+  // Order flow / CVD
+  cvd24h: number; // Cumulative Volume Delta (positive = net buying)
+  buyPressure: number; // Buy pressure score (0-100)
+  sellPressure: number; // Sell pressure score (0-100)
+}
+
+export const cryptoAnalytics: CryptoAssetAnalytics[] = [
+  {
+    id: 'btc',
+    symbol: 'BTC',
+    name: 'Bitcoin',
+    price: 110919.6,
+    priceChange24h: -1.29,
+    volume24h: 90_270_000_000,
+    volumeChange24h: -35.28,
+    marketCap: 2_210_000_000_000,
+    fundingRate: 0.0054,
+    fundingRateChange: 0.0012,
+    openInterest: 72_140_000_000,
+    oiChange1h: 0.06,
+    oiChange24h: -1.03,
+    liquidations24h: 86_060_000,
+    longShortRatio: 1.23,
+    exchangeBalance: 2_170_000,
+    exchangeBalanceChange24h: -16_020,
+    whaleTransactions24h: 342,
+    activeAddresses24h: 895_430,
+    cvd24h: 2_340_000_000,
+    buyPressure: 58,
+    sellPressure: 42,
+  },
+  {
+    id: 'eth',
+    symbol: 'ETH',
+    name: 'Ethereum',
+    price: 3996.85,
+    priceChange24h: -2.74,
+    volume24h: 102_830_000_000,
+    volumeChange24h: -27.14,
+    marketCap: 483_280_000_000,
+    fundingRate: 0.0031,
+    fundingRateChange: -0.0008,
+    openInterest: 46_700_000_000,
+    oiChange1h: -0.62,
+    oiChange24h: -1.17,
+    liquidations24h: 128_370_000,
+    longShortRatio: 0.92,
+    exchangeBalance: 15_230_000,
+    exchangeBalanceChange24h: -8_450,
+    whaleTransactions24h: 287,
+    activeAddresses24h: 512_340,
+    cvd24h: -1_560_000_000,
+    buyPressure: 45,
+    sellPressure: 55,
+  },
+  {
+    id: 'sol',
+    symbol: 'SOL',
+    name: 'Solana',
+    price: 192.57,
+    priceChange24h: -5.36,
+    volume24h: 25_650_000_000,
+    volumeChange24h: -31.46,
+    marketCap: 105_600_000_000,
+    fundingRate: 0.0001,
+    fundingRateChange: -0.0015,
+    openInterest: 10_160_000_000,
+    oiChange1h: -0.84,
+    oiChange24h: -2.91,
+    liquidations24h: 32_460_000,
+    longShortRatio: 1.05,
+    exchangeBalance: 42_180_000,
+    exchangeBalanceChange24h: -120_000,
+    whaleTransactions24h: 156,
+    activeAddresses24h: 3_420_000,
+    cvd24h: -480_000_000,
+    buyPressure: 48,
+    sellPressure: 52,
+  },
+  {
+    id: 'xrp',
+    symbol: 'XRP',
+    name: 'Ripple',
+    price: 2.4043,
+    priceChange24h: -3.65,
+    volume24h: 6_490_000_000,
+    volumeChange24h: -38.51,
+    marketCap: 144_340_000_000,
+    fundingRate: 0.0007,
+    fundingRateChange: 0.0003,
+    openInterest: 4_040_000_000,
+    oiChange1h: -0.96,
+    oiChange24h: -2.25,
+    liquidations24h: 10_130_000,
+    longShortRatio: 1.15,
+    exchangeBalance: 8_920_000_000,
+    exchangeBalanceChange24h: -25_000_000,
+    whaleTransactions24h: 98,
+    activeAddresses24h: 67_890,
+    cvd24h: 120_000_000,
+    buyPressure: 53,
+    sellPressure: 47,
+  },
+  {
+    id: 'bnb',
+    symbol: 'BNB',
+    name: 'BNB',
+    price: 1175.54,
+    priceChange24h: -2.08,
+    volume24h: 5_850_000_000,
+    volumeChange24h: -49.22,
+    marketCap: 163_980_000_000,
+    fundingRate: 0.0054,
+    fundingRateChange: 0.0021,
+    openInterest: 2_090_000_000,
+    oiChange1h: -1.17,
+    oiChange24h: 1.82,
+    liquidations24h: 6_450_000,
+    longShortRatio: 1.42,
+    exchangeBalance: 1_280_000,
+    exchangeBalanceChange24h: -3_200,
+    whaleTransactions24h: 54,
+    activeAddresses24h: 145_670,
+    cvd24h: 340_000_000,
+    buyPressure: 61,
+    sellPressure: 39,
+  },
+  {
+    id: 'doge',
+    symbol: 'DOGE',
+    name: 'Dogecoin',
+    price: 0.19579,
+    priceChange24h: -3.84,
+    volume24h: 8_180_000_000,
+    volumeChange24h: -41.65,
+    marketCap: 29_700_000_000,
+    fundingRate: -0.0035,
+    fundingRateChange: -0.0012,
+    openInterest: 1_990_000_000,
+    oiChange1h: -0.78,
+    oiChange24h: 1.12,
+    liquidations24h: 9_120_000,
+    longShortRatio: 0.88,
+    exchangeBalance: 28_340_000_000,
+    exchangeBalanceChange24h: 120_000_000,
+    whaleTransactions24h: 67,
+    activeAddresses24h: 89_450,
+    cvd24h: -560_000_000,
+    buyPressure: 42,
+    sellPressure: 58,
+  },
+];
+
+// Market overview aggregated metrics
+export interface MarketOverview {
+  totalVolume24h: number;
+  totalVolumeChange24h: number;
+  totalOpenInterest: number;
+  totalOiChange24h: number;
+  totalLiquidations24h: number;
+  totalLiquidationsChange24h: number;
+  avgLongShortRatio: number;
+  btcDominance: number;
+  btcDominanceChange: number;
+  fearGreedIndex: number;
+  fearGreedLabel: string;
+}
+
+export const marketOverview: MarketOverview = {
+  totalVolume24h: 313_774_321_211,
+  totalVolumeChange24h: -29.39,
+  totalOpenInterest: 159_801_028_994,
+  totalOiChange24h: -1.35,
+  totalLiquidations24h: 444_625_886,
+  totalLiquidationsChange24h: -30.39,
+  avgLongShortRatio: 1.08,
+  btcDominance: 58.86,
+  btcDominanceChange: 0.67,
+  fearGreedIndex: 29,
+  fearGreedLabel: 'Fear',
+};
+
+// Funding rate leaderboard (highest/lowest across exchanges)
+export interface FundingRateEntry {
+  id: string;
+  pair: string;
+  exchange: string;
+  fundingRate: number;
+  nextFunding: string; // Time until next funding (e.g., "2h 15m")
+  openInterest: number;
+}
+
+export const fundingRateLeaderboard: FundingRateEntry[] = [
+  {
+    id: 'fr-1',
+    pair: 'BTC/USDT',
+    exchange: 'Binance',
+    fundingRate: 0.0032,
+    nextFunding: '2h 15m',
+    openInterest: 24_500_000_000,
+  },
+  {
+    id: 'fr-2',
+    pair: 'ETH/USDT',
+    exchange: 'Bybit',
+    fundingRate: 0.0036,
+    nextFunding: '1h 45m',
+    openInterest: 18_200_000_000,
+  },
+  {
+    id: 'fr-3',
+    pair: 'SOL/USDT',
+    exchange: 'OKX',
+    fundingRate: 0.0001,
+    nextFunding: '3h 10m',
+    openInterest: 4_120_000_000,
+  },
+  {
+    id: 'fr-4',
+    pair: 'DOGE/USDT',
+    exchange: 'Binance',
+    fundingRate: -0.0035,
+    nextFunding: '2h 15m',
+    openInterest: 890_000_000,
+  },
+  {
+    id: 'fr-5',
+    pair: 'ARB/USDT',
+    exchange: 'Bybit',
+    fundingRate: 0.0068,
+    nextFunding: '1h 45m',
+    openInterest: 1_240_000_000,
+  },
+];
+
 // Trading-specific data from existing structure
 
 // Navigation and route data (enhanced from existing)
