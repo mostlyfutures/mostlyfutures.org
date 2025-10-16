@@ -50,6 +50,13 @@
 		return formatCurrency(value);
 	}
 	
+	function formatLargeNumber(value: number): string {
+		if (value >= 1e12) return `$${(value / 1e12).toFixed(2)}T`;
+		if (value >= 1e9) return `$${(value / 1e9).toFixed(2)}B`;
+		if (value >= 1e6) return `$${(value / 1e6).toFixed(0)}M`;
+		return formatCurrency(value);
+	}
+	
 	function getSentimentColor(sentiment: string): string {
 		const colors: Record<string, string> = {
 			'Hope': 'bg-blue-500/10 text-blue-500 border-blue-500/30',
@@ -121,21 +128,21 @@
 		<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
 			<div class="p-5 rounded-xl bg-card border border-border hover:border-tufts-blue/50 transition-colors">
 				<div class="text-sm text-muted-foreground mb-2">24h Volume</div>
-				<div class="text-3xl font-bold mb-2">{formatCurrency(marketOverview.totalVolume24h)}</div>
+				<div class="text-3xl font-bold mb-2">{formatLargeNumber(marketOverview.totalVolume24h)}</div>
 				<div class="text-sm {marketOverview.totalVolumeChange24h >= 0 ? 'text-green-500' : 'text-red-500'}">
 					{formatPercentage(marketOverview.totalVolumeChange24h)}
 				</div>
 			</div>
 			<div class="p-5 rounded-xl bg-card border border-border hover:border-tufts-blue/50 transition-colors">
 				<div class="text-sm text-muted-foreground mb-2">Open Interest</div>
-				<div class="text-3xl font-bold mb-2">{formatCurrency(marketOverview.totalOpenInterest)}</div>
+				<div class="text-3xl font-bold mb-2">{formatLargeNumber(marketOverview.totalOpenInterest)}</div>
 				<div class="text-sm {marketOverview.totalOiChange24h >= 0 ? 'text-green-500' : 'text-red-500'}">
 					{formatPercentage(marketOverview.totalOiChange24h)}
 				</div>
 			</div>
 			<div class="p-5 rounded-xl bg-card border border-border hover:border-tufts-blue/50 transition-colors">
 				<div class="text-sm text-muted-foreground mb-2">24h Liquidations</div>
-				<div class="text-3xl font-bold mb-2">{formatCurrency(marketOverview.totalLiquidations24h)}</div>
+				<div class="text-3xl font-bold mb-2">{formatLargeNumber(marketOverview.totalLiquidations24h)}</div>
 				<div class="text-sm {marketOverview.totalLiquidationsChange24h >= 0 ? 'text-green-500' : 'text-red-500'}">
 					{formatPercentage(marketOverview.totalLiquidationsChange24h)}
 				</div>
