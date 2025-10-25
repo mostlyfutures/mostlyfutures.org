@@ -1,1 +1,1 @@
-export { default as component } from "../../../../src/routes/nfts/+page.svelte";
+export { default as component } from "../../../../src/routes/crypto-intro/+page.svelte";

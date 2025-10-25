@@ -331,8 +331,9 @@ export const navLinks: NavLink[] = [
     href: '/data',
     label: 'Data',
     description: 'Market data and analytics'
-  { 
-    href: '/features', 
+  },
+  {
+    href: '/features',
     label: 'Features',
     description: 'Discover our powerful trading tools'
   },
@@ -450,5 +451,151 @@ export const tradingAssets = [
       'Regulatory uncertainty in many jurisdictions',
       'Technical complexity for beginners'
     ],
+  }
+];
+
+// Additional data for community page
+export const communityMembers = [
+  {
+    id: 1,
+    name: 'Alex Chen',
+    avatar: '/avatars/alex.jpg',
+    joinDate: '2024-01-15',
+    posts: 156,
+    reputation: 892,
+    badges: ['Top Contributor', 'Mentor']
+  },
+  {
+    id: 2,
+    name: 'Sarah Williams',
+    avatar: '/avatars/sarah.jpg',
+    joinDate: '2024-02-20',
+    posts: 234,
+    reputation: 1245,
+    badges: ['Expert', 'Community Leader']
+  }
+];
+
+export const forumPosts = [
+  {
+    id: 1,
+    title: 'Best risk management strategies for beginners',
+    author: 'Alex Chen',
+    category: 'Risk Management',
+    replies: 23,
+    views: 1450,
+    lastActivity: '2024-03-10T14:30:00Z',
+    tags: ['risk-management', 'beginners', 'strategies']
+  },
+  {
+    id: 2,
+    title: 'Technical analysis: How to read RSI correctly',
+    author: 'Sarah Williams',
+    category: 'Technical Analysis',
+    replies: 45,
+    views: 2100,
+    lastActivity: '2024-03-12T09:15:00Z',
+    tags: ['technical-analysis', 'RSI', 'indicators']
+  }
+];
+
+export const events = [
+  {
+    id: 1,
+    title: 'Crypto Trading Workshop',
+    date: '2024-04-15',
+    time: '18:00 UTC',
+    type: 'workshop',
+    attendees: 45,
+    maxAttendees: 100,
+    description: 'Learn crypto trading strategies from experts'
+  },
+  {
+    id: 2,
+    title: 'Community AMA with Professional Traders',
+    date: '2024-04-20',
+    time: '20:00 UTC',
+    type: 'ama',
+    attendees: 120,
+    maxAttendees: 200,
+    description: 'Ask me anything session with experienced traders'
+  }
+];
+
+// Additional data for education page
+export const courses = [
+  {
+    id: 1,
+    title: 'Cryptocurrency Fundamentals',
+    description: 'Learn the basics of cryptocurrency and blockchain technology',
+    duration: '6 weeks',
+    modules: 12,
+    students: 15420,
+    rating: 4.8,
+    instructor: 'Dr. Michael Block',
+    level: 'Beginner',
+    price: 99,
+    image: '/courses/crypto-fundamentals.jpg'
+  },
+  {
+    id: 2,
+    title: 'Advanced Trading Strategies',
+    description: 'Master advanced trading techniques and risk management',
+    duration: '8 weeks',
+    modules: 16,
+    students: 8230,
+    rating: 4.9,
+    instructor: 'Sarah Johnson',
+    level: 'Advanced',
+    price: 299,
+    image: '/courses/advanced-trading.jpg'
+  }
+];
+
+// Add types for RWA and DEX data
+export interface RwaAsset {
+  id: string;
+  name: string;
+  symbol: string;
+  class: string;
+  issuer: string;
+  value: number;
+  change24h: number;
+  apy: number;
+}
+
+export interface DexPool {
+  id: string;
+  token0: string;
+  token1: string;
+  tvl: number;
+  apr: number;
+  volume24h: number;
+  fees24h: number;
+}
+
+// Sample data for RWA assets and DEX pools
+export const rwaAssets: RwaAsset[] = [
+  {
+    id: '1',
+    name: 'US Treasury Bond',
+    symbol: 'USTB',
+    class: 'Government',
+    issuer: 'US Treasury',
+    value: 1000000,
+    change24h: 0.1,
+    apy: 5.2
+  }
+];
+
+export const dexPools: DexPool[] = [
+  {
+    id: '1',
+    token0: 'ETH',
+    token1: 'USDC',
+    tvl: 50000000,
+    apr: 12.5,
+    volume24h: 2500000,
+    fees24h: 7500
   }
 ];

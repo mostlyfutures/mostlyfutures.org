@@ -21,21 +21,12 @@
 	"/dashboard": [
 		"src/routes/+layout.js"
 	],
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
->>>>>>> main
 	"/data": [
 		"src/routes/+layout.js"
 	],
 	"/education": [
 		"src/routes/+layout.js"
 	],
-<<<<<<< HEAD
-=======
->>>>>>> 910f9999 (Nav Bar Updated)
->>>>>>> main
 	"/features": [
 		"src/routes/+layout.js"
 	],

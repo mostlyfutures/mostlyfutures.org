@@ -27,36 +27,21 @@ export {};
 
 declare module "$app/types" {
 	export interface AppTypes {
-<<<<<<< HEAD
-		RouteId(): "/" | "/ai-agent" | "/blog" | "/community" | "/contact" | "/crypto-intro" | "/dashboard" | "/data" | "/education" | "/features" | "/landing" | "/markets" | "/markets/[symbol]" | "/nfts" | "/peers" | "/pricing" | "/tools" | "/trading-intro";
-=======
-<<<<<<< HEAD
-		RouteId(): "/" | "/contact" | "/crypto-intro" | "/dashboard" | "/features" | "/landing" | "/nfts" | "/pricing" | "/trading-intro";
-=======
-		RouteId(): "/" | "/ai-agent" | "/blog" | "/community" | "/contact" | "/crypto-intro" | "/dashboard" | "/data" | "/education" | "/features" | "/landing" | "/markets" | "/nfts" | "/peers" | "/pricing" | "/tools" | "/trading-intro";
->>>>>>> 910f9999 (Nav Bar Updated)
->>>>>>> main
+		RouteId(): "/" | "/ai-agent" | "/api" | "/blog" | "/community" | "/contact" | "/crypto-intro" | "/dashboard" | "/data" | "/education" | "/features" | "/landing" | "/markets" | "/markets/[symbol]" | "/nfts" | "/peers" | "/pricing" | "/tools" | "/trading-intro";
 		RouteParams(): {
 			"/markets/[symbol]": { symbol: string }
 		};
 		LayoutParams(): {
 			"/": { symbol?: string };
 			"/ai-agent": Record<string, never>;
+			"/api": Record<string, never>;
 			"/blog": Record<string, never>;
 			"/community": Record<string, never>;
 			"/contact": Record<string, never>;
 			"/crypto-intro": Record<string, never>;
 			"/dashboard": Record<string, never>;
-<<<<<<< HEAD
 			"/data": Record<string, never>;
 			"/education": Record<string, never>;
-=======
-<<<<<<< HEAD
-=======
-			"/data": Record<string, never>;
-			"/education": Record<string, never>;
->>>>>>> 910f9999 (Nav Bar Updated)
->>>>>>> main
 			"/features": Record<string, never>;
 			"/landing": Record<string, never>;
 			"/markets": { symbol?: string };
@@ -67,15 +52,7 @@ declare module "$app/types" {
 			"/tools": Record<string, never>;
 			"/trading-intro": Record<string, never>
 		};
-<<<<<<< HEAD
-		Pathname(): "/" | "/ai-agent" | "/ai-agent/" | "/blog" | "/blog/" | "/community" | "/community/" | "/contact" | "/contact/" | "/crypto-intro" | "/crypto-intro/" | "/dashboard" | "/dashboard/" | "/data" | "/data/" | "/education" | "/education/" | "/features" | "/features/" | "/landing" | "/landing/" | "/markets" | "/markets/" | `/markets/${string}` & {} | `/markets/${string}/` & {} | "/nfts" | "/nfts/" | "/peers" | "/peers/" | "/pricing" | "/pricing/" | "/tools" | "/tools/" | "/trading-intro" | "/trading-intro/";
-=======
-<<<<<<< HEAD
-		Pathname(): "/" | "/contact" | "/contact/" | "/crypto-intro" | "/crypto-intro/" | "/dashboard" | "/dashboard/" | "/features" | "/features/" | "/landing" | "/landing/" | "/nfts" | "/nfts/" | "/pricing" | "/pricing/" | "/trading-intro" | "/trading-intro/";
-=======
-		Pathname(): "/" | "/ai-agent" | "/ai-agent/" | "/blog" | "/blog/" | "/community" | "/community/" | "/contact" | "/contact/" | "/crypto-intro" | "/crypto-intro/" | "/dashboard" | "/dashboard/" | "/data" | "/data/" | "/education" | "/education/" | "/features" | "/features/" | "/landing" | "/landing/" | "/markets" | "/markets/" | "/nfts" | "/nfts/" | "/peers" | "/peers/" | "/pricing" | "/pricing/" | "/tools" | "/tools/" | "/trading-intro" | "/trading-intro/";
->>>>>>> 910f9999 (Nav Bar Updated)
->>>>>>> main
+		Pathname(): "/" | "/ai-agent" | "/ai-agent/" | "/api" | "/api/" | "/blog" | "/blog/" | "/community" | "/community/" | "/contact" | "/contact/" | "/crypto-intro" | "/crypto-intro/" | "/dashboard" | "/dashboard/" | "/data" | "/data/" | "/education" | "/education/" | "/features" | "/features/" | "/landing" | "/landing/" | "/markets" | "/markets/" | `/markets/${string}` & {} | `/markets/${string}/` & {} | "/nfts" | "/nfts/" | "/peers" | "/peers/" | "/pricing" | "/pricing/" | "/tools" | "/tools/" | "/trading-intro" | "/trading-intro/";
 		ResolvedPathname(): `${"" | `/${string}`}${ReturnType<AppTypes['Pathname']>}`;
 		Asset(): "/.nojekyll" | string & {};
 	}

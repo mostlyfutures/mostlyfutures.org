@@ -11,12 +11,6 @@ export const nodes = [
 	() => import('./nodes/7'),
 	() => import('./nodes/8'),
 	() => import('./nodes/9'),
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-	() => import('./nodes/10')
-=======
->>>>>>> main
 	() => import('./nodes/10'),
 	() => import('./nodes/11'),
 	() => import('./nodes/12'),
@@ -25,32 +19,14 @@ export const nodes = [
 	() => import('./nodes/15'),
 	() => import('./nodes/16'),
 	() => import('./nodes/17'),
-<<<<<<< HEAD
 	() => import('./nodes/18'),
 	() => import('./nodes/19')
-=======
-	() => import('./nodes/18')
->>>>>>> 910f9999 (Nav Bar Updated)
->>>>>>> main
 ];
 
 export const server_loads = [];
 
 export const dictionary = {
 		"/": [2],
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-		"/contact": [3],
-		"/crypto-intro": [4],
-		"/dashboard": [5],
-		"/features": [6],
-		"/landing": [7],
-		"/nfts": [8],
-		"/pricing": [9],
-		"/trading-intro": [10]
-=======
->>>>>>> main
 		"/ai-agent": [3],
 		"/blog": [4],
 		"/community": [5],
@@ -62,21 +38,12 @@ export const dictionary = {
 		"/features": [11],
 		"/landing": [12],
 		"/markets": [13],
-<<<<<<< HEAD
 		"/markets/[symbol]": [14],
 		"/nfts": [15],
 		"/peers": [16],
 		"/pricing": [17],
 		"/tools": [18],
 		"/trading-intro": [19]
-=======
-		"/nfts": [14],
-		"/peers": [15],
-		"/pricing": [16],
-		"/tools": [17],
-		"/trading-intro": [18]
->>>>>>> 910f9999 (Nav Bar Updated)
->>>>>>> main
 	};
 
 export const hooks = {

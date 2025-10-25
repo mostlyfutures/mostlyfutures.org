@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "archon": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "http://localhost:8051/mcp",
+        "--allow-http"
+      ],
+      "env": {}
+    },"chrome-devtools": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"-y",
+				"chrome-devtools-mcp@latest"
+			]
+		}
+  }
+}
