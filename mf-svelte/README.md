@@ -142,6 +142,62 @@ The project is configured for static site generation with:
 - Optimized assets and bundles
 - SEO-friendly meta tags
 
+## 🌐 Netlify Deployment (Recommended for 3dns domains)
+
+### Quick Setup
+1. **Connect your GitHub repository** to Netlify
+2. **Set build command**: `npm run build`
+3. **Set publish directory**: `build`
+4. **Deploy automatically** when pushing to `main` branch
+
+### Manual Deployment
+```bash
+# 1. Build the project
+npm run build
+
+# 2. Deploy to Netlify (using Netlify CLI)
+npm install -g netlify-cli
+netlify deploy --prod --dir=build
+```
+
+### DNS Configuration for 3dns
+Point your 3dns domain to Netlify:
+- **CNAME Record**: `yourdomain.3dns.net` → `something.netlify.app`
+- **A Record**: `@` → Netlify's load balancer IP
+
+### Environment Variables on Netlify
+Set these in your Netlify dashboard:
+```
+NODE_ENV=production
+PUBLIC_API_URL=https://api.coingecko.com/api/v3
+PUBLIC_BASE_PATH=
+```
+
+## 🔧 Git Workflow Setup
+
+### Pre-Commit Checklist
+- [ ] `npm run check` - No TypeScript errors
+- [ ] `npm run build` - Build succeeds
+- [ ] Test critical pages manually
+- [ ] Review .gitignore for sensitive files
+
+### Commit Commands
+```bash
+# Stage all changes
+git add .
+
+# Commit with clear message
+git commit -m "chore: Update .gitignore and deployment docs"
+
+# Push to trigger deployment
+git push origin main
+```
+
+### Branch Strategy
+- `main` - Production deployments
+- `develop` - Feature development
+- `staging` - Pre-production testing
+
 ## 🤝 Contributing
 
 1. Fork the repository
