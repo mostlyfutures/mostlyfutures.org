@@ -1,10 +1,16 @@
 <script lang="ts">
+<<<<<<< HEAD
 	import FeatureCard from '$lib/components/saas/FeatureCard.svelte';
 	import Hero from '$lib/components/saas/Hero.svelte';
 	import { features as mockFeatures } from '$lib/data/mockData';
 
 	// Local tools features (kept for specificity)
 	const localTools = [
+=======
+	import ComingSoonCard from '$lib/components/ComingSoonCard.svelte';
+
+	const toolsFeatures = [
+>>>>>>> main
 		{
 			title: 'Decentralized Persistent & Mutable RAGs',
 			description: 'Decentralized Retrieval-Augmented Generation knowledge bases that are persistent and mutable, available for sale.',
@@ -45,7 +51,11 @@
 			title: 'Trading Charts with Persistent Workspace',
 			description: 'TradingView-style charts that save your edits and workspace configurations.',
 			category: 'Trading',
+<<<<<<< HEAD
 			icon: '📈'
+=======
+			icon: '📉'
+>>>>>>> main
 		},
 		{
 			title: 'ZK Photo Storage GUI',
@@ -60,6 +70,7 @@
 			icon: '📍'
 		}
 	];
+<<<<<<< HEAD
 
 	// Data features that should be moved to tools
 	const dataFeatures = [
@@ -179,4 +190,28 @@
 			{/each}
 		</div>
 	</section>
+=======
+</script>
+
+<div class="container mx-auto px-4 py-12">
+	<div class="mb-12">
+		<h1 class="text-4xl font-bold mb-4 bg-gradient-to-r from-tufts-blue to-jordy-blue bg-clip-text text-transparent">
+			Tools
+		</h1>
+		<p class="text-lg text-muted-foreground">
+			Cutting-edge decentralized tools, ZK-powered privacy solutions, and DeFi infrastructure for the next generation of web3.
+		</p>
+	</div>
+
+	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+		{#each toolsFeatures as feature}
+			<ComingSoonCard
+				title={feature.title}
+				description={feature.description}
+				category={feature.category}
+				icon={feature.icon}
+			/>
+		{/each}
+	</div>
+>>>>>>> main
 </div>

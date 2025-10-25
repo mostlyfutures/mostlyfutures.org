@@ -1212,6 +1212,7 @@ export const navLinks: NavLink[] = [
     href: '/tools',
     label: 'Tools',
     description: 'Trading and DeFi tools'
+<<<<<<< HEAD
   },
   {
     href: '/data',
@@ -1229,6 +1230,29 @@ export const navLinks: NavLink[] = [
     description: 'Connect with traders'
   },
   {
+=======
+  },
+  {
+    href: '/data',
+    label: 'Data',
+    description: 'Market data and analytics'
+  { 
+    href: '/features', 
+    label: 'Features',
+    description: 'Discover our powerful trading tools'
+  },
+  {
+    href: '/dashboard',
+    label: 'Home',
+    description: 'Your trading command center'
+  },
+  {
+    href: '/peers',
+    label: 'Peers',
+    description: 'Connect with traders'
+  },
+  {
+>>>>>>> main
     href: '/markets',
     label: 'Market',
     description: 'Live crypto prices'

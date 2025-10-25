@@ -13,24 +13,36 @@
 	} from '$lib/stores/market';
 	import MarketTable from '$lib/components/crypto/MarketTable.svelte';
 	import PriceCard from '$lib/components/crypto/PriceCard.svelte';
+<<<<<<< HEAD
 	import PriceChart from '$lib/components/crypto/PriceChart.svelte';
 	import { formatCurrency, formatPercent } from '$lib/utils/format';
 	import { fetchHistoricalPrices } from '$lib/api/crypto';
 	import WalletConnect from '$lib/components/WalletConnect.svelte';
+=======
+	import { formatCurrency, formatPercent } from '$lib/utils/format';
+	import ComingSoonCard from '$lib/components/ComingSoonCard.svelte';
+>>>>>>> main
 
 	let stopAutoRefresh: (() => void) | null = null;
 	let viewMode: 'table' | 'grid' = 'table';
 	let selectedTab: 'all' | 'gainers' | 'losers' = 'all';
+<<<<<<< HEAD
 	let chartData: any = null;
 	let chartLoading = false;
+=======
+>>>>>>> main
 
 	onMount(async () => {
 		// Load initial data
 		await loadMarketData();
+<<<<<<< HEAD
 		
 		// Load BTC chart data
 		await loadChartData('bitcoin', '7d');
 		
+=======
+
+>>>>>>> main
 		// Start auto-refresh every 60 seconds
 		stopAutoRefresh = startAutoRefresh(60000);
 	});
@@ -41,6 +53,7 @@
 		}
 	});
 
+<<<<<<< HEAD
 	async function loadChartData(coinId: string, range: string) {
 		chartLoading = true;
 		try {
@@ -57,6 +70,34 @@
 		: selectedTab === 'gainers' 
 			? $topGainers 
 			: $topLosers;
+=======
+	$: displayAssets = selectedTab === 'all'
+		? $filteredMarketData
+		: selectedTab === 'gainers'
+			? $topGainers
+			: $topLosers;
+
+	const marketFeatures = [
+		{
+			title: 'Advanced Market Indicators',
+			description: 'Access comprehensive market indicators including fear & greed index, market dominance, and more.',
+			category: 'Analytics',
+			icon: '📊'
+		},
+		{
+			title: 'Cross-Exchange Arbitrage Detection',
+			description: 'Identify arbitrage opportunities across multiple exchanges in real-time.',
+			category: 'Trading',
+			icon: '⚡'
+		},
+		{
+			title: 'Market Sentiment Analysis',
+			description: 'AI-powered sentiment analysis from social media, news, and on-chain data.',
+			category: 'AI',
+			icon: '🧠'
+		}
+	];
+>>>>>>> main
 </script>
 
 <svelte:head>
@@ -92,6 +133,7 @@
 		</div>
 	</section>
 
+<<<<<<< HEAD
 	<!-- BTC Price Chart Section -->
 	<section class="bg-white dark:bg-gray-900 py-8 border-b border-gray-200 dark:border-gray-800">
 		<div class="container mx-auto px-4">
@@ -269,6 +311,128 @@
 						</div>
 					{/if}
 				{/if}
+=======
+	<!-- Main Content -->
+	<div class="container mx-auto px-4 py-8">
+		<!-- Tabs -->
+		<div class="flex items-center justify-between mb-6">
+			<div class="flex space-x-2 bg-white dark:bg-gray-900 rounded-lg p-1 shadow-sm">
+				<button
+					on:click={() => selectedTab = 'all'}
+					class={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+						selectedTab === 'all' 
+							? 'bg-robinhood-blue text-white' 
+							: 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+					}`}
+				>
+					All Crypto
+				</button>
+				<button
+					on:click={() => selectedTab = 'gainers'}
+					class={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+						selectedTab === 'gainers' 
+							? 'bg-robinhood-blue text-white' 
+							: 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+					}`}
+				>
+					🚀 Top Gainers
+				</button>
+				<button
+					on:click={() => selectedTab = 'losers'}
+					class={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+						selectedTab === 'losers' 
+							? 'bg-robinhood-blue text-white' 
+							: 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+					}`}
+				>
+					📉 Top Losers
+				</button>
+			</div>
+
+			<!-- View Toggle -->
+			<div class="flex space-x-2 bg-white dark:bg-gray-900 rounded-lg p-1 shadow-sm">
+				<button
+					on:click={() => viewMode = 'table'}
+					aria-label="Table view"
+					class={`px-3 py-2 rounded-md text-sm transition-colors ${
+						viewMode === 'table' 
+							? 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white' 
+							: 'text-gray-600 dark:text-gray-400'
+					}`}
+				>
+					<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+					</svg>
+				</button>
+				<button
+					on:click={() => viewMode = 'grid'}
+					aria-label="Grid view"
+					class={`px-3 py-2 rounded-md text-sm transition-colors ${
+						viewMode === 'grid' 
+							? 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white' 
+							: 'text-gray-600 dark:text-gray-400'
+					}`}
+				>
+					<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+					</svg>
+				</button>
+			</div>
+		</div>
+
+		<!-- Loading State -->
+		{#if $isLoadingMarketData && $marketData.length === 0}
+			<div class="flex items-center justify-center py-20">
+				<div class="text-center">
+					<div class="animate-spin rounded-full h-12 w-12 border-b-2 border-robinhood-blue mx-auto mb-4"></div>
+					<p class="text-gray-600 dark:text-gray-400">Loading market data...</p>
+				</div>
+			</div>
+		{:else if $marketDataError}
+			<div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-6 text-center">
+				<p class="text-red-600 dark:text-red-400 font-medium mb-2">Failed to load market data</p>
+				<p class="text-red-500 dark:text-red-300 text-sm">{$marketDataError}</p>
+				<button 
+					on:click={() => loadMarketData()}
+					class="mt-4 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+				>
+					Try Again
+				</button>
+			</div>
+		{:else}
+			<!-- Market Data -->
+			{#if viewMode === 'table'}
+				<div class="bg-white dark:bg-gray-900 rounded-lg shadow-sm border border-gray-200 dark:border-gray-800">
+					<MarketTable assets={displayAssets} />
+				</div>
+			{:else}
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+					{#each displayAssets as asset (asset.id)}
+						<PriceCard {asset} showChart={true} />
+					{/each}
+				</div>
+			{/if}
+
+			{#if displayAssets.length === 0 && $searchQuery}
+				<div class="text-center py-12">
+					<p class="text-gray-600 dark:text-gray-400">No assets found matching "{$searchQuery}"</p>
+				</div>
+			{/if}
+		{/if}
+
+		<!-- Coming Soon Features -->
+		<div class="mt-12">
+			<h2 class="text-2xl font-bold mb-6 dark:text-white">Coming Soon to Markets</h2>
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+				{#each marketFeatures as feature}
+					<ComingSoonCard
+						title={feature.title}
+						description={feature.description}
+						category={feature.category}
+						icon={feature.icon}
+					/>
+				{/each}
+>>>>>>> main
 			</div>
 		</div>
 	</div>

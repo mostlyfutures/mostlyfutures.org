@@ -4,10 +4,20 @@
   import { Button } from '$lib/components/ui/button';
   import { dashboardMetrics, mockUsers } from '$lib/data/mockData.js';
   import { formatCurrency, formatPercentage } from '$lib/utils.js';
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+  
+=======
+>>>>>>> main
   import AnimatedIcon from '$lib/components/AnimatedIcon.svelte';
   import Tooltip from '$lib/components/Tooltip.svelte';
   import ComingSoonCard from '$lib/components/ComingSoonCard.svelte';
 
+<<<<<<< HEAD
+=======
+>>>>>>> 910f9999 (Nav Bar Updated)
+>>>>>>> main
   // Mock current user (in a real app, this would come from authentication)
   const currentUser = mockUsers[0];
 
