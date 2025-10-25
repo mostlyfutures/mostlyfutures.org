@@ -13,36 +13,17 @@
 	} from '$lib/stores/market';
 	import MarketTable from '$lib/components/crypto/MarketTable.svelte';
 	import PriceCard from '$lib/components/crypto/PriceCard.svelte';
-<<<<<<< HEAD
-	import PriceChart from '$lib/components/crypto/PriceChart.svelte';
-	import { formatCurrency, formatPercent } from '$lib/utils/format';
-	import { fetchHistoricalPrices } from '$lib/api/crypto';
-	import WalletConnect from '$lib/components/WalletConnect.svelte';
-=======
 	import { formatCurrency, formatPercent } from '$lib/utils/format';
 	import ComingSoonCard from '$lib/components/ComingSoonCard.svelte';
->>>>>>> main
 
 	let stopAutoRefresh: (() => void) | null = null;
 	let viewMode: 'table' | 'grid' = 'table';
 	let selectedTab: 'all' | 'gainers' | 'losers' = 'all';
-<<<<<<< HEAD
-	let chartData: any = null;
-	let chartLoading = false;
-=======
->>>>>>> main
 
 	onMount(async () => {
 		// Load initial data
 		await loadMarketData();
-<<<<<<< HEAD
-		
-		// Load BTC chart data
-		await loadChartData('bitcoin', '7d');
-		
-=======
 
->>>>>>> main
 		// Start auto-refresh every 60 seconds
 		stopAutoRefresh = startAutoRefresh(60000);
 	});
@@ -53,24 +34,6 @@
 		}
 	});
 
-<<<<<<< HEAD
-	async function loadChartData(coinId: string, range: string) {
-		chartLoading = true;
-		try {
-			chartData = await fetchHistoricalPrices(coinId, 7, 'usd');
-		} catch (error) {
-			console.error('Failed to load chart data:', error);
-		} finally {
-			chartLoading = false;
-		}
-	}
-
-	$: displayAssets = selectedTab === 'all' 
-		? $filteredMarketData 
-		: selectedTab === 'gainers' 
-			? $topGainers 
-			: $topLosers;
-=======
 	$: displayAssets = selectedTab === 'all'
 		? $filteredMarketData
 		: selectedTab === 'gainers'
@@ -97,7 +60,6 @@
 			icon: '🧠'
 		}
 	];
->>>>>>> main
 </script>
 
 <svelte:head>
@@ -133,185 +95,6 @@
 		</div>
 	</section>
 
-<<<<<<< HEAD
-	<!-- BTC Price Chart Section -->
-	<section class="bg-white dark:bg-gray-900 py-8 border-b border-gray-200 dark:border-gray-800">
-		<div class="container mx-auto px-4">
-			<div class="flex items-center justify-between mb-6">
-				<div>
-					<h2 class="text-2xl font-bold text-gray-900 dark:text-white">Bitcoin Price Chart</h2>
-					<p class="text-gray-600 dark:text-gray-400">Live 7-day price history</p>
-				</div>
-				<div class="flex space-x-2">
-					<button on:click={() => loadChartData('bitcoin', '1d')} class="px-4 py-2 text-sm rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">1D</button>
-					<button on:click={() => loadChartData('bitcoin', '7d')} class="px-4 py-2 text-sm rounded-lg bg-robinhood-blue text-white">7D</button>
-					<button on:click={() => loadChartData('bitcoin', '30d')} class="px-4 py-2 text-sm rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">30D</button>
-				</div>
-			</div>
-			
-			{#if chartLoading}
-				<div class="flex items-center justify-center py-12">
-					<div class="animate-spin rounded-full h-8 w-8 border-b-2 border-robinhood-blue"></div>
-				</div>
-			{:else if chartData}
-				<PriceChart data={chartData} coinName="Bitcoin" timeRange="7d" height="400px" />
-			{:else}
-				<div class="text-center py-12 text-gray-500">
-					<p>Chart data not available</p>
-				</div>
-			{/if}
-		</div>
-	</section>
-
-	<!-- Main Content -->
-	<div class="container mx-auto px-4 py-8">
-		<div class="grid lg:grid-cols-4 gap-8">
-			<!-- Sidebar -->
-			<div class="lg:col-span-1 space-y-6">
-				<!-- Wallet Connection -->
-				<div class="bg-white dark:bg-gray-900 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-800">
-					<h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Portfolio</h3>
-					<WalletConnect />
-				</div>
-
-				<!-- Quick Stats -->
-				<div class="bg-white dark:bg-gray-900 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-800">
-					<h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Market Overview</h3>
-					{#if $globalStats}
-						<div class="space-y-3">
-							<div class="flex justify-between">
-								<span class="text-sm text-gray-600 dark:text-gray-400">Total Market Cap</span>
-								<span class="text-sm font-medium text-gray-900 dark:text-white">
-									{formatNumber($globalStats.total_market_cap.usd)}
-								</span>
-							</div>
-							<div class="flex justify-between">
-								<span class="text-sm text-gray-600 dark:text-gray-400">24h Volume</span>
-								<span class="text-sm font-medium text-gray-900 dark:text-white">
-									{formatNumber($globalStats.total_volume.usd)}
-								</span>
-							</div>
-							<div class="flex justify-between">
-								<span class="text-sm text-gray-600 dark:text-gray-400">Dominance</span>
-								<span class="text-sm font-medium text-gray-900 dark:text-white">
-									BTC {formatPercent($globalStats.market_cap_percentage.btc)} | ETH {formatPercent($globalStats.market_cap_percentage.eth)}
-								</span>
-							</div>
-						</div>
-					{:else}
-						<p class="text-gray-500 dark:text-gray-400">Loading market stats...</p>
-					{/if}
-				</div>
-			</div>
-
-			<!-- Main Content -->
-			<div class="lg:col-span-3">
-				<!-- Tabs -->
-				<div class="flex items-center justify-between mb-6">
-					<div class="flex space-x-2 bg-white dark:bg-gray-900 rounded-lg p-1 shadow-sm">
-						<button
-							on:click={() => selectedTab = 'all'}
-							class={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-								selectedTab === 'all' 
-									? 'bg-robinhood-blue text-white' 
-									: 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
-							}`}
-						>
-							All Crypto
-						</button>
-						<button
-							on:click={() => selectedTab = 'gainers'}
-							class={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-								selectedTab === 'gainers' 
-									? 'bg-robinhood-blue text-white' 
-									: 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
-							}`}
-						>
-							🚀 Top Gainers
-						</button>
-						<button
-							on:click={() => selectedTab = 'losers'}
-							class={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-								selectedTab === 'losers' 
-									? 'bg-robinhood-blue text-white' 
-									: 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
-							}`}
-						>
-							📉 Top Losers
-						</button>
-					</div>
-
-					<!-- View Toggle -->
-					<div class="flex space-x-2 bg-white dark:bg-gray-900 rounded-lg p-1 shadow-sm">
-						<button
-							on:click={() => viewMode = 'table'}
-							aria-label="Table view"
-							class={`px-3 py-2 rounded-md text-sm transition-colors ${
-								viewMode === 'table' 
-									? 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white' 
-									: 'text-gray-600 dark:text-gray-400'
-							}`}
-						>
-							<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
-							</svg>
-						</button>
-						<button
-							on:click={() => viewMode = 'grid'}
-							aria-label="Grid view"
-							class={`px-3 py-2 rounded-md text-sm transition-colors ${
-								viewMode === 'grid' 
-									? 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white' 
-									: 'text-gray-600 dark:text-gray-400'
-							}`}
-						>
-							<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-							</svg>
-						</button>
-					</div>
-				</div>
-
-				<!-- Loading State -->
-				{#if $isLoadingMarketData && $marketData.length === 0}
-					<div class="flex items-center justify-center py-20">
-						<div class="text-center">
-							<div class="animate-spin rounded-full h-12 w-12 border-b-2 border-robinhood-blue mx-auto mb-4"></div>
-							<p class="text-gray-600 dark:text-gray-400">Loading market data...</p>
-						</div>
-					</div>
-				{:else if $marketDataError}
-					<div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-6 text-center">
-						<p class="text-red-600 dark:text-red-400 font-medium mb-2">Failed to load market data</p>
-						<p class="text-red-500 dark:text-red-300 text-sm">{$marketDataError}</p>
-						<button 
-							on:click={() => loadMarketData()}
-							class="mt-4 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
-						>
-							Try Again
-						</button>
-					</div>
-				{:else}
-					<!-- Market Data -->
-					{#if viewMode === 'table'}
-						<div class="bg-white dark:bg-gray-900 rounded-lg shadow-sm border border-gray-200 dark:border-gray-800">
-							<MarketTable assets={displayAssets} />
-						</div>
-					{:else}
-						<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-							{#each displayAssets as asset (asset.id)}
-								<PriceCard {asset} showChart={true} />
-							{/each}
-						</div>
-					{/if}
-
-					{#if displayAssets.length === 0 && $searchQuery}
-						<div class="text-center py-12">
-							<p class="text-gray-600 dark:text-gray-400">No assets found matching "{$searchQuery}"</p>
-						</div>
-					{/if}
-				{/if}
-=======
 	<!-- Main Content -->
 	<div class="container mx-auto px-4 py-8">
 		<!-- Tabs -->
@@ -432,7 +215,6 @@
 						icon={feature.icon}
 					/>
 				{/each}
->>>>>>> main
 			</div>
 		</div>
 	</div>

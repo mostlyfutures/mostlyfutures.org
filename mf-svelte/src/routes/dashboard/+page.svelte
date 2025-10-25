@@ -5,19 +5,13 @@
   import { dashboardMetrics, mockUsers } from '$lib/data/mockData.js';
   import { formatCurrency, formatPercentage } from '$lib/utils.js';
 <<<<<<< HEAD
-=======
-<<<<<<< HEAD
   
 =======
->>>>>>> main
   import AnimatedIcon from '$lib/components/AnimatedIcon.svelte';
   import Tooltip from '$lib/components/Tooltip.svelte';
   import ComingSoonCard from '$lib/components/ComingSoonCard.svelte';
 
-<<<<<<< HEAD
-=======
 >>>>>>> 910f9999 (Nav Bar Updated)
->>>>>>> main
   // Mock current user (in a real app, this would come from authentication)
   const currentUser = mockUsers[0];
 
@@ -59,7 +53,7 @@
 </script>
 
 <svelte:head>
-  <title>Dashboard - Mostlyfutures</title>
+  <title>Dashboard - MostlyFutures</title>
   <meta name="description" content="Your trading command center. Monitor portfolio, track performance, and manage trades." />
 </svelte:head>
 
@@ -84,11 +78,7 @@
             <p class="text-sm font-medium text-muted-foreground">Portfolio Value</p>
             <p class="text-2xl font-bold">{formatCurrency(84404)}</p>
           </div>
-          <Tooltip content="Portfolio Value" placement="top">
-            <div>
-              <AnimatedIcon size={28} color="#468BE6" variant="shield" />
-            </div>
-          </Tooltip>
+          <span class="text-2xl text-muted-foreground">💰</span>
         </div>
         <div class="mt-4 flex items-center text-sm">
           <span class="mr-1 text-green-500">↗</span>
@@ -105,11 +95,7 @@
             <p class="text-sm font-medium text-muted-foreground">Today's P&L</p>
             <p class="text-2xl font-bold text-green-600">+{formatCurrency(1090)}</p>
           </div>
-          <Tooltip content="Today's Profit/Loss" placement="top">
-            <div>
-              <AnimatedIcon size={28} color="#10b981" variant="lightning" />
-            </div>
-          </Tooltip>
+          <span class="text-2xl text-green-500">📈</span>
         </div>
         <div class="mt-4 flex items-center text-sm">
           <span class="text-green-600">+{formatPercentage(1.3)}</span>
@@ -125,11 +111,7 @@
             <p class="text-sm font-medium text-muted-foreground">Win Rate</p>
             <p class="text-2xl font-bold">{currentUser.stats.winRate}%</p>
           </div>
-          <Tooltip content="Win Rate" placement="top">
-            <div>
-              <AnimatedIcon size={28} color="#468BE6" variant="default" />
-            </div>
-          </Tooltip>
+          <span class="text-2xl text-muted-foreground">📊</span>
         </div>
         <div class="mt-4 flex items-center text-sm">
           <span class="text-muted-foreground">Last 30 trades</span>
@@ -144,11 +126,7 @@
             <p class="text-sm font-medium text-muted-foreground">Total Trades</p>
             <p class="text-2xl font-bold">{currentUser.stats.totalTrades}</p>
           </div>
-          <Tooltip content="Total Trades" placement="top">
-            <div>
-              <AnimatedIcon size={28} color="#468BE6" variant="lightning" />
-            </div>
-          </Tooltip>
+          <span class="text-2xl text-muted-foreground">📈</span>
         </div>
         <div class="mt-4 flex items-center text-sm">
           <span class="text-muted-foreground">This month</span>
